@@ -48,8 +48,11 @@ struct DataModel: Codable
         while self.planning.mostRecentEntryEndDate == nil || self.planning.mostRecentEntryEndDate! < slotEndDate {
             for task in self.backlog.tasks {
                 
-                self.addToPlanning(task, startingAt: taskStartDate, duration: taskDuration)
-                taskStartDate.addTimeInterval(taskDuration)
+                let entry = self.addToPlanning(task, startingAt: taskStartDate, duration: taskDuration)
+                if entry.timeSlot.endDate >= slotEndDate {
+                    return
+                }
+                taskStartDate = entry.timeSlot.endDate
             }
         }
     }
