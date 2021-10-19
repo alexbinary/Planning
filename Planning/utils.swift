@@ -3,12 +3,12 @@ import Foundation
 
 
 
-func readPlanning(from url: URL) -> Planning {
+func readDataModel(from url: URL) -> DataModel {
     
-    return (try? JSONDecoder().decode(Planning.self, from: Data(contentsOf: url))) ?? Planning(items: [])
+    return (try? JSONDecoder().decode(DataModel.self, from: Data(contentsOf: url))) ?? DataModel(planning: Planning(items: []))
 }
 
-func save(_ planning: Planning, to url: URL) {
+func save(_ dataModel: DataModel, to url: URL) {
     
-    try! JSONEncoder().encode(planning).write(to: url)
+    try! JSONEncoder().encode(dataModel).write(to: url)
 }

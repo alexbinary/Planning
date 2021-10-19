@@ -3,8 +3,8 @@ import Foundation
 
 
 
-let planning = readPlanning(from: Settings.fileUrl)
+let dataModel = readDataModel(from: Settings.fileUrl)
 
-print(planning)
+print(dataModel)
 
-save(planning, to: Settings.fileUrl)
+save(dataModel, to: Settings.fileUrl)
