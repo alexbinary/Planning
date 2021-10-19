@@ -22,4 +22,9 @@ struct DataModel: Codable
         
         self.planning.items.append(PlanningItem(withTask: task, startingAt: startingDate, duration: duration))
     }
+    
+    mutating func deleteFromPlanning(itemWithId id: UUID) {
+        
+        self.planning.items.removeAll(where: { $0.id == id })
+    }
 }
