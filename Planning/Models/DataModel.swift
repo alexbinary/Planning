@@ -27,4 +27,16 @@ struct DataModel: Codable
         
         self.planning.items.removeAll(where: { $0.id == id })
     }
+    
+    mutating func fillPlanning(from slotStartDate: Date, to slotEndDate: Date) {
+        
+        var taskStartDate = slotStartDate
+        let taskDuration: TimeInterval = 30*60
+        
+        for task in self.backlog.tasks {
+            
+            self.addToPlanning(task, startingAt: taskStartDate, duration: taskDuration)
+            taskStartDate.addTimeInterval(taskDuration)
+        }
+    }
 }
