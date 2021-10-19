@@ -47,7 +47,7 @@ struct PlanningEntry: Codable, Equatable
     
     /// The time slot that this entry positions the task on.
     ///
-    let timeSlot: TimeSlot
+    var timeSlot: TimeSlot
     
     
     /// The feedback given on this entry.
