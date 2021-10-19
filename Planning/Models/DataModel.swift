@@ -41,6 +41,11 @@ struct DataModel: Codable
         self.planning.entries.removeAll()
     }
     
+    func planningEntries(in timeSlot: TimeSlot) -> [PlanningEntry] {
+        
+        return self.planning.entries.filter { $0.timeSlot.intersects(with: timeSlot) }
+    }
+    
     mutating func giveFeedback(_ feedback: PlanningEntryFeedback, onPlanningEntryWithId id: UUID) {
         
         let index = self.planning.entries.firstIndex(where: { $0.id == id })!
@@ -49,7 +54,7 @@ struct DataModel: Codable
     
     func planningFeedbackScore(on timeSlot: TimeSlot) -> Float {
         
-        let entriesInSlot = self.planning.entries.filter { $0.timeSlot.startDate >= timeSlot.startDate && $0.timeSlot.startDate <= timeSlot.endDate }
+        let entriesInSlot = self.planningEntries(in: timeSlot)
         
         return Float(entriesInSlot.filter { $0.feedback == .taskCompletedWithoutProblem } .count) / Float(entriesInSlot.count)
     }
