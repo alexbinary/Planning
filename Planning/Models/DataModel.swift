@@ -20,12 +20,12 @@ struct DataModel: Codable
     
     mutating func addToPlanning(_ task: Task, startingAt startingDate: Date, duration: TimeInterval) {
         
-        self.planning.items.append(PlanningItem(withTask: task, startingAt: startingDate, duration: duration))
+        self.planning.entries.append(PlanningEntry(withTask: task, startingAt: startingDate, duration: duration))
     }
     
-    mutating func deleteFromPlanning(itemWithId id: UUID) {
+    mutating func deleteFromPlanning(entryWithId id: UUID) {
         
-        self.planning.items.removeAll(where: { $0.id == id })
+        self.planning.entries.removeAll(where: { $0.id == id })
     }
     
     mutating func fillPlanning(from slotStartDate: Date, to slotEndDate: Date) {
@@ -40,9 +40,9 @@ struct DataModel: Codable
         }
     }
     
-    mutating func fillPlanningForNext24HoursAfterLatestItem() {
+    mutating func fillPlanningForNext24HoursAfterLatestEntry() {
         
-        let slotStartDate = self.planning.mostRecentItemEndDate ?? Date()
+        let slotStartDate = self.planning.mostRecentEntryEndDate ?? Date()
         let slotEndDate = Calendar.current.date(byAdding: .hour, value: 24, to: slotStartDate)!
         
         self.fillPlanning(from: slotStartDate, to: slotEndDate)

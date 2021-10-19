@@ -22,12 +22,12 @@ func print(_ planning: Planning) {
     print("==== Planning ====")
     print()
     
-    for item in planning.items {
+    for entry in planning.entries {
         
-        print("* \(item.id)")
-        print("  \(DateFormatter.localizedString(from: item.startDate, dateStyle: .short, timeStyle: .short)) - \(item.task.id)")
-        print("                     \(item.task.name)")
-        print("  \(DateFormatter.localizedString(from: item.endDate, dateStyle: .short, timeStyle: .short))")
+        print("* \(entry.id)")
+        print("  \(DateFormatter.localizedString(from: entry.startDate, dateStyle: .short, timeStyle: .short)) - \(entry.task.id)")
+        print("                     \(entry.task.name)")
+        print("  \(DateFormatter.localizedString(from: entry.endDate, dateStyle: .short, timeStyle: .short))")
         print()
     }
 }

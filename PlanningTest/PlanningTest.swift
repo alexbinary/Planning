@@ -7,43 +7,43 @@ import XCTest
 class PlanningTest: XCTestCase {
 
     
-    func test_mostRecentItemEndDate_empty() {
+    func test_mostRecentEntryEndDate_empty() {
         
-        let planning = Planning(items: [ ])
+        let planning = Planning(entries: [ ])
         
-        XCTAssertEqual(planning.mostRecentItemEndDate, nil)
+        XCTAssertEqual(planning.mostRecentEntryEndDate, nil)
     }
     
-    func test_mostRecentItemEndDate_continuous() {
+    func test_mostRecentEntryEndDate_continuous() {
         
-        let item1 = PlanningItem(withTask: Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
-        let item2 = PlanningItem(withTask: Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
-        let item3 = PlanningItem(withTask: Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 4), duration: 2)
+        let entry1 = PlanningEntry(withTask: Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
+        let entry2 = PlanningEntry(withTask: Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
+        let entry3 = PlanningEntry(withTask: Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 4), duration: 2)
         
-        let planning = Planning(items: [ item1, item2, item3 ])
+        let planning = Planning(entries: [ entry1, entry2, entry3 ])
         
-        XCTAssertEqual(planning.mostRecentItemEndDate, item3.endDate)
+        XCTAssertEqual(planning.mostRecentEntryEndDate, entry3.endDate)
     }
     
-    func test_mostRecentItemEndDate_break() {
+    func test_mostRecentEntryEndDate_break() {
         
-        let item1 = PlanningItem(withTask: Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
-        let item2 = PlanningItem(withTask: Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
-        let item3 = PlanningItem(withTask: Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 10), duration: 2)
+        let entry1 = PlanningEntry(withTask: Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
+        let entry2 = PlanningEntry(withTask: Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
+        let entry3 = PlanningEntry(withTask: Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 10), duration: 2)
         
-        let planning = Planning(items: [ item1, item2, item3 ])
+        let planning = Planning(entries: [ entry1, entry2, entry3 ])
         
-        XCTAssertEqual(planning.mostRecentItemEndDate, item3.endDate)
+        XCTAssertEqual(planning.mostRecentEntryEndDate, entry3.endDate)
     }
     
-    func test_mostRecentItemEndDate_crossed() {
+    func test_mostRecentEntryEndDate_crossed() {
         
-        let item1 = PlanningItem(withTask: Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
-        let item2 = PlanningItem(withTask: Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 5)
-        let item3 = PlanningItem(withTask: Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 4), duration: 2)
+        let entry1 = PlanningEntry(withTask: Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
+        let entry2 = PlanningEntry(withTask: Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 5)
+        let entry3 = PlanningEntry(withTask: Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 4), duration: 2)
         
-        let planning = Planning(items: [ item1, item2, item3 ])
+        let planning = Planning(entries: [ entry1, entry2, entry3 ])
         
-        XCTAssertEqual(planning.mostRecentItemEndDate, item2.endDate)
+        XCTAssertEqual(planning.mostRecentEntryEndDate, entry2.endDate)
     }
 }
