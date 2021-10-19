@@ -62,9 +62,9 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(entries: []), backlog: Backlog(tasks: []))
         
-        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
-        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
-        let entry3 = dataModel.addToPlanning(Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 4), duration: 2)
+        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let entry3 = dataModel.addToPlanning(Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
         
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry1.id)
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry2.id)
@@ -78,9 +78,9 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(entries: []), backlog: Backlog(tasks: []))
         
-        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
-        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
-        let entry3 = dataModel.addToPlanning(Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 4), duration: 2)
+        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let entry3 = dataModel.addToPlanning(Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
         
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry1.id)
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry2.id)
@@ -94,9 +94,9 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(entries: []), backlog: Backlog(tasks: []))
         
-        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
-        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
-        _ = dataModel.addToPlanning(Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 4), duration: 2)
+        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        _ = dataModel.addToPlanning(Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
         
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry1.id)
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry2.id)
@@ -109,8 +109,8 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(entries: []), backlog: Backlog(tasks: []))
         
-        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
-        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
+        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
         
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry1.id)
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry2.id)

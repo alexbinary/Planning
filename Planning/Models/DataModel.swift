@@ -24,9 +24,9 @@ struct DataModel: Codable
         self.backlog.tasks.removeAll()
     }
     
-    mutating func addToPlanning(_ task: Task, startingAt startingDate: Date, duration: TimeInterval) -> PlanningEntry {
+    mutating func addToPlanning(_ task: Task, on timeSlot: TimeSlot) -> PlanningEntry {
         
-        let entry = PlanningEntry(withTask: task, startingAt: startingDate, duration: duration)
+        let entry = PlanningEntry(withTask: task, on: timeSlot)
         self.planning.entries.append(entry)
         return entry
     }
@@ -62,7 +62,7 @@ struct DataModel: Codable
         while self.planning.mostRecentEntryEndDate == nil || self.planning.mostRecentEntryEndDate! < slotEndDate {
             for task in self.backlog.tasks {
                 
-                let entry = self.addToPlanning(task, startingAt: taskStartDate, duration: taskDuration)
+                let entry = self.addToPlanning(task, on: TimeSlot(withStartDate: taskStartDate, duration: taskDuration))
                 if entry.timeSlot.endDate >= slotEndDate {
                     return
                 }

@@ -10,11 +10,11 @@ struct PlanningEntry: Codable, Equatable
     let timeSlot: TimeSlot
     var feedback: PlanningEntryFeedback?
     
-    init(withTask task: Task, startingAt startDate: Date, duration: TimeInterval) {
+    init(withTask task: Task, on timeSlot: TimeSlot) {
         
         self.id = UUID()
         self.task = task
-        self.timeSlot = TimeSlot(withStartDate: startDate, duration: duration)
+        self.timeSlot = timeSlot
         self.feedback = nil
     }
     
