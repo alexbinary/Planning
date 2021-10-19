@@ -39,4 +39,12 @@ struct DataModel: Codable
             taskStartDate.addTimeInterval(taskDuration)
         }
     }
+    
+    mutating func fillPlanningForNext24HoursAfterLatestItem() {
+        
+        let slotStartDate = self.planning.mostRecentItemEndDate ?? Date()
+        let slotEndDate = Calendar.current.date(byAdding: .hour, value: 24, to: slotStartDate)!
+        
+        self.fillPlanning(from: slotStartDate, to: slotEndDate)
+    }
 }
