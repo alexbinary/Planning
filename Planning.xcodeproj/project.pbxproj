@@ -18,6 +18,8 @@
 		29B3D3D6271EB8B400F0CB0E /* PlanningEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D5271EB8B400F0CB0E /* PlanningEntry.swift */; };
 		29B3D3D9271EB92E00F0CB0E /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D8271EB92E00F0CB0E /* Planning.swift */; };
 		29B3D3DD271EB9AB00F0CB0E /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3DC271EB9AB00F0CB0E /* utils.swift */; };
+		29B6BB80271F1146005F52C8 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB7F271F1146005F52C8 /* TimeSlot.swift */; };
+		29B6BB83271F11E7005F52C8 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB7F271F1146005F52C8 /* TimeSlot.swift */; };
 		29F4DB1A271EE738005433B8 /* PlanningEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D5271EB8B400F0CB0E /* PlanningEntry.swift */; };
 		29F4DB1D271EE741005433B8 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D1271EB86400F0CB0E /* Task.swift */; };
 		29F4DB20271EE743005433B8 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D8271EB92E00F0CB0E /* Planning.swift */; };
@@ -53,6 +55,7 @@
 		29B3D3D5271EB8B400F0CB0E /* PlanningEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningEntry.swift; sourceTree = "<group>"; };
 		29B3D3D8271EB92E00F0CB0E /* Planning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planning.swift; sourceTree = "<group>"; };
 		29B3D3DC271EB9AB00F0CB0E /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		29B6BB7F271F1146005F52C8 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,7 @@
 				29B3D3D8271EB92E00F0CB0E /* Planning.swift */,
 				299C0C71271EC4B300DE927D /* DataModel.swift */,
 				299C0C74271EC54C00DE927D /* Backlog.swift */,
+				29B6BB7F271F1146005F52C8 /* TimeSlot.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -215,6 +219,7 @@
 			files = (
 				29F4DB23271EE746005433B8 /* DataModel.swift in Sources */,
 				29F4DB24271EE749005433B8 /* Backlog.swift in Sources */,
+				29B6BB83271F11E7005F52C8 /* TimeSlot.swift in Sources */,
 				29F4DB27271EE750005433B8 /* dates.swift in Sources */,
 				29F4DB20271EE743005433B8 /* Planning.swift in Sources */,
 				299C0C86271EE5A100DE927D /* PlanningTest.swift in Sources */,
@@ -228,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				299C0C72271EC4B300DE927D /* DataModel.swift in Sources */,
+				29B6BB80271F1146005F52C8 /* TimeSlot.swift in Sources */,
 				299C0C7C271ED61F00DE927D /* dates.swift in Sources */,
 				299C0C6E271EC37500DE927D /* Settings.swift in Sources */,
 				29B3D3DD271EB9AB00F0CB0E /* utils.swift in Sources */,

@@ -22,7 +22,7 @@ class PlanningTest: XCTestCase {
         
         let planning = Planning(entries: [ entry1, entry2, entry3 ])
         
-        XCTAssertEqual(planning.mostRecentEntryEndDate, entry3.endDate)
+        XCTAssertEqual(planning.mostRecentEntryEndDate, entry3.timeSlot.endDate)
     }
     
     func test_mostRecentEntryEndDate_break() {
@@ -33,7 +33,7 @@ class PlanningTest: XCTestCase {
         
         let planning = Planning(entries: [ entry1, entry2, entry3 ])
         
-        XCTAssertEqual(planning.mostRecentEntryEndDate, entry3.endDate)
+        XCTAssertEqual(planning.mostRecentEntryEndDate, entry3.timeSlot.endDate)
     }
     
     func test_mostRecentEntryEndDate_crossed() {
@@ -44,6 +44,6 @@ class PlanningTest: XCTestCase {
         
         let planning = Planning(entries: [ entry1, entry2, entry3 ])
         
-        XCTAssertEqual(planning.mostRecentEntryEndDate, entry2.endDate)
+        XCTAssertEqual(planning.mostRecentEntryEndDate, entry2.timeSlot.endDate)
     }
 }
