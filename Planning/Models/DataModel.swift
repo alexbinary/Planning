@@ -6,5 +6,10 @@ import Foundation
 struct DataModel: Codable
 {
     let planning: Planning
-    let backlog: Backlog
+    var backlog: Backlog
+    
+    mutating func addToBacklog(_ task: Task) {
+        
+        self.backlog.tasks.append(task)
+    }
 }
