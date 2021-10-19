@@ -3,12 +3,12 @@ import Foundation
 
 
 
-func print(_ backlog: Backlog) {
+func printBacklog(from dataModel: DataModel) {
     
     print("==== Backlog ====")
     print()
     
-    for task in backlog.tasks {
+    for task in dataModel.backlog.tasks {
         
         print("* \(task.id)")
         print("  \(task.name)")
@@ -17,12 +17,12 @@ func print(_ backlog: Backlog) {
 }
 
 
-func print(_ planning: Planning) {
+func printPlanning(from dataModel: DataModel) {
     
     print("==== Planning ====")
     print()
     
-    for entry in planning.entries {
+    for entry in dataModel.planning.entries {
         
         print("* \(entry.id)")
         print("  \(DateFormatter.localizedString(from: entry.timeSlot.startDate, dateStyle: .short, timeStyle: .short)) - \(entry.task.id)")
