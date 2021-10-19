@@ -25,9 +25,9 @@ func print(_ planning: Planning) {
     for item in planning.items {
         
         print("* \(item.id)")
-        print("  \(item.startDate) - \(item.task.id)")
-        print("                              \(item.task.name)")
-        print("  \(item.endDate)")
+        print("  \(DateFormatter.localizedString(from: item.startDate, dateStyle: .short, timeStyle: .short)) - \(item.task.id)")
+        print("                     \(item.task.name)")
+        print("  \(DateFormatter.localizedString(from: item.endDate, dateStyle: .short, timeStyle: .short))")
         print()
     }
 }
