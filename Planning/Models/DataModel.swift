@@ -43,10 +43,12 @@ struct DataModel: Codable
         var taskStartDate = slotStartDate
         let taskDuration: TimeInterval = 30*60
         
-        for task in self.backlog.tasks {
-            
-            self.addToPlanning(task, startingAt: taskStartDate, duration: taskDuration)
-            taskStartDate.addTimeInterval(taskDuration)
+        while self.planning.mostRecentEntryEndDate == nil || self.planning.mostRecentEntryEndDate! < slotEndDate {
+            for task in self.backlog.tasks {
+                
+                self.addToPlanning(task, startingAt: taskStartDate, duration: taskDuration)
+                taskStartDate.addTimeInterval(taskDuration)
+            }
         }
     }
     
