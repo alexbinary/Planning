@@ -3,7 +3,7 @@ import Foundation
 
 
 
-struct Planning
+struct Planning: Codable
 {
     let items: [PlanningItem]
 }

@@ -3,7 +3,7 @@ import Foundation
 
 
 
-struct Task
+struct Task: Codable
 {
     let name: String
 }

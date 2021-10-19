@@ -3,7 +3,7 @@ import Foundation
 
 
 
-struct PlanningItem
+struct PlanningItem: Codable
 {
     let task: Task
     let startDate: Date

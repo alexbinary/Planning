@@ -11,6 +11,7 @@
 		29B3D3D2271EB86400F0CB0E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D1271EB86400F0CB0E /* Task.swift */; };
 		29B3D3D6271EB8B400F0CB0E /* PlanningItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D5271EB8B400F0CB0E /* PlanningItem.swift */; };
 		29B3D3D9271EB92E00F0CB0E /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D8271EB92E00F0CB0E /* Planning.swift */; };
+		29B3D3DD271EB9AB00F0CB0E /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3DC271EB9AB00F0CB0E /* utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		29B3D3D1271EB86400F0CB0E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		29B3D3D5271EB8B400F0CB0E /* PlanningItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningItem.swift; sourceTree = "<group>"; };
 		29B3D3D8271EB92E00F0CB0E /* Planning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planning.swift; sourceTree = "<group>"; };
+		29B3D3DC271EB9AB00F0CB0E /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				29B3D3C8271EB7FD00F0CB0E /* main.swift */,
+				29B3D3DC271EB9AB00F0CB0E /* utils.swift */,
 				29B3D3D0271EB85400F0CB0E /* Models */,
 			);
 			path = Planning;
@@ -136,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29B3D3DD271EB9AB00F0CB0E /* utils.swift in Sources */,
 				29B3D3D9271EB92E00F0CB0E /* Planning.swift in Sources */,
 				29B3D3D2271EB86400F0CB0E /* Task.swift in Sources */,
 				29B3D3C9271EB7FD00F0CB0E /* main.swift in Sources */,
