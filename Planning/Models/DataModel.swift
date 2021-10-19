@@ -54,16 +54,16 @@ struct DataModel: Codable
         return Float(entriesInSlot.filter { $0.feedback == .taskCompletedWithoutProblem } .count) / Float(entriesInSlot.count)
     }
     
-    mutating func fillPlanning(from slotStartDate: Date, to slotEndDate: Date) {
+    mutating func fillPlanning(on timeSlot: TimeSlot) {
         
-        var taskStartDate = slotStartDate
+        var taskStartDate = timeSlot.startDate
         let taskDuration: TimeInterval = 30*60
         
-        while self.planning.mostRecentEntryEndDate == nil || self.planning.mostRecentEntryEndDate! < slotEndDate {
+        while self.planning.mostRecentEntryEndDate == nil || self.planning.mostRecentEntryEndDate! < timeSlot.endDate {
             for task in self.backlog.tasks {
                 
                 let entry = self.addToPlanning(task, on: TimeSlot(withStartDate: taskStartDate, duration: taskDuration))
-                if entry.timeSlot.endDate >= slotEndDate {
+                if entry.timeSlot.endDate >= timeSlot.endDate {
                     return
                 }
                 taskStartDate = entry.timeSlot.endDate
@@ -73,9 +73,6 @@ struct DataModel: Codable
     
     mutating func fillPlanningForNext24HoursAfterLatestEntry() {
         
-        let slotStartDate = self.planning.mostRecentEntryEndDate ?? Date()
-        let slotEndDate = Calendar.current.date(byAdding: .hour, value: 24, to: slotStartDate)!
-        
-        self.fillPlanning(from: slotStartDate, to: slotEndDate)
+        self.fillPlanning(on: TimeSlot(withStartDate: self.planning.mostRecentEntryEndDate ?? Date(), duration: 24*3600))
     }
 }

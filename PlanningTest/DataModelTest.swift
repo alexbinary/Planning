@@ -15,7 +15,7 @@ class DataModelTest: XCTestCase {
         let task2 = dataModel.addToBacklog(Task(withName: "t2"))
         _ = dataModel.addToBacklog(Task(withName: "t3"))
         
-        dataModel.fillPlanning(from: Date(timeIntervalSinceReferenceDate: 0), to: Date(timeIntervalSinceReferenceDate: 45*60))
+        dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 45*60))
         
         XCTAssertEqual(dataModel.planning.entries.count, 2)
         XCTAssertEqual(dataModel.planning.entries[0].task, task1)
@@ -31,7 +31,7 @@ class DataModelTest: XCTestCase {
         let task2 = dataModel.addToBacklog(Task(withName: "t2"))
         let task3 = dataModel.addToBacklog(Task(withName: "t3"))
         
-        dataModel.fillPlanning(from: Date(timeIntervalSinceReferenceDate: 0), to: Date(timeIntervalSinceReferenceDate: 80*60))
+        dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 80*60))
         
         XCTAssertEqual(dataModel.planning.entries.count, 3)
         XCTAssertEqual(dataModel.planning.entries[0].task, task1)
@@ -48,7 +48,7 @@ class DataModelTest: XCTestCase {
         let task2 = dataModel.addToBacklog(Task(withName: "t2"))
         let task3 = dataModel.addToBacklog(Task(withName: "t3"))
         
-        dataModel.fillPlanning(from: Date(timeIntervalSinceReferenceDate: 0), to: Date(timeIntervalSinceReferenceDate: 110*60))
+        dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 110*60))
         
         XCTAssertEqual(dataModel.planning.entries.count, 4)
         XCTAssertEqual(dataModel.planning.entries[0].task, task1)
