@@ -17,7 +17,7 @@ import Foundation
 /// print(timeSlot.endDate) // Date() + 2 seconds
 /// ```
 ///
-struct TimeSlot: Codable
+struct TimeSlot: Codable, Equatable
 {
     
     /// The date at which the moment starts.
