@@ -8,9 +8,10 @@ struct DataModel: Codable
     var planning: Planning
     var backlog: Backlog
     
-    mutating func addToBacklog(_ task: Task) {
+    mutating func addToBacklog(_ task: Task) -> Task {
         
         self.backlog.tasks.append(task)
+        return task
     }
     
     mutating func deleteFromBacklog(taskWithId id: UUID) {
