@@ -33,7 +33,7 @@ struct TimeSlot: Codable, Equatable
     
     /// The date at which the moment starts.
     ///
-    let startDate: Date
+    var startDate: Date
     
     
     /// The duration of the moment.
