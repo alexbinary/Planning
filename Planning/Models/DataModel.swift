@@ -23,9 +23,11 @@ struct DataModel: Codable
         self.backlog.tasks.removeAll()
     }
     
-    mutating func addToPlanning(_ task: Task, startingAt startingDate: Date, duration: TimeInterval) {
+    mutating func addToPlanning(_ task: Task, startingAt startingDate: Date, duration: TimeInterval) -> PlanningEntry {
         
-        self.planning.entries.append(PlanningEntry(withTask: task, startingAt: startingDate, duration: duration))
+        let entry = PlanningEntry(withTask: task, startingAt: startingDate, duration: duration)
+        self.planning.entries.append(entry)
+        return entry
     }
     
     mutating func deleteFromPlanning(entryWithId id: UUID) {
