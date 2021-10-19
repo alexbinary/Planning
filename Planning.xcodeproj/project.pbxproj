@@ -12,11 +12,18 @@
 		299C0C75271EC54C00DE927D /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C74271EC54C00DE927D /* Backlog.swift */; };
 		299C0C78271ED1CA00DE927D /* print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C77271ED1CA00DE927D /* print.swift */; };
 		299C0C7C271ED61F00DE927D /* dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C7B271ED61F00DE927D /* dates.swift */; };
+		299C0C86271EE5A100DE927D /* PlanningTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C85271EE5A100DE927D /* PlanningTest.swift */; };
 		29B3D3C9271EB7FD00F0CB0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3C8271EB7FD00F0CB0E /* main.swift */; };
 		29B3D3D2271EB86400F0CB0E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D1271EB86400F0CB0E /* Task.swift */; };
 		29B3D3D6271EB8B400F0CB0E /* PlanningItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D5271EB8B400F0CB0E /* PlanningItem.swift */; };
 		29B3D3D9271EB92E00F0CB0E /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D8271EB92E00F0CB0E /* Planning.swift */; };
 		29B3D3DD271EB9AB00F0CB0E /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3DC271EB9AB00F0CB0E /* utils.swift */; };
+		29F4DB1A271EE738005433B8 /* PlanningItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D5271EB8B400F0CB0E /* PlanningItem.swift */; };
+		29F4DB1D271EE741005433B8 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D1271EB86400F0CB0E /* Task.swift */; };
+		29F4DB20271EE743005433B8 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D8271EB92E00F0CB0E /* Planning.swift */; };
+		29F4DB23271EE746005433B8 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C71271EC4B300DE927D /* DataModel.swift */; };
+		29F4DB24271EE749005433B8 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C74271EC54C00DE927D /* Backlog.swift */; };
+		29F4DB27271EE750005433B8 /* dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C7B271ED61F00DE927D /* dates.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +44,9 @@
 		299C0C74271EC54C00DE927D /* Backlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backlog.swift; sourceTree = "<group>"; };
 		299C0C77271ED1CA00DE927D /* print.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = print.swift; sourceTree = "<group>"; };
 		299C0C7B271ED61F00DE927D /* dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dates.swift; sourceTree = "<group>"; };
+		299C0C83271EE5A100DE927D /* PlanningTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanningTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		299C0C85271EE5A100DE927D /* PlanningTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningTest.swift; sourceTree = "<group>"; };
+		299C0C87271EE5A100DE927D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29B3D3C5271EB7FD00F0CB0E /* Planning */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Planning; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B3D3C8271EB7FD00F0CB0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		29B3D3D1271EB86400F0CB0E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -46,6 +56,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		299C0C80271EE5A100DE927D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		29B3D3C2271EB7FD00F0CB0E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,10 +73,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		299C0C84271EE5A100DE927D /* PlanningTest */ = {
+			isa = PBXGroup;
+			children = (
+				299C0C87271EE5A100DE927D /* Info.plist */,
+				299C0C85271EE5A100DE927D /* PlanningTest.swift */,
+			);
+			path = PlanningTest;
+			sourceTree = "<group>";
+		};
 		29B3D3BC271EB7FD00F0CB0E = {
 			isa = PBXGroup;
 			children = (
 				29B3D3C7271EB7FD00F0CB0E /* Planning */,
+				299C0C84271EE5A100DE927D /* PlanningTest */,
 				29B3D3C6271EB7FD00F0CB0E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				29B3D3C5271EB7FD00F0CB0E /* Planning */,
+				299C0C83271EE5A100DE927D /* PlanningTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,6 +128,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		299C0C82271EE5A100DE927D /* PlanningTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 299C0C88271EE5A100DE927D /* Build configuration list for PBXNativeTarget "PlanningTest" */;
+			buildPhases = (
+				299C0C7F271EE5A100DE927D /* Sources */,
+				299C0C80271EE5A100DE927D /* Frameworks */,
+				299C0C81271EE5A100DE927D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlanningTest;
+			productName = PlanningTest;
+			productReference = 299C0C83271EE5A100DE927D /* PlanningTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		29B3D3C4271EB7FD00F0CB0E /* Planning */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 29B3D3CC271EB7FD00F0CB0E /* Build configuration list for PBXNativeTarget "Planning" */;
@@ -126,6 +171,9 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					299C0C82271EE5A100DE927D = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					29B3D3C4271EB7FD00F0CB0E = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -145,11 +193,36 @@
 			projectRoot = "";
 			targets = (
 				29B3D3C4271EB7FD00F0CB0E /* Planning */,
+				299C0C82271EE5A100DE927D /* PlanningTest */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		299C0C81271EE5A100DE927D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		299C0C7F271EE5A100DE927D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29F4DB23271EE746005433B8 /* DataModel.swift in Sources */,
+				29F4DB24271EE749005433B8 /* Backlog.swift in Sources */,
+				29F4DB27271EE750005433B8 /* dates.swift in Sources */,
+				29F4DB20271EE743005433B8 /* Planning.swift in Sources */,
+				299C0C86271EE5A100DE927D /* PlanningTest.swift in Sources */,
+				29F4DB1D271EE741005433B8 /* Task.swift in Sources */,
+				29F4DB1A271EE738005433B8 /* PlanningItem.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		29B3D3C1271EB7FD00F0CB0E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -170,6 +243,42 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		299C0C89271EE5A100DE927D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2N6DR3R99K;
+				INFOPLIST_FILE = PlanningTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.bintz.PlanningTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		299C0C8A271EE5A100DE927D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2N6DR3R99K;
+				INFOPLIST_FILE = PlanningTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.bintz.PlanningTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		29B3D3CA271EB7FD00F0CB0E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -310,6 +419,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		299C0C88271EE5A100DE927D /* Build configuration list for PBXNativeTarget "PlanningTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				299C0C89271EE5A100DE927D /* Debug */,
+				299C0C8A271EE5A100DE927D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		29B3D3C0271EB7FD00F0CB0E /* Build configuration list for PBXProject "Planning" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

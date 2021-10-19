@@ -3,7 +3,7 @@ import Foundation
 
 
 
-struct PlanningItem: Codable
+struct PlanningItem: Codable, Equatable
 {
     let id: UUID
     let task: Task
@@ -17,5 +17,10 @@ struct PlanningItem: Codable
         self.task = task
         self.startDate = startDate
         self.duration = duration
+    }
+    
+    static func == (lhs: PlanningItem, rhs: PlanningItem) -> Bool {
+        
+        return lhs.id == rhs.id
     }
 }
