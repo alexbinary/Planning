@@ -132,4 +132,19 @@ class DataModelTest: XCTestCase {
         XCTAssertEqual(dataModel.planningEntries(in: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 3.0), and: Date(timeIntervalSinceReferenceDate:  7.0))), [entry1, entry2, entry3])
         XCTAssertEqual(dataModel.planningEntries(in: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 4.5), and: Date(timeIntervalSinceReferenceDate:  5.5))), [entry2])
     }
+    
+    
+    func test_moveEntryToNewStartDate() {
+ 
+        var dataModel = DataModel(planning: Planning(entries: []), backlog: Backlog(tasks: []))
+        
+        let duration: TimeInterval = 2
+        let entry = dataModel.addToPlanning(Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: duration))
+        
+        let newStartDate = Date(timeIntervalSinceReferenceDate: 4)
+        let newEntry = dataModel.move(entryWithId: entry.id, toNewStartDate: newStartDate)
+        
+        XCTAssertEqual(newEntry.timeSlot.startDate, newStartDate)
+        XCTAssertEqual(newEntry.timeSlot.duration, duration)
+    }
 }

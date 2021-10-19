@@ -41,6 +41,15 @@ struct DataModel: Codable
         self.planning.entries.removeAll()
     }
     
+    mutating func move(entryWithId id: UUID, toNewStartDate newStartDate: Date) -> PlanningEntry {
+        
+        let index = self.planning.entries.firstIndex(where: { $0.id == id })!
+        
+        self.planning.entries[index].timeSlot.startDate = newStartDate
+        
+        return self.planning.entries[index]
+    }
+    
     func planningEntries(in timeSlot: TimeSlot) -> [PlanningEntry] {
         
         return self.planning.entries.filter { $0.timeSlot.intersects(with: timeSlot) }
