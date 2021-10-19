@@ -17,12 +17,12 @@ func printBacklog(from dataModel: DataModel) {
 }
 
 
-func printPlanning(from dataModel: DataModel) {
+func printPlanning(from dataModel: DataModel, for timeSlot: TimeSlot) {
     
     print("==== Planning ====")
     print()
     
-    for entry in dataModel.planning.entries {
+    for entry in dataModel.planningEntries(in: timeSlot) {
         
         print("* \(entry.id)")
         print("  \(DateFormatter.localizedString(from: entry.timeSlot.startDate, dateStyle: .short, timeStyle: .short)) - \(entry.task.id)")
