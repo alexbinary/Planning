@@ -27,7 +27,7 @@ struct TimeSlot: Codable, Equatable
     
     /// The duration of the moment.
     ///
-    let duration: TimeInterval
+    var duration: TimeInterval
     
     
     /// The date at which the moment ends.
