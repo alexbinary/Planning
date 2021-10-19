@@ -3,4 +3,8 @@ import Foundation
 
 
 
-print("Hello, World!")
+let planning = readPlanning(from: Settings.fileUrl)
+
+print(planning)
+
+save(planning, to: Settings.fileUrl)
