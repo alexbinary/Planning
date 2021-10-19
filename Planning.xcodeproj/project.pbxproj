@@ -22,6 +22,7 @@
 		29B6BB83271F11E7005F52C8 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB7F271F1146005F52C8 /* TimeSlot.swift */; };
 		29B6BB87271F16C7005F52C8 /* DataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB86271F16C7005F52C8 /* DataModelTest.swift */; };
 		29B6BB8B271F19C8005F52C8 /* PlanningEntryFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB8A271F19C8005F52C8 /* PlanningEntryFeedback.swift */; };
+		29B6BB8E271F2046005F52C8 /* PlanningEntryFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB8A271F19C8005F52C8 /* PlanningEntryFeedback.swift */; };
 		29F4DB1A271EE738005433B8 /* PlanningEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D5271EB8B400F0CB0E /* PlanningEntry.swift */; };
 		29F4DB1D271EE741005433B8 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D1271EB86400F0CB0E /* Task.swift */; };
 		29F4DB20271EE743005433B8 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D8271EB92E00F0CB0E /* Planning.swift */; };
@@ -223,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29B6BB8E271F2046005F52C8 /* PlanningEntryFeedback.swift in Sources */,
 				29F4DB23271EE746005433B8 /* DataModel.swift in Sources */,
 				29F4DB24271EE749005433B8 /* Backlog.swift in Sources */,
 				29B6BB83271F11E7005F52C8 /* TimeSlot.swift in Sources */,

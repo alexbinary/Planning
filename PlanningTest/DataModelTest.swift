@@ -56,4 +56,66 @@ class DataModelTest: XCTestCase {
         XCTAssertEqual(dataModel.planning.entries[2].task, task3)
         XCTAssertEqual(dataModel.planning.entries[3].task, task1)
     }
+    
+    
+    func test_planningFeedbackScoreBetweenAnd_allPositive() {
+ 
+        var dataModel = DataModel(planning: Planning(entries: []), backlog: Backlog(tasks: []))
+        
+        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
+        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
+        let entry3 = dataModel.addToPlanning(Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 4), duration: 2)
+        
+        dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry1.id)
+        dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry2.id)
+        dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry3.id)
+        
+        XCTAssertEqual(dataModel.planningFeedbackScore(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 6)), 1)
+    }
+    
+    
+    func test_planningFeedbackScoreBetweenAnd_allNegative() {
+ 
+        var dataModel = DataModel(planning: Planning(entries: []), backlog: Backlog(tasks: []))
+        
+        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
+        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
+        let entry3 = dataModel.addToPlanning(Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 4), duration: 2)
+        
+        dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry1.id)
+        dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry2.id)
+        dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry3.id)
+        
+        XCTAssertEqual(dataModel.planningFeedbackScore(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 6)), 0)
+    }
+    
+    
+    func test_planningFeedbackScoreBetweenAnd_mixed() {
+ 
+        var dataModel = DataModel(planning: Planning(entries: []), backlog: Backlog(tasks: []))
+        
+        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
+        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
+        _ = dataModel.addToPlanning(Task(withName: "t3"), startingAt: Date(timeIntervalSinceReferenceDate: 4), duration: 2)
+        
+        dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry1.id)
+        dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry2.id)
+        
+        XCTAssertEqual(dataModel.planningFeedbackScore(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 6)), 1/3)
+    }
+    
+    
+    func test_planningFeedbackScoreBetweenAnd_mixed_slotSmaller() {
+ 
+        var dataModel = DataModel(planning: Planning(entries: []), backlog: Backlog(tasks: []))
+        
+        let entry1 = dataModel.addToPlanning(Task(withName: "t1"), startingAt: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
+        let entry2 = dataModel.addToPlanning(Task(withName: "t2"), startingAt: Date(timeIntervalSinceReferenceDate: 2), duration: 2)
+        
+        dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry1.id)
+        dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry2.id)
+        
+        XCTAssertEqual(dataModel.planningFeedbackScore(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 1)), 1)
+        XCTAssertEqual(dataModel.planningFeedbackScore(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 3)), 0)
+    }
 }

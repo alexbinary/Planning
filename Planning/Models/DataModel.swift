@@ -47,6 +47,13 @@ struct DataModel: Codable
         self.planning.entries[index].feedback = feedback
     }
     
+    func planningFeedbackScore(between slotStartDate: Date, and slotEndDate: Date) -> Float {
+        
+        let entriesInSlot = self.planning.entries.filter { $0.timeSlot.startDate >= slotStartDate && $0.timeSlot.startDate <= slotEndDate }
+        
+        return Float(entriesInSlot.filter { $0.feedback == .taskCompletedWithoutProblem } .count) / Float(entriesInSlot.count)
+    }
+    
     mutating func fillPlanning(from slotStartDate: Date, to slotEndDate: Date) {
         
         var taskStartDate = slotStartDate
