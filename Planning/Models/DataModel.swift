@@ -73,6 +73,9 @@ struct DataModel: Codable
     
     mutating func fillPlanningForNext24HoursAfterLatestEntry() {
         
-        self.fillPlanning(on: TimeSlot(withStartDate: self.planning.mostRecentEntryEndDate ?? Date(), duration: 24*3600))
+        let slotStartDate = self.planning.mostRecentEntryEndDate ?? Date()
+        let slotEndDate = Calendar.current.date(byAdding: .hour, value: 24, to: slotStartDate)!
+        
+        self.fillPlanning(on: TimeSlot(between: slotStartDate, and: slotEndDate))
     }
 }

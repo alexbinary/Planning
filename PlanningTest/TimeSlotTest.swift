@@ -7,14 +7,29 @@ import XCTest
 class TimeSlotTest: XCTestCase {
 
     
-    func test_init() {
+    func test_init_startDateDuration() {
         
         let startDate = Date(timeIntervalSinceReferenceDate: 0)
         let duration: TimeInterval = 2
+        
         let timeSlot = TimeSlot(withStartDate: startDate, duration: duration)
         
         XCTAssertEqual(timeSlot.startDate, startDate)
         XCTAssertEqual(timeSlot.duration, duration)
+    }
+    
+    
+    func test_init_startDateEndDate() {
+        
+        let startDate = Date(timeIntervalSinceReferenceDate: 0)
+        let duration: TimeInterval = 2
+        let endDate = startDate.addingTimeInterval(duration)
+        
+        let timeSlot = TimeSlot(between: startDate, and: endDate)
+        
+        XCTAssertEqual(timeSlot.startDate, startDate)
+        XCTAssertEqual(timeSlot.duration, duration)
+        XCTAssertEqual(timeSlot.endDate, endDate)
     }
     
     

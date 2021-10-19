@@ -70,7 +70,7 @@ class DataModelTest: XCTestCase {
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry2.id)
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry3.id)
         
-        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 6)), 1)
+        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 6))), 1)
     }
     
     
@@ -86,7 +86,7 @@ class DataModelTest: XCTestCase {
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry2.id)
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry3.id)
         
-        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 6)), 0)
+        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 6))), 0)
     }
     
     
@@ -101,7 +101,7 @@ class DataModelTest: XCTestCase {
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry1.id)
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry2.id)
         
-        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 6)), 1/3)
+        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 6))), 1/3)
     }
     
     
@@ -115,7 +115,7 @@ class DataModelTest: XCTestCase {
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry1.id)
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry2.id)
         
-        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 1)), 1)
-        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 1), duration: 2)), 0)
+        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 1))), 1)
+        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 3))), 0)
     }
 }

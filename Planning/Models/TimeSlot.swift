@@ -5,13 +5,14 @@ import Foundation
 
 /// A type that represents a moment in time between two dates.
 ///
-/// You create a time slot by specifying a start date and a duration.
+/// You can create a time slot by specifying a start date and a duration, or a start date and an end date.
 ///
 /// ```swift
-/// let timeSlot = TimeSlot(withStartDate: Date(), duration: 2)
+/// let timeSlot1 = TimeSlot(withStartDate: Date(), duration: 2)
+/// let timeSlot2 = TimeSlot(withStartDate: Date(), duration: Date().addingTimeInterval(2))
 /// ```
 ///
-/// A time slot exposes the date at which the moment ends.
+/// No matter how a time slot was created, a time slot exposes the date at which the moment ends.
 ///
 /// ```swift
 /// print(timeSlot.endDate) // Date() + 2 seconds
@@ -42,5 +43,14 @@ struct TimeSlot: Codable, Equatable
     {
         self.startDate = startDate
         self.duration = duration
+    }
+    
+    
+    /// Creates a new time slot from a start date and an end date.
+    ///
+    init(between startDate: Date, and endDate: Date)
+    {
+        self.startDate = startDate
+        self.duration = endDate.timeIntervalSince(startDate)
     }
 }
