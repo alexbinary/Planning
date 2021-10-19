@@ -41,6 +41,12 @@ struct DataModel: Codable
         self.planning.entries.removeAll()
     }
     
+    mutating func giveFeedback(_ feedback: PlanningEntryFeedback, onPlanningEntryWithId id: UUID) {
+        
+        let index = self.planning.entries.firstIndex(where: { $0.id == id })!
+        self.planning.entries[index].feedback = feedback
+    }
+    
     mutating func fillPlanning(from slotStartDate: Date, to slotEndDate: Date) {
         
         var taskStartDate = slotStartDate

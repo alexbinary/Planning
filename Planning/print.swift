@@ -27,6 +27,7 @@ func print(_ planning: Planning) {
         print("* \(entry.id)")
         print("  \(DateFormatter.localizedString(from: entry.timeSlot.startDate, dateStyle: .short, timeStyle: .short)) - \(entry.task.id)")
         print("                     \(entry.task.name)")
+        print("                     Feedback: \(entry.feedback?.description ?? "-")")
         print("  \(DateFormatter.localizedString(from: entry.timeSlot.endDate, dateStyle: .short, timeStyle: .short))")
         print()
     }
