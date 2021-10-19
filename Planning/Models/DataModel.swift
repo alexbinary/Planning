@@ -33,6 +33,11 @@ struct DataModel: Codable
         self.planning.entries.removeAll(where: { $0.id == id })
     }
     
+    mutating func clearPlanning() {
+        
+        self.planning.entries.removeAll()
+    }
+    
     mutating func fillPlanning(from slotStartDate: Date, to slotEndDate: Date) {
         
         var taskStartDate = slotStartDate
