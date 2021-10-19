@@ -12,4 +12,9 @@ struct DataModel: Codable
         
         self.backlog.tasks.append(task)
     }
+    
+    mutating func deleteFromBacklog(taskWithId id: UUID) {
+        
+        self.backlog.tasks.removeAll(where: { $0.id == id })
+    }
 }
