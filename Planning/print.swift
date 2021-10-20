@@ -24,13 +24,13 @@ func printPlanning(from dataModel: DataModel, for timeSlot: TimeSlot? = nil) {
     
     let printer = Printer()
     
-    for model in printer.planningEntryPrintModels(from: dataModel, on: timeSlot) {
+    for model in printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel, on: timeSlot) {
         printPlanningEntry(model: model)
     }
 }
 
 
-func printPlanningEntry(model: PlanningEntryPrintModel) {
+func printPlanningEntry(model: AnnotatedTimeSlotPrintModel) {
     
     print("* \(model.head)")
     print("  \(DateFormatter.localizedString(from: model.timeSlot.startDate, dateStyle: .short, timeStyle: .short)) - \(model.title)")

@@ -13,9 +13,9 @@ struct Printer
     /// - Parameter dataModel The data model planning entries should be read from
     /// - Parameter timeSlot If provided, only planning entries that intersect with the time slot are used. Otherwise, all entries are used.
     ///
-    func planningEntryPrintModels(from dataModel: DataModel, on timeSlot: TimeSlot? = nil) -> [PlanningEntryPrintModel] {
+    func annotatedTimeSlotPrintModelsForPlanning(from dataModel: DataModel, on timeSlot: TimeSlot? = nil) -> [AnnotatedTimeSlotPrintModel] {
         
-        var models: [PlanningEntryPrintModel] = []
+        var models: [AnnotatedTimeSlotPrintModel] = []
         
         var latestReferenceDate: Date? = nil
         
@@ -28,11 +28,11 @@ struct Printer
             if let latestReferenceDate = latestReferenceDate,
                entry.timeSlot.startDate > latestReferenceDate {
                 
-                let model = makeEmptyEntryPrintModel(on: TimeSlot(between: latestReferenceDate, and: entry.timeSlot.startDate))
+                let model = makeAnnotatedTimeSlotPrintModelForEmptyPlanningEntry(on: TimeSlot(between: latestReferenceDate, and: entry.timeSlot.startDate))
                 models.append(model)
             }
             
-            let model = makeEntryPrintModel(from: entry)
+            let model = makeAnnotatedTimeSlotPrintModel(for: entry)
             models.append(model)
             
             latestReferenceDate = entry.timeSlot.endDate
@@ -42,7 +42,7 @@ struct Printer
            let latestReferenceDate = latestReferenceDate,
            latestReferenceDate < timeSlot.endDate {
         
-            let model = makeEmptyEntryPrintModel(on: TimeSlot(between: latestReferenceDate, and: timeSlot.endDate))
+            let model = makeAnnotatedTimeSlotPrintModelForEmptyPlanningEntry(on: TimeSlot(between: latestReferenceDate, and: timeSlot.endDate))
             models.append(model)
         }
         
@@ -50,9 +50,9 @@ struct Printer
     }
 
 
-    func makeEntryPrintModel(from entry: PlanningEntry) -> PlanningEntryPrintModel {
+    func makeAnnotatedTimeSlotPrintModel(for entry: PlanningEntry) -> AnnotatedTimeSlotPrintModel {
         
-        return PlanningEntryPrintModel(
+        return AnnotatedTimeSlotPrintModel(
             timeSlot: entry.timeSlot,
             head: "\(entry.id)",
             title: "\(entry.task.id)",
@@ -62,9 +62,9 @@ struct Printer
     }
 
 
-    func makeEmptyEntryPrintModel(on timeSlot: TimeSlot) -> PlanningEntryPrintModel {
+    func makeAnnotatedTimeSlotPrintModelForEmptyPlanningEntry(on timeSlot: TimeSlot) -> AnnotatedTimeSlotPrintModel {
         
-        return PlanningEntryPrintModel(
+        return AnnotatedTimeSlotPrintModel(
             timeSlot: timeSlot,
             head: "(Empty)",
             title: "Empty",

@@ -5,7 +5,7 @@ import Foundation
 
 /// A type that stores the data that should be presented to the user to communicate a time slot with associated data.
 ///
-struct PlanningEntryPrintModel: Equatable
+struct AnnotatedTimeSlotPrintModel: Equatable
 {
     
     /// The time slot that should be printed.
