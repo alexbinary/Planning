@@ -25,6 +25,8 @@
 		29B6BB8E271F2046005F52C8 /* PlanningEntryFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB8A271F19C8005F52C8 /* PlanningEntryFeedback.swift */; };
 		29B6BB92271F22D3005F52C8 /* PlanningEntryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB91271F22D3005F52C8 /* PlanningEntryTest.swift */; };
 		29B6BB96271F2858005F52C8 /* TimeSlotTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB95271F2858005F52C8 /* TimeSlotTest.swift */; };
+		29F301AE272040F0009D9CF5 /* PlanningEntryPrintModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F301AD272040F0009D9CF5 /* PlanningEntryPrintModel.swift */; };
+		29F301B427204104009D9CF5 /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F301B327204104009D9CF5 /* Printer.swift */; };
 		29F4DB1A271EE738005433B8 /* PlanningEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D5271EB8B400F0CB0E /* PlanningEntry.swift */; };
 		29F4DB1D271EE741005433B8 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D1271EB86400F0CB0E /* Task.swift */; };
 		29F4DB20271EE743005433B8 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D8271EB92E00F0CB0E /* Planning.swift */; };
@@ -65,6 +67,8 @@
 		29B6BB8A271F19C8005F52C8 /* PlanningEntryFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningEntryFeedback.swift; sourceTree = "<group>"; };
 		29B6BB91271F22D3005F52C8 /* PlanningEntryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningEntryTest.swift; sourceTree = "<group>"; };
 		29B6BB95271F2858005F52C8 /* TimeSlotTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlotTest.swift; sourceTree = "<group>"; };
+		29F301AD272040F0009D9CF5 /* PlanningEntryPrintModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningEntryPrintModel.swift; sourceTree = "<group>"; };
+		29F301B327204104009D9CF5 /* Printer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,7 @@
 				299C0C77271ED1CA00DE927D /* print.swift */,
 				299C0C7B271ED61F00DE927D /* dates.swift */,
 				299C0C6D271EC37500DE927D /* Settings.swift */,
+				29F301AC272040CE009D9CF5 /* Print */,
 				29B3D3D0271EB85400F0CB0E /* Models */,
 			);
 			path = Planning;
@@ -140,6 +145,15 @@
 				29B6BB8A271F19C8005F52C8 /* PlanningEntryFeedback.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		29F301AC272040CE009D9CF5 /* Print */ = {
+			isa = PBXGroup;
+			children = (
+				29F301B327204104009D9CF5 /* Printer.swift */,
+				29F301AD272040F0009D9CF5 /* PlanningEntryPrintModel.swift */,
+			);
+			path = Print;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,11 +263,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29F301AE272040F0009D9CF5 /* PlanningEntryPrintModel.swift in Sources */,
 				299C0C72271EC4B300DE927D /* DataModel.swift in Sources */,
 				29B6BB80271F1146005F52C8 /* TimeSlot.swift in Sources */,
 				299C0C7C271ED61F00DE927D /* dates.swift in Sources */,
 				299C0C6E271EC37500DE927D /* Settings.swift in Sources */,
 				29B6BB8B271F19C8005F52C8 /* PlanningEntryFeedback.swift in Sources */,
+				29F301B427204104009D9CF5 /* Printer.swift in Sources */,
 				29B3D3DD271EB9AB00F0CB0E /* utils.swift in Sources */,
 				299C0C75271EC54C00DE927D /* Backlog.swift in Sources */,
 				29B3D3D9271EB92E00F0CB0E /* Planning.swift in Sources */,
