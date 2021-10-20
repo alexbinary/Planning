@@ -3,7 +3,7 @@ import Foundation
 
 
 
-struct PlanningEntryPrintModel
+struct PlanningEntryPrintModel: Equatable
 {
     let timeSlot: TimeSlot
     let head: String
