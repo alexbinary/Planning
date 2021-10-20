@@ -50,9 +50,13 @@ struct DataModel: Codable
         return self.planning.entries[index]
     }
     
-    func planningEntries(in timeSlot: TimeSlot) -> [PlanningEntry] {
+    func planningEntries(in timeSlot: TimeSlot? = nil) -> [PlanningEntry] {
         
-        return self.planning.entries.filter { $0.timeSlot.intersects(with: timeSlot) }
+        if let timeSlot = timeSlot {
+            return self.planning.entries.filter { $0.timeSlot.intersects(with: timeSlot) }
+        } else {
+            return self.planning.entries
+        }
     }
     
     mutating func giveFeedback(_ feedback: PlanningEntryFeedback, onPlanningEntryWithId id: UUID) {

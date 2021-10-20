@@ -131,6 +131,7 @@ class DataModelTest: XCTestCase {
         XCTAssertEqual(dataModel.planningEntries(in: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0.0), and: Date(timeIntervalSinceReferenceDate: 10.0))), [entry1, entry2, entry3])
         XCTAssertEqual(dataModel.planningEntries(in: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 3.0), and: Date(timeIntervalSinceReferenceDate:  7.0))), [entry1, entry2, entry3])
         XCTAssertEqual(dataModel.planningEntries(in: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 4.5), and: Date(timeIntervalSinceReferenceDate:  5.5))), [entry2])
+        XCTAssertEqual(dataModel.planningEntries(), [entry1, entry2, entry3])
     }
     
     
