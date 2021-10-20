@@ -22,6 +22,16 @@ func printPlanning(from dataModel: DataModel, for timeSlot: TimeSlot? = nil) {
     print("==== Planning ====")
     print()
     
+    for model in planningEntryPrintModels(from: dataModel, on: timeSlot) {
+        printPlanningEntry(model: model)
+    }
+}
+
+
+func planningEntryPrintModels(from dataModel: DataModel, on timeSlot: TimeSlot? = nil) -> [PlanningEntryPrintModel] {
+    
+    var models: [PlanningEntryPrintModel] = []
+    
     var latestReferenceDate: Date? = nil
     
     if let timeSlot = timeSlot {
@@ -33,15 +43,12 @@ func printPlanning(from dataModel: DataModel, for timeSlot: TimeSlot? = nil) {
         if let latestReferenceDate = latestReferenceDate,
            entry.timeSlot.startDate > latestReferenceDate {
             
-            printEmptyEntry(on: TimeSlot(between: latestReferenceDate, and: entry.timeSlot.startDate))
+            let model = makeEmptyEntryPrintModel(on: TimeSlot(between: latestReferenceDate, and: entry.timeSlot.startDate))
+            models.append(model)
         }
         
-        print("* \(entry.id)")
-        print("  \(DateFormatter.localizedString(from: entry.timeSlot.startDate, dateStyle: .short, timeStyle: .short)) - \(entry.task.id)")
-        print("                     \(entry.task.name)")
-        print("                     Feedback: \(entry.feedback?.description ?? "-")")
-        print("  \(DateFormatter.localizedString(from: entry.timeSlot.endDate, dateStyle: .short, timeStyle: .short))")
-        print()
+        let model = makeEntryPrintModel(from: entry)
+        models.append(model)
         
         latestReferenceDate = entry.timeSlot.endDate
     }
@@ -50,15 +57,58 @@ func printPlanning(from dataModel: DataModel, for timeSlot: TimeSlot? = nil) {
        let latestReferenceDate = latestReferenceDate,
        latestReferenceDate < timeSlot.endDate {
     
-        printEmptyEntry(on: TimeSlot(between: latestReferenceDate, and: timeSlot.endDate))
+        let model = makeEmptyEntryPrintModel(on: TimeSlot(between: latestReferenceDate, and: timeSlot.endDate))
+        models.append(model)
     }
+    
+    return models
 }
 
 
-func printEmptyEntry(on timeSlot: TimeSlot) {
+func makeEntryPrintModel(from entry: PlanningEntry) -> PlanningEntryPrintModel {
     
-    print("* (Empty)")
-    print("  \(DateFormatter.localizedString(from: timeSlot.startDate, dateStyle: .short, timeStyle: .short)) - Empty")
-    print("  \(DateFormatter.localizedString(from: timeSlot.endDate, dateStyle: .short, timeStyle: .short))")
+    return PlanningEntryPrintModel(
+        timeSlot: entry.timeSlot,
+        head: "\(entry.id)",
+        title: "\(entry.task.id)",
+        subtitle: "\(entry.task.name)",
+        extra: "Feedback: \(entry.feedback?.description ?? "-")"
+    )
+}
+
+
+func makeEmptyEntryPrintModel(on timeSlot: TimeSlot) -> PlanningEntryPrintModel {
+    
+    return PlanningEntryPrintModel(
+        timeSlot: timeSlot,
+        head: "(Empty)",
+        title: "Empty",
+        subtitle: nil,
+        extra: nil
+    )
+}
+
+
+func printPlanningEntry(model: PlanningEntryPrintModel) {
+    
+    print("* \(model.head)")
+    print("  \(DateFormatter.localizedString(from: model.timeSlot.startDate, dateStyle: .short, timeStyle: .short)) - \(model.title)")
+    if let subtitle = model.subtitle {
+        print("                     \(subtitle)")
+    }
+    if let extra = model.extra {
+        print("                     \(extra)")
+    }
+    print("  \(DateFormatter.localizedString(from: model.timeSlot.endDate, dateStyle: .short, timeStyle: .short))")
     print()
+}
+
+
+struct PlanningEntryPrintModel
+{
+    let timeSlot: TimeSlot
+    let head: String
+    let title: String
+    let subtitle: String?
+    let extra: String?
 }
