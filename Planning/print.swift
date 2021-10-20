@@ -17,7 +17,7 @@ func printBacklog(from dataModel: DataModel) {
 }
 
 
-func printPlanning(from dataModel: DataModel, for timeSlot: TimeSlot) {
+func printPlanning(from dataModel: DataModel, for timeSlot: TimeSlot? = nil) {
     
     print("==== Planning ====")
     print()
