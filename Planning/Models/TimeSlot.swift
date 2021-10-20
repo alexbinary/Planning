@@ -90,7 +90,7 @@ struct TimeSlot: Codable, Equatable
         let latestStartDate = [timeSlot1.startDate, timeSlot2.startDate].max()!
         let earliestEndDate = [timeSlot1.endDate, timeSlot2.endDate].min()!
         
-        return latestStartDate < earliestEndDate ? TimeSlot(between: latestStartDate, and: earliestEndDate) : nil
+        return latestStartDate <= earliestEndDate ? TimeSlot(between: latestStartDate, and: earliestEndDate) : nil
     }
     
     

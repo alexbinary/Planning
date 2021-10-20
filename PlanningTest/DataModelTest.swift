@@ -115,8 +115,8 @@ class DataModelTest: XCTestCase {
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onPlanningEntryWithId: entry1.id)
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onPlanningEntryWithId: entry2.id)
         
-        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 1))), 1)
-        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 2), and: Date(timeIntervalSinceReferenceDate: 3))), 0)
+        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0.0), and: Date(timeIntervalSinceReferenceDate: 1.0))), 1)
+        XCTAssertEqual(dataModel.planningFeedbackScore(on: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 2.5), and: Date(timeIntervalSinceReferenceDate: 3.0))), 0)
     }
     
     
