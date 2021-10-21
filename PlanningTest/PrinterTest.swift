@@ -7,12 +7,12 @@ import XCTest
 class PrinterTest: XCTestCase {
 
     
-    func test_makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling() {
+    func test_makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot() {
         
         let timeSlot = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 1))
         
         let printer = Printer()
-        let model = printer.makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: timeSlot)
+        let model = printer.makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(timeSlot)
         
         XCTAssertEqual(model.timeSlot, timeSlot)
         XCTAssertEqual(model.head, "(Empty)")
@@ -22,14 +22,14 @@ class PrinterTest: XCTestCase {
     }
     
     
-    func test_makeAnnotatedTimeSlotPrintModelFor() {
+    func test_makeAnnotatedTimeSlotPrintModelRepresenting() {
         
         let task = Task(withName: "t1")
         let timeSlot = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 1))
         let scheduling = TaskScheduling(scheduling: task, on: timeSlot)
         
         let printer = Printer()
-        let model = printer.makeAnnotatedTimeSlotPrintModel(for: scheduling)
+        let model = printer.makeAnnotatedTimeSlotPrintModel(representing: scheduling)
         
         XCTAssertEqual(model.timeSlot, timeSlot)
         XCTAssertEqual(model.head, "\(scheduling.id)")
@@ -51,9 +51,9 @@ class PrinterTest: XCTestCase {
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel)
         
         XCTAssertEqual(models, [
-            printer.makeAnnotatedTimeSlotPrintModel(for: scheduling1),
-            printer.makeAnnotatedTimeSlotPrintModel(for: scheduling2),
-            printer.makeAnnotatedTimeSlotPrintModel(for: scheduling3),
+            printer.makeAnnotatedTimeSlotPrintModel(representing: scheduling1),
+            printer.makeAnnotatedTimeSlotPrintModel(representing: scheduling2),
+            printer.makeAnnotatedTimeSlotPrintModel(representing: scheduling3),
         ])
     }
     
@@ -70,11 +70,11 @@ class PrinterTest: XCTestCase {
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel)
         
         XCTAssertEqual(models, [
-            printer.makeAnnotatedTimeSlotPrintModel(for: scheduling1),
-            printer.makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: TimeSlot(between: scheduling1.timeSlot.endDate, and: scheduling2.timeSlot.startDate)),
-            printer.makeAnnotatedTimeSlotPrintModel(for: scheduling2),
-            printer.makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: TimeSlot(between: scheduling2.timeSlot.endDate, and: scheduling3.timeSlot.startDate)),
-            printer.makeAnnotatedTimeSlotPrintModel(for: scheduling3),
+            printer.makeAnnotatedTimeSlotPrintModel(representing: scheduling1),
+            printer.makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: scheduling1.timeSlot.endDate, and: scheduling2.timeSlot.startDate)),
+            printer.makeAnnotatedTimeSlotPrintModel(representing: scheduling2),
+            printer.makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: scheduling2.timeSlot.endDate, and: scheduling3.timeSlot.startDate)),
+            printer.makeAnnotatedTimeSlotPrintModel(representing: scheduling3),
         ])
     }
     
@@ -90,8 +90,8 @@ class PrinterTest: XCTestCase {
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel, on: timeSlot)
         
         XCTAssertEqual(models, [
-            printer.makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: TimeSlot(between: timeSlot.startDate, and: scheduling1.timeSlot.startDate)),
-            printer.makeAnnotatedTimeSlotPrintModel(for: scheduling1),
+            printer.makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: timeSlot.startDate, and: scheduling1.timeSlot.startDate)),
+            printer.makeAnnotatedTimeSlotPrintModel(representing: scheduling1),
         ])
     }
     
@@ -107,8 +107,8 @@ class PrinterTest: XCTestCase {
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel, on: timeSlot)
         
         XCTAssertEqual(models, [
-            printer.makeAnnotatedTimeSlotPrintModel(for: scheduling1),
-            printer.makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: TimeSlot(between: scheduling1.timeSlot.endDate, and: timeSlot.endDate)),
+            printer.makeAnnotatedTimeSlotPrintModel(representing: scheduling1),
+            printer.makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: scheduling1.timeSlot.endDate, and: timeSlot.endDate)),
         ])
     }
     
@@ -124,9 +124,9 @@ class PrinterTest: XCTestCase {
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel, on: timeSlot)
         
         XCTAssertEqual(models, [
-            printer.makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: TimeSlot(between: timeSlot.startDate, and: scheduling1.timeSlot.startDate)),
-            printer.makeAnnotatedTimeSlotPrintModel(for: scheduling1),
-            printer.makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: TimeSlot(between: scheduling1.timeSlot.endDate, and: timeSlot.endDate)),
+            printer.makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: timeSlot.startDate, and: scheduling1.timeSlot.startDate)),
+            printer.makeAnnotatedTimeSlotPrintModel(representing: scheduling1),
+            printer.makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: scheduling1.timeSlot.endDate, and: timeSlot.endDate)),
         ])
     }
     
@@ -140,7 +140,7 @@ class PrinterTest: XCTestCase {
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel, on: timeSlot)
         
         XCTAssertEqual(models, [
-            printer.makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: TimeSlot(between: timeSlot.startDate, and: timeSlot.endDate)),
+            printer.makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: timeSlot.startDate, and: timeSlot.endDate)),
         ])
     }
 }

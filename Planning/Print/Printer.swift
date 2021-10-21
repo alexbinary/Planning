@@ -28,11 +28,11 @@ struct Printer
             if let latestReferenceDate = latestReferenceDate,
                taskScheduling.timeSlot.startDate > latestReferenceDate {
                 
-                let model = makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: TimeSlot(between: latestReferenceDate, and: taskScheduling.timeSlot.startDate))
+                let model = makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: latestReferenceDate, and: taskScheduling.timeSlot.startDate))
                 models.append(model)
             }
             
-            let model = makeAnnotatedTimeSlotPrintModel(for: taskScheduling)
+            let model = makeAnnotatedTimeSlotPrintModel(representing: taskScheduling)
             models.append(model)
             
             latestReferenceDate = taskScheduling.timeSlot.endDate
@@ -42,7 +42,7 @@ struct Printer
            let latestReferenceDate = latestReferenceDate,
            latestReferenceDate < timeSlot.endDate {
         
-            let model = makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: TimeSlot(between: latestReferenceDate, and: timeSlot.endDate))
+            let model = makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: latestReferenceDate, and: timeSlot.endDate))
             models.append(model)
         }
         
@@ -50,7 +50,7 @@ struct Printer
     }
 
 
-    func makeAnnotatedTimeSlotPrintModel(for taskScheduling: TaskScheduling) -> AnnotatedTimeSlotPrintModel {
+    func makeAnnotatedTimeSlotPrintModel(representing taskScheduling: TaskScheduling) -> AnnotatedTimeSlotPrintModel {
         
         return AnnotatedTimeSlotPrintModel(
             timeSlot: taskScheduling.timeSlot,
@@ -62,7 +62,7 @@ struct Printer
     }
 
 
-    func makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on timeSlot: TimeSlot) -> AnnotatedTimeSlotPrintModel {
+    func makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(_ timeSlot: TimeSlot) -> AnnotatedTimeSlotPrintModel {
         
         return AnnotatedTimeSlotPrintModel(
             timeSlot: timeSlot,
