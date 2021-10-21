@@ -8,7 +8,7 @@ import Foundation
 /// You can create a time slot by specifying a start date and a duration, or a start date and an end date.
 ///
 /// ```swift
-/// let timeSlot1 = TimeSlot(withStartDate: Date(), duration: 2)
+/// let timeSlot1 = TimeSlot(withStartDate: Date(), duration: 2.hours)
 /// let timeSlot2 = TimeSlot(withStartDate: Date(), duration: Date().addingTimeInterval(2))
 /// ```
 ///

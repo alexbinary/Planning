@@ -10,7 +10,7 @@ import Foundation
 ///
 /// ```swift
 /// let task = Task(withName: "t1")
-/// let timeSlot = TimeSlot(withStartDate: Date(), duration: 2)
+/// let timeSlot = TimeSlot(withStartDate: Date(), duration: 2.hours)
 /// let scheduling = TaskScheduling(scheduling: task, on: timeSlot)
 /// ```
 /// 
