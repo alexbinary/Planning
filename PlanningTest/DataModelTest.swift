@@ -11,15 +11,18 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let task1 = dataModel.addToBacklog(Task(withName: "t1", referenceDuration: 30.minutes))
-        let task2 = dataModel.addToBacklog(Task(withName: "t2", referenceDuration: 30.minutes))
-        _ = dataModel.addToBacklog(Task(withName: "t3", referenceDuration: 30.minutes))
+        let task1 = dataModel.addToBacklog(Task(withName: "t1", referenceDuration: 10.minutes))
+        let task2 = dataModel.addToBacklog(Task(withName: "t2", referenceDuration: 20.minutes))
+        let task3 = dataModel.addToBacklog(Task(withName: "t3", referenceDuration: 30.minutes))
         
-        dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 45.minutes))
+        dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: task1.referenceDuration + task2.referenceDuration))
         
-        XCTAssertEqual(dataModel.planning.taskSchedulings.count, 2)
-        XCTAssertEqual(dataModel.planning.taskSchedulings[0].task, task1)
-        XCTAssertEqual(dataModel.planning.taskSchedulings[1].task, task2)
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task1.id } .count, 1)
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task2.id } .count, 1)
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task3.id } .count, 0)
+        
+        XCTAssertEqual(dataModel.planning.taskSchedulings.first(where: { $0.task.id == task1.id })!.timeSlot, TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: task1.referenceDuration))
+        XCTAssertEqual(dataModel.planning.taskSchedulings.first(where: { $0.task.id == task2.id })!.timeSlot, TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0) + task1.referenceDuration, duration: task2.referenceDuration))
     }
     
     
@@ -27,16 +30,19 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let task1 = dataModel.addToBacklog(Task(withName: "t1", referenceDuration: 30.minutes))
-        let task2 = dataModel.addToBacklog(Task(withName: "t2", referenceDuration: 30.minutes))
+        let task1 = dataModel.addToBacklog(Task(withName: "t1", referenceDuration: 10.minutes))
+        let task2 = dataModel.addToBacklog(Task(withName: "t2", referenceDuration: 20.minutes))
         let task3 = dataModel.addToBacklog(Task(withName: "t3", referenceDuration: 30.minutes))
         
-        dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 80.minutes))
+        dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: task1.referenceDuration + task2.referenceDuration + task3.referenceDuration))
         
-        XCTAssertEqual(dataModel.planning.taskSchedulings.count, 3)
-        XCTAssertEqual(dataModel.planning.taskSchedulings[0].task, task1)
-        XCTAssertEqual(dataModel.planning.taskSchedulings[1].task, task2)
-        XCTAssertEqual(dataModel.planning.taskSchedulings[2].task, task3)
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task1.id } .count, 1)
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task2.id } .count, 1)
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task3.id } .count, 1)
+        
+        XCTAssertEqual(dataModel.planning.taskSchedulings.first(where: { $0.task.id == task1.id })!.timeSlot, TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: task1.referenceDuration))
+        XCTAssertEqual(dataModel.planning.taskSchedulings.first(where: { $0.task.id == task2.id })!.timeSlot, TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0) + task1.referenceDuration, duration: task2.referenceDuration))
+        XCTAssertEqual(dataModel.planning.taskSchedulings.first(where: { $0.task.id == task3.id })!.timeSlot, TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0) + task1.referenceDuration + task2.referenceDuration, duration: task3.referenceDuration))
     }
     
     
@@ -44,17 +50,21 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let task1 = dataModel.addToBacklog(Task(withName: "t1", referenceDuration: 30.minutes))
-        let task2 = dataModel.addToBacklog(Task(withName: "t2", referenceDuration: 30.minutes))
+        let task1 = dataModel.addToBacklog(Task(withName: "t1", referenceDuration: 10.minutes))
+        let task2 = dataModel.addToBacklog(Task(withName: "t2", referenceDuration: 20.minutes))
         let task3 = dataModel.addToBacklog(Task(withName: "t3", referenceDuration: 30.minutes))
         
-        dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 110.minutes))
+        dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: task1.referenceDuration + task2.referenceDuration + task3.referenceDuration + task1.referenceDuration))
         
-        XCTAssertEqual(dataModel.planning.taskSchedulings.count, 4)
-        XCTAssertEqual(dataModel.planning.taskSchedulings[0].task, task1)
-        XCTAssertEqual(dataModel.planning.taskSchedulings[1].task, task2)
-        XCTAssertEqual(dataModel.planning.taskSchedulings[2].task, task3)
-        XCTAssertEqual(dataModel.planning.taskSchedulings[3].task, task1)
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task1.id } .count, 2)
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task2.id } .count, 1)
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task3.id } .count, 1)
+        
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task1.id } .min(by: { $0.timeSlot.startDate < $1.timeSlot.startDate })! .timeSlot, TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: task1.referenceDuration))
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task1.id } .max(by: { $0.timeSlot.startDate < $1.timeSlot.startDate })! .timeSlot, TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0) + task1.referenceDuration + task2.referenceDuration + task3.referenceDuration, duration: task1.referenceDuration))
+        
+        XCTAssertEqual(dataModel.planning.taskSchedulings.first(where: { $0.task.id == task2.id })!.timeSlot, TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0) + task1.referenceDuration, duration: task2.referenceDuration))
+        XCTAssertEqual(dataModel.planning.taskSchedulings.first(where: { $0.task.id == task3.id })!.timeSlot, TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0) + task1.referenceDuration + task2.referenceDuration, duration: task3.referenceDuration))        
     }
     
     
