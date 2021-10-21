@@ -14,6 +14,7 @@ class PlanningTest: XCTestCase {
         XCTAssertEqual(planning.mostRecentTaskSchedulingEndDate, nil)
     }
     
+    
     func test_mostRecentTaskSchedulingEndDate_continuous() {
         
         let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours))
@@ -25,6 +26,7 @@ class PlanningTest: XCTestCase {
         XCTAssertEqual(planning.mostRecentTaskSchedulingEndDate, scheduling3.timeSlot.endDate)
     }
     
+    
     func test_mostRecentTaskSchedulingEndDate_break() {
         
         let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours))
@@ -35,6 +37,7 @@ class PlanningTest: XCTestCase {
         
         XCTAssertEqual(planning.mostRecentTaskSchedulingEndDate, scheduling3.timeSlot.endDate)
     }
+    
     
     func test_mostRecentTaskSchedulingEndDate_crossed() {
         
