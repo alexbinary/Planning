@@ -7,7 +7,7 @@ import XCTest
 class DataModelTest: XCTestCase {
 
     
-    func test_fillPlanningFromTo_backlogBiggerThanSlot() {
+    func test_fillPlanningOn_backlogBiggerThanSlot() {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
@@ -23,7 +23,7 @@ class DataModelTest: XCTestCase {
     }
     
     
-    func test_fillPlanningFromTo_backlogSameSizeThanSlot() {
+    func test_fillPlanningOn_backlogSameSizeThanSlot() {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
@@ -40,7 +40,7 @@ class DataModelTest: XCTestCase {
     }
     
     
-    func test_fillPlanningFromTo_backlogSmallerThanSlot() {
+    func test_fillPlanningOn_backlogSmallerThanSlot() {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
