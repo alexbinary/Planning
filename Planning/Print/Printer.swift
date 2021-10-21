@@ -10,10 +10,10 @@ struct Printer
     
     /// Returns the data that should be presented to the user to communicate tasks scheduled on a planning on a given optional time slot.
     ///
-    /// - Parameter dataModel The data model scheduled tasks should be read from.
+    /// - Parameter planning The planning scheduled tasks should be read from.
     /// - Parameter timeSlot If provided, only tasks whose scheduling intersects with the time slot are used. Otherwise, all scheduled tasks are used.
     ///
-    func annotatedTimeSlotPrintModelsForPlanning(from dataModel: DataModel, on timeSlot: TimeSlot? = nil) -> [AnnotatedTimeSlotPrintModel] {
+    func annotatedTimeSlotPrintModels(from planning: Planning, on timeSlot: TimeSlot? = nil) -> [AnnotatedTimeSlotPrintModel] {
         
         var models: [AnnotatedTimeSlotPrintModel] = []
         
@@ -23,7 +23,7 @@ struct Printer
             latestReferenceDate = timeSlot.startDate
         }
         
-        for taskScheduling in dataModel.taskSchedulings(intersectingWith: timeSlot) {
+        for taskScheduling in planning.taskSchedulings(intersectingWith: timeSlot) {
             
             if let latestReferenceDate = latestReferenceDate,
                taskScheduling.timeSlot.startDate > latestReferenceDate {

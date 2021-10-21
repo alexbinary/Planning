@@ -3,12 +3,12 @@ import Foundation
 
 
 
-func printBacklog(from dataModel: DataModel) {
+func printBacklog(_ backlog: Backlog) {
     
     print("==== Backlog ====")
     print()
     
-    for task in dataModel.backlog.tasks {
+    for task in backlog.tasks {
         
         print("* \(task.id)")
         print("  \(task.name)")
@@ -17,14 +17,14 @@ func printBacklog(from dataModel: DataModel) {
 }
 
 
-func printPlanning(from dataModel: DataModel, for timeSlot: TimeSlot? = nil) {
+func printPlanning(_ planning: Planning, for timeSlot: TimeSlot? = nil) {
     
     print("==== Planning ====")
     print()
     
     let printer = Printer()
     
-    for model in printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel, on: timeSlot) {
+    for model in printer.annotatedTimeSlotPrintModels(from: planning, on: timeSlot) {
         printAnnotatedTimeSlot(model)
     }
 }
