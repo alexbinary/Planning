@@ -74,17 +74,17 @@ struct DataModel: Codable
     
     mutating func fillPlanning(on timeSlot: TimeSlot) {
         
-        var taskStartDate = timeSlot.startDate
+        var referenceDate = timeSlot.startDate
         
-        while self.planning.mostRecentTaskSchedulingEndDate == nil || self.planning.mostRecentTaskSchedulingEndDate! < timeSlot.endDate {
+        while true {
             for task in self.backlog.tasks {
                 
                 let taskDuration = task.referenceDuration
-                let taskScheduling = self.addToPlanning(task, on: TimeSlot(withStartDate: taskStartDate, duration: taskDuration))
+                let taskScheduling = self.addToPlanning(task, on: TimeSlot(withStartDate: referenceDate, duration: taskDuration))
                 if taskScheduling.timeSlot.endDate >= timeSlot.endDate {
                     return
                 }
-                taskStartDate = taskScheduling.timeSlot.endDate
+                referenceDate = taskScheduling.timeSlot.endDate
             }
         }
     }

@@ -7,6 +7,26 @@ import XCTest
 class DataModelTest: XCTestCase {
 
     
+    func test_fillPlanningOn_taskScheduledAfterSlot() {
+ 
+        var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
+        
+        let task1 = dataModel.addToBacklog(Task(withName: "t1", referenceDuration: 10.minutes))
+        let task2 = dataModel.addToBacklog(Task(withName: "t2", referenceDuration: 20.minutes))
+        
+        _ = dataModel.addToPlanning(task1, on: TimeSlot(withStartDate: .referenceDate + 1.hours, duration: task1.referenceDuration))
+        dataModel.fillPlanning(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration + task2.referenceDuration))
+        
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task1.id } .count, 2)
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task2.id } .count, 1)
+        
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task1.id } .min(by: { $0.timeSlot.startDate < $1.timeSlot.startDate })! .timeSlot, TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration))
+        XCTAssertEqual(dataModel.planning.taskSchedulings.filter { $0.task.id == task1.id } .max(by: { $0.timeSlot.startDate < $1.timeSlot.startDate })! .timeSlot, TimeSlot(withStartDate: .referenceDate + 1.hours, duration: task1.referenceDuration))
+        
+        XCTAssertEqual(dataModel.planning.taskSchedulings.first(where: { $0.task.id == task2.id })!.timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration, duration: task2.referenceDuration))
+    }
+    
+    
     func test_fillPlanningOn_backlogBiggerThanSlot() {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
