@@ -11,9 +11,9 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let task1 = dataModel.addToBacklog(Task(withName: "t1"))
-        let task2 = dataModel.addToBacklog(Task(withName: "t2"))
-        _ = dataModel.addToBacklog(Task(withName: "t3"))
+        let task1 = dataModel.addToBacklog(Task(withName: "t1", referenceDuration: 30.minutes))
+        let task2 = dataModel.addToBacklog(Task(withName: "t2", referenceDuration: 30.minutes))
+        _ = dataModel.addToBacklog(Task(withName: "t3", referenceDuration: 30.minutes))
         
         dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 45*60))
         
@@ -27,9 +27,9 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let task1 = dataModel.addToBacklog(Task(withName: "t1"))
-        let task2 = dataModel.addToBacklog(Task(withName: "t2"))
-        let task3 = dataModel.addToBacklog(Task(withName: "t3"))
+        let task1 = dataModel.addToBacklog(Task(withName: "t1", referenceDuration: 30.minutes))
+        let task2 = dataModel.addToBacklog(Task(withName: "t2", referenceDuration: 30.minutes))
+        let task3 = dataModel.addToBacklog(Task(withName: "t3", referenceDuration: 30.minutes))
         
         dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 80*60))
         
@@ -44,9 +44,9 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let task1 = dataModel.addToBacklog(Task(withName: "t1"))
-        let task2 = dataModel.addToBacklog(Task(withName: "t2"))
-        let task3 = dataModel.addToBacklog(Task(withName: "t3"))
+        let task1 = dataModel.addToBacklog(Task(withName: "t1", referenceDuration: 30.minutes))
+        let task2 = dataModel.addToBacklog(Task(withName: "t2", referenceDuration: 30.minutes))
+        let task3 = dataModel.addToBacklog(Task(withName: "t3", referenceDuration: 30.minutes))
         
         dataModel.fillPlanning(on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 110*60))
         
@@ -62,9 +62,9 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
-        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
-        let scheduling3 = dataModel.addToPlanning(Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
+        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let scheduling3 = dataModel.addToPlanning(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
         
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling2.id)
@@ -78,9 +78,9 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
-        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
-        let scheduling3 = dataModel.addToPlanning(Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
+        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let scheduling3 = dataModel.addToPlanning(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
         
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling1.id)
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
@@ -94,9 +94,9 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
-        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
-        _ = dataModel.addToPlanning(Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
+        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        _ = dataModel.addToPlanning(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
         
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
@@ -109,8 +109,8 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
-        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
         
         dataModel.giveFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
         dataModel.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
@@ -124,9 +124,9 @@ class DataModelTest: XCTestCase {
  
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
-        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
-        let scheduling3 = dataModel.addToPlanning(Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 6), duration: 2))
+        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
+        let scheduling3 = dataModel.addToPlanning(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 6), duration: 2))
         
         XCTAssertEqual(dataModel.taskSchedulings(intersectingWith: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0.0), and: Date(timeIntervalSinceReferenceDate: 10.0))), [scheduling1, scheduling2, scheduling3])
         XCTAssertEqual(dataModel.taskSchedulings(intersectingWith: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 3.0), and: Date(timeIntervalSinceReferenceDate:  7.0))), [scheduling1, scheduling2, scheduling3])
@@ -140,7 +140,7 @@ class DataModelTest: XCTestCase {
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
         let duration: TimeInterval = 2
-        let scheduling = dataModel.addToPlanning(Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: duration))
+        let scheduling = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: duration))
         
         let newStartDate = Date(timeIntervalSinceReferenceDate: 4)
         let newTaskScheduling = dataModel.move(taskSchedulingWithId: scheduling.id, toNewStartDate: newStartDate)

@@ -16,9 +16,9 @@ class PlanningTest: XCTestCase {
     
     func test_mostRecentTaskSchedulingEndDate_continuous() {
         
-        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
-        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
-        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
         
         let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
         
@@ -27,9 +27,9 @@ class PlanningTest: XCTestCase {
     
     func test_mostRecentTaskSchedulingEndDate_break() {
         
-        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
-        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
-        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 10), duration: 2))
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 10), duration: 2))
         
         let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
         
@@ -38,9 +38,9 @@ class PlanningTest: XCTestCase {
     
     func test_mostRecentTaskSchedulingEndDate_crossed() {
         
-        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
-        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 5))
-        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 5))
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
         
         let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
         

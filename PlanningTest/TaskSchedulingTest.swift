@@ -9,7 +9,7 @@ class TaskSchedulingTest: XCTestCase {
     
     func test_init() {
         
-        let task = Task(withName: "t1")
+        let task = Task(withName: "t1", referenceDuration: 30.minutes)
         let timeSlot = TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
         
         let scheduling = TaskScheduling(scheduling: task, on: timeSlot)
@@ -21,7 +21,7 @@ class TaskSchedulingTest: XCTestCase {
     
     func test_equatable() {
         
-        let task = Task(withName: "t1")
+        let task = Task(withName: "t1", referenceDuration: 30.minutes)
         let timeSlot = TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2)
         
         let scheduling1 = TaskScheduling(scheduling: task, on: timeSlot)

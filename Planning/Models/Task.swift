@@ -5,10 +5,11 @@ import Foundation
 
 /// A type that represents an activity that should be performed.
 ///
-/// To create a task, you pass the name of the task.
+/// A task has name and a reference duration.
+/// To create a task, you pass the name of the task and the reference duration.
 ///
 /// ```swift
-/// let task = Task(withName: "fix bugs")
+/// let task = Task(withName: "fix bugs", referenceDuration: 30.minutes)
 /// ```
 ///
 /// Tasks are automatically assigned a unique identifier.
@@ -33,13 +34,19 @@ struct Task: Codable, Equatable
     let name: String
     
     
+    /// The duration that should be used as reference when scheduling the task.
+    ///
+    let referenceDuration: TimeInterval
+    
+    
     
     /// Creates a new task with a given name.
     ///
-    init(withName name: String) {
+    init(withName name: String, referenceDuration: TimeInterval) {
         
         self.id = UUID()
         self.name = name
+        self.referenceDuration = referenceDuration
     }
     
     
