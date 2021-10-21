@@ -7,6 +7,18 @@ import XCTest
 class PlanningTest: XCTestCase {
 
     
+    func test_taskSchedulingsOrderedByStartDateOldestFirst() {
+        
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours))
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 6.hours, duration: 2.hours))
+        
+        let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
+        
+        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst, [ scheduling2, scheduling1, scheduling3 ])
+    }
+    
+    
     func test_mostRecentTaskSchedulingEndDate_empty() {
         
         let planning = Planning(taskSchedulings: [ ])

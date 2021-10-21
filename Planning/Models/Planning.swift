@@ -15,6 +15,11 @@ struct Planning: Codable
     var taskSchedulings: [TaskScheduling]
     
     
+    /// The tasks schedulings ordered by their start date, with the oldest start date first.
+    ///
+    var taskSchedulingsOrderedByStartDateOldestFirst: [TaskScheduling] { self.taskSchedulings.sorted(by: { $0.timeSlot.startDate < $1.timeSlot.startDate }) }
+    
+    
     /// Returns the date of the task scheduling that ends the most recently.
     ///
     var mostRecentTaskSchedulingEndDate: Date? { self.taskSchedulings.max(by: { $0.timeSlot.endDate < $1.timeSlot.endDate })?.timeSlot.endDate }
