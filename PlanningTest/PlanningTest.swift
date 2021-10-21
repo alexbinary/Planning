@@ -179,6 +179,34 @@ class PlanningTest: XCTestCase {
     }
     
     
+    func test_fillOnUsing_taskScheduledInsideSlot() {
+ 
+        var planning = Planning(taskSchedulings: [])
+        var backlog = Backlog(tasks: [])
+        
+        let task1 = backlog.add(Task(withName: "t1", referenceDuration: 10.minutes))
+        let task2 = backlog.add(Task(withName: "t2", referenceDuration: 20.minutes))
+        let task3 = backlog.add(Task(withName: "t3", referenceDuration: 30.minutes))
+        
+        _ = planning.schedule(task1, on: TimeSlot(withStartDate: .referenceDate + 20.minutes, duration: task1.referenceDuration!))
+        planning.fill(on: TimeSlot(between: .referenceDate, and: .referenceDate + 80.minutes), using: backlog)
+        
+        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst.count, 4)
+        
+        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].task, task1)
+        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].timeSlot, TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration!))
+        
+        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].task, task1)
+        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].timeSlot, TimeSlot(withStartDate: .referenceDate + 20.minutes, duration: task1.referenceDuration!))
+        
+        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[2].task, task2)
+        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[2].timeSlot, TimeSlot(withStartDate: .referenceDate + 20.minutes + task1.referenceDuration!, duration: task2.referenceDuration!))
+        
+        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[3].task, task3)
+        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[3].timeSlot, TimeSlot(withStartDate: .referenceDate + 20.minutes + task1.referenceDuration! + task2.referenceDuration!, duration: task3.referenceDuration!))
+    }
+    
+    
     func test_fillOnUsing_backlogBiggerThanSlot() {
  
         var planning = Planning(taskSchedulings: [])

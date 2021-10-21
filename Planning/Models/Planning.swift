@@ -89,7 +89,14 @@ struct Planning: Codable
             for task in backlog.tasks {
                 
                 let taskDuration = task.referenceDuration ?? 30.minutes
-                let taskScheduling = self.schedule(task, on: TimeSlot(withStartDate: referenceDate, duration: taskDuration))
+                var taskTimeSlot = TimeSlot(withStartDate: referenceDate, duration: taskDuration)
+                
+                let existingSchedulings = self.taskSchedulings(intersectingWith: taskTimeSlot)
+                if !existingSchedulings.isEmpty {
+                    taskTimeSlot.startDate = existingSchedulings.max(by: { $0.timeSlot.endDate < $1.timeSlot.endDate })!.timeSlot.endDate
+                }
+                
+                let taskScheduling = self.schedule(task, on: taskTimeSlot)
                 if taskScheduling.timeSlot.endDate >= timeSlot.endDate {
                     return
                 }
