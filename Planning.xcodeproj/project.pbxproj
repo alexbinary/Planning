@@ -13,6 +13,9 @@
 		299C0C78271ED1CA00DE927D /* print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C77271ED1CA00DE927D /* print.swift */; };
 		299C0C7C271ED61F00DE927D /* dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C7B271ED61F00DE927D /* dates.swift */; };
 		299C0C86271EE5A100DE927D /* PlanningTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C85271EE5A100DE927D /* PlanningTest.swift */; };
+		29A849192721AC0200CA330B /* durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A849182721AC0200CA330B /* durations.swift */; };
+		29A8491F2721AF4700CA330B /* durationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A8491E2721AF4700CA330B /* durationsTest.swift */; };
+		29A849222721AFB700CA330B /* durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A849182721AC0200CA330B /* durations.swift */; };
 		29B3D3C9271EB7FD00F0CB0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3C8271EB7FD00F0CB0E /* main.swift */; };
 		29B3D3D2271EB86400F0CB0E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D1271EB86400F0CB0E /* Task.swift */; };
 		29B3D3D6271EB8B400F0CB0E /* TaskScheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D5271EB8B400F0CB0E /* TaskScheduling.swift */; };
@@ -59,6 +62,8 @@
 		299C0C83271EE5A100DE927D /* PlanningTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanningTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		299C0C85271EE5A100DE927D /* PlanningTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningTest.swift; sourceTree = "<group>"; };
 		299C0C87271EE5A100DE927D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29A849182721AC0200CA330B /* durations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = durations.swift; sourceTree = "<group>"; };
+		29A8491E2721AF4700CA330B /* durationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = durationsTest.swift; sourceTree = "<group>"; };
 		29B3D3C5271EB7FD00F0CB0E /* Planning */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Planning; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B3D3C8271EB7FD00F0CB0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		29B3D3D1271EB86400F0CB0E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -102,6 +107,7 @@
 				29B6BB91271F22D3005F52C8 /* TaskSchedulingTest.swift */,
 				29B6BB95271F2858005F52C8 /* TimeSlotTest.swift */,
 				29B6BB86271F16C7005F52C8 /* DataModelTest.swift */,
+				29A8491E2721AF4700CA330B /* durationsTest.swift */,
 			);
 			path = PlanningTest;
 			sourceTree = "<group>";
@@ -131,6 +137,7 @@
 				29B3D3DC271EB9AB00F0CB0E /* utils.swift */,
 				299C0C77271ED1CA00DE927D /* print.swift */,
 				299C0C7B271ED61F00DE927D /* dates.swift */,
+				29A849182721AC0200CA330B /* durations.swift */,
 				299C0C6D271EC37500DE927D /* Settings.swift */,
 				29F301AC272040CE009D9CF5 /* Print */,
 				29B3D3D0271EB85400F0CB0E /* Models */,
@@ -253,9 +260,11 @@
 				29F301C02720422E009D9CF5 /* AnnotatedTimeSlotPrintModel.swift in Sources */,
 				29F4DB23271EE746005433B8 /* DataModel.swift in Sources */,
 				29F4DB24271EE749005433B8 /* Backlog.swift in Sources */,
+				29A849222721AFB700CA330B /* durations.swift in Sources */,
 				29B6BB83271F11E7005F52C8 /* TimeSlot.swift in Sources */,
 				29B6BB92271F22D3005F52C8 /* TaskSchedulingTest.swift in Sources */,
 				29B6BB87271F16C7005F52C8 /* DataModelTest.swift in Sources */,
+				29A8491F2721AF4700CA330B /* durationsTest.swift in Sources */,
 				29F301BD2720422B009D9CF5 /* Printer.swift in Sources */,
 				29F4DB27271EE750005433B8 /* dates.swift in Sources */,
 				29F4DB20271EE743005433B8 /* Planning.swift in Sources */,
@@ -280,6 +289,7 @@
 				29F301B427204104009D9CF5 /* Printer.swift in Sources */,
 				29B3D3DD271EB9AB00F0CB0E /* utils.swift in Sources */,
 				299C0C75271EC54C00DE927D /* Backlog.swift in Sources */,
+				29A849192721AC0200CA330B /* durations.swift in Sources */,
 				29B3D3D9271EB92E00F0CB0E /* Planning.swift in Sources */,
 				29B3D3D2271EB86400F0CB0E /* Task.swift in Sources */,
 				29B3D3C9271EB7FD00F0CB0E /* main.swift in Sources */,
