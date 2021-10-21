@@ -21,11 +21,11 @@ import Foundation
 /// Time slots can check if they intersect with each other, and even return a time slot that corresponds the their common portion.
 ///
 /// ```swift
-/// let timeSlot1 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 2))
-/// let timeSlot2 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 3))
+/// let timeSlot1 = TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)
+/// let timeSlot2 = TimeSlot(between: .referenceDate + 1.hours, and: .referenceDate + 3.hours)
 ///
 /// timeSlot1.intersects(with: timeSlot2)  // true
-/// timeSlot1.intersection(with: timeSlot2) // TimeSlot(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 2))
+/// timeSlot1.intersection(with: timeSlot2) // TimeSlot(between: .referenceDate + 1.hours, and: .referenceDate + 2.hours)
 /// ```
 ///
 struct TimeSlot: Codable, Equatable
@@ -71,13 +71,13 @@ struct TimeSlot: Codable, Equatable
     /// If the given time slots overlap, this method returns a time slot that correspond to their common portion.
     ///
     /// ```swift
-    /// let timeSlot1 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 2))
-    /// let timeSlot2 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 3))
+    /// let timeSlot1 = TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)
+    /// let timeSlot2 = TimeSlot(between: .referenceDate + 1.hours, and: .referenceDate + 3.hours)
     ///
-    /// TimeSlot.intersection(between: timeSlot1, and: timeSlot2)  // TimeSlot(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 2))
+    /// TimeSlot.intersection(between: timeSlot1, and: timeSlot2)  // TimeSlot(between: .referenceDate + 1.hours, and: .referenceDate + 2.hours))
     ///
-    /// let timeSlot3 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 1))
-    /// let timeSlot4 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 2), and: Date(timeIntervalSinceReferenceDate: 3))
+    /// let timeSlot3 = TimeSlot(between: .referenceDate, and: .referenceDate + 1.hours)
+    /// let timeSlot4 = TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 3.hours))
     ///
     /// TimeSlot.intersection(between: timeSlot3, and: timeSlot4))  // nil
     /// ```

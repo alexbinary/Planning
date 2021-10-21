@@ -16,6 +16,7 @@
 		29A849192721AC0200CA330B /* durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A849182721AC0200CA330B /* durations.swift */; };
 		29A8491F2721AF4700CA330B /* durationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A8491E2721AF4700CA330B /* durationsTest.swift */; };
 		29A849222721AFB700CA330B /* durations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A849182721AC0200CA330B /* durations.swift */; };
+		29A849262721BE6E00CA330B /* datesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A849252721BE6E00CA330B /* datesTest.swift */; };
 		29B3D3C9271EB7FD00F0CB0E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3C8271EB7FD00F0CB0E /* main.swift */; };
 		29B3D3D2271EB86400F0CB0E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D1271EB86400F0CB0E /* Task.swift */; };
 		29B3D3D6271EB8B400F0CB0E /* TaskScheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D5271EB8B400F0CB0E /* TaskScheduling.swift */; };
@@ -64,6 +65,7 @@
 		299C0C87271EE5A100DE927D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29A849182721AC0200CA330B /* durations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = durations.swift; sourceTree = "<group>"; };
 		29A8491E2721AF4700CA330B /* durationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = durationsTest.swift; sourceTree = "<group>"; };
+		29A849252721BE6E00CA330B /* datesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = datesTest.swift; sourceTree = "<group>"; };
 		29B3D3C5271EB7FD00F0CB0E /* Planning */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Planning; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B3D3C8271EB7FD00F0CB0E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		29B3D3D1271EB86400F0CB0E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				29B6BB95271F2858005F52C8 /* TimeSlotTest.swift */,
 				29B6BB86271F16C7005F52C8 /* DataModelTest.swift */,
 				29A8491E2721AF4700CA330B /* durationsTest.swift */,
+				29A849252721BE6E00CA330B /* datesTest.swift */,
 			);
 			path = PlanningTest;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				29A849222721AFB700CA330B /* durations.swift in Sources */,
 				29B6BB83271F11E7005F52C8 /* TimeSlot.swift in Sources */,
 				29B6BB92271F22D3005F52C8 /* TaskSchedulingTest.swift in Sources */,
+				29A849262721BE6E00CA330B /* datesTest.swift in Sources */,
 				29B6BB87271F16C7005F52C8 /* DataModelTest.swift in Sources */,
 				29A8491F2721AF4700CA330B /* durationsTest.swift in Sources */,
 				29F301BD2720422B009D9CF5 /* Printer.swift in Sources */,

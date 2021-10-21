@@ -9,7 +9,7 @@ class PrinterTest: XCTestCase {
     
     func test_makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot() {
         
-        let timeSlot = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 1))
+        let timeSlot = TimeSlot(between: .referenceDate, and: .referenceDate + 1.hours)
         
         let printer = Printer()
         let model = printer.makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(timeSlot)
@@ -25,7 +25,7 @@ class PrinterTest: XCTestCase {
     func test_makeAnnotatedTimeSlotPrintModelRepresenting() {
         
         let task = Task(withName: "t1", referenceDuration: 30.minutes)
-        let timeSlot = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 1))
+        let timeSlot = TimeSlot(between: .referenceDate, and: .referenceDate + 1.hours)
         let scheduling = TaskScheduling(scheduling: task, on: timeSlot)
         
         let printer = Printer()
@@ -43,9 +43,9 @@ class PrinterTest: XCTestCase {
         
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
-        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
-        let scheduling3 = dataModel.addToPlanning(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 6), duration: 2))
+        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
+        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours))
+        let scheduling3 = dataModel.addToPlanning(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 6.hours, duration: 2.hours))
         
         let printer = Printer()
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel)
@@ -62,9 +62,9 @@ class PrinterTest: XCTestCase {
         
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate:  2), duration: 2))
-        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate:  6), duration: 2))
-        let scheduling3 = dataModel.addToPlanning(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 10), duration: 2))
+        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate +  2.hours, duration: 2.hours))
+        let scheduling2 = dataModel.addToPlanning(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate +  6.hours, duration: 2.hours))
+        let scheduling3 = dataModel.addToPlanning(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 10.hours, duration: 2.hours))
         
         let printer = Printer()
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel)
@@ -83,10 +83,10 @@ class PrinterTest: XCTestCase {
         
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
         
         let printer = Printer()
-        let timeSlot = TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 1), duration: 3)
+        let timeSlot = TimeSlot(withStartDate: .referenceDate + 1.hours, duration: 3.hours)
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel, on: timeSlot)
         
         XCTAssertEqual(models, [
@@ -100,10 +100,10 @@ class PrinterTest: XCTestCase {
         
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
         
         let printer = Printer()
-        let timeSlot = TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 3), duration: 2)
+        let timeSlot = TimeSlot(withStartDate: .referenceDate + 3.hours, duration: 2.hours)
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel, on: timeSlot)
         
         XCTAssertEqual(models, [
@@ -117,10 +117,10 @@ class PrinterTest: XCTestCase {
         
         var dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
-        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let scheduling1 = dataModel.addToPlanning(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
         
         let printer = Printer()
-        let timeSlot = TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 1), duration: 5)
+        let timeSlot = TimeSlot(withStartDate: .referenceDate + 1.hours, duration: 5.hours)
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel, on: timeSlot)
         
         XCTAssertEqual(models, [
@@ -136,7 +136,7 @@ class PrinterTest: XCTestCase {
         let dataModel = DataModel(planning: Planning(taskSchedulings: []), backlog: Backlog(tasks: []))
         
         let printer = Printer()
-        let timeSlot = TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 1), duration: 5)
+        let timeSlot = TimeSlot(withStartDate: .referenceDate + 1.hours, duration: 5.hours)
         let models = printer.annotatedTimeSlotPrintModelsForPlanning(from: dataModel, on: timeSlot)
         
         XCTAssertEqual(models, [

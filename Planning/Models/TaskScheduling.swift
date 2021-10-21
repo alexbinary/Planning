@@ -20,7 +20,7 @@ import Foundation
 ///
 /// ```swift
 /// let task = Task(withName: "t1")
-/// let timeSlot = TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2
+/// let timeSlot = TimeSlot(withStartDate: .referenceDate, duration: 2.hours)
 ///
 /// let scheduling1 = TaskScheduling(scheduling: task, on: timeSlot)
 /// let scheduling2 = TaskScheduling(scheduling: task, on: timeSlot)
@@ -78,7 +78,7 @@ struct TaskScheduling: Codable, Equatable
     ///
     /// ```swift
     /// let task = Task(withName: "t1")
-    /// let timeSlot = TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2
+    /// let timeSlot = TimeSlot(withStartDate: .referenceDate, duration: 2.hours)
     ///
     /// let scheduling1 = TaskScheduling(task, on: timeSlot)
     /// let scheduling2 = TaskScheduling(task, on: timeSlot)

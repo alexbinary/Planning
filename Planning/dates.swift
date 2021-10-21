@@ -6,6 +6,13 @@ import Foundation
 extension Date
 {
     
+    /// Returns a date that can be used as a reference when working with dates.
+    ///
+    /// The reference date is always the same. The actual date is not important.
+    ///
+    static var referenceDate: Date { Date(timeIntervalSinceReferenceDate: 0) }
+    
+    
     /// Returns the current date.
     ///
     static var now: Date { Date() }

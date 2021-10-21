@@ -9,7 +9,7 @@ class TimeSlotTest: XCTestCase {
     
     func test_init_startDateDuration() {
         
-        let startDate = Date(timeIntervalSinceReferenceDate: 0)
+        let startDate: Date = .referenceDate
         let duration: TimeInterval = 2
         
         let timeSlot = TimeSlot(withStartDate: startDate, duration: duration)
@@ -21,7 +21,7 @@ class TimeSlotTest: XCTestCase {
     
     func test_init_startDateEndDate() {
         
-        let startDate = Date(timeIntervalSinceReferenceDate: 0)
+        let startDate: Date = .referenceDate
         let duration: TimeInterval = 2
         let endDate = startDate.addingTimeInterval(duration)
         
@@ -35,7 +35,7 @@ class TimeSlotTest: XCTestCase {
     
     func test_endDate() {
         
-        let startDate = Date(timeIntervalSinceReferenceDate: 0)
+        let startDate: Date = .referenceDate
         let duration: TimeInterval = 2
         let timeSlot = TimeSlot(withStartDate: startDate, duration: duration)
         
@@ -45,7 +45,7 @@ class TimeSlotTest: XCTestCase {
     
     func test_equatable() {
         
-        let startDate = Date(timeIntervalSinceReferenceDate: 0)
+        let startDate: Date = .referenceDate
         let duration: TimeInterval = 2
         
         let timeSlot1 = TimeSlot(withStartDate: startDate, duration: duration)
@@ -61,8 +61,8 @@ class TimeSlotTest: XCTestCase {
     
     func test_intersection_noIntersection() {
         
-        let timeSlot1 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 1))
-        let timeSlot2 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 2), and: Date(timeIntervalSinceReferenceDate: 3))
+        let timeSlot1 = TimeSlot(between: .referenceDate, and: .referenceDate + 1.hours)
+        let timeSlot2 = TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 3.hours)
         
         let expectedIntersection: TimeSlot? = nil
         
@@ -79,10 +79,10 @@ class TimeSlotTest: XCTestCase {
     
     func test_intersection_oneContainsTheOther() {
         
-        let timeSlot1 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 3))
-        let timeSlot2 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 2))
+        let timeSlot1 = TimeSlot(between: .referenceDate, and: .referenceDate + 3.hours)
+        let timeSlot2 = TimeSlot(between: .referenceDate + 1.hours, and: .referenceDate + 2.hours)
         
-        let expectedIntersection: TimeSlot? = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 2))
+        let expectedIntersection: TimeSlot? = TimeSlot(between: .referenceDate + 1.hours, and: .referenceDate + 2.hours)
         
         XCTAssertEqual(TimeSlot.intersection(between: timeSlot1, and: timeSlot2), expectedIntersection)
         XCTAssertEqual(TimeSlot.intersection(between: timeSlot2, and: timeSlot1), expectedIntersection)
@@ -97,10 +97,10 @@ class TimeSlotTest: XCTestCase {
     
     func test_intersection_partialIntersection() {
         
-        let timeSlot1 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 2))
-        let timeSlot2 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 3))
+        let timeSlot1 = TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)
+        let timeSlot2 = TimeSlot(between: .referenceDate + 1.hours, and: .referenceDate + 3.hours)
         
-        let expectedIntersection: TimeSlot? = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 2))
+        let expectedIntersection: TimeSlot? = TimeSlot(between: .referenceDate + 1.hours, and: .referenceDate + 2.hours)
         
         XCTAssertEqual(TimeSlot.intersection(between: timeSlot1, and: timeSlot2), expectedIntersection)
         XCTAssertEqual(TimeSlot.intersection(between: timeSlot2, and: timeSlot1), expectedIntersection)
@@ -115,10 +115,10 @@ class TimeSlotTest: XCTestCase {
     
     func test_intersection_partialIntersection_slotWithDurationZero() {
         
-        let timeSlot1 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0), and: Date(timeIntervalSinceReferenceDate: 2))
-        let timeSlot2 = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 1))
+        let timeSlot1 = TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)
+        let timeSlot2 = TimeSlot(between: .referenceDate + 1.hours, and: .referenceDate + 1.hours)
         
-        let expectedIntersection: TimeSlot? = TimeSlot(between: Date(timeIntervalSinceReferenceDate: 1), and: Date(timeIntervalSinceReferenceDate: 1))
+        let expectedIntersection: TimeSlot? = TimeSlot(between: .referenceDate + 1.hours, and: .referenceDate + 1.hours)
         
         XCTAssertEqual(TimeSlot.intersection(between: timeSlot1, and: timeSlot2), expectedIntersection)
         XCTAssertEqual(TimeSlot.intersection(between: timeSlot2, and: timeSlot1), expectedIntersection)
