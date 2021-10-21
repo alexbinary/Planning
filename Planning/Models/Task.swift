@@ -36,13 +36,13 @@ struct Task: Codable, Equatable
     
     /// The duration that should be used as reference when scheduling the task.
     ///
-    let referenceDuration: TimeInterval
+    let referenceDuration: TimeInterval?
     
     
     
     /// Creates a new task with a given name.
     ///
-    init(withName name: String, referenceDuration: TimeInterval) {
+    init(withName name: String, referenceDuration: TimeInterval? = nil) {
         
         self.id = UUID()
         self.name = name

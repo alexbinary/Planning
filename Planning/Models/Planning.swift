@@ -88,7 +88,7 @@ struct Planning: Codable
         while true {
             for task in backlog.tasks {
                 
-                let taskDuration = task.referenceDuration
+                let taskDuration = task.referenceDuration ?? 30.minutes
                 let taskScheduling = self.schedule(task, on: TimeSlot(withStartDate: referenceDate, duration: taskDuration))
                 if taskScheduling.timeSlot.endDate >= timeSlot.endDate {
                     return
