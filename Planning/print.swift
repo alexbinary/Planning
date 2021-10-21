@@ -43,5 +43,3 @@ func printAnnotatedTimeSlot(_ model: AnnotatedTimeSlotPrintModel) {
     print("  \(DateFormatter.localizedString(from: model.timeSlot.endDate, dateStyle: .short, timeStyle: .short))")
     print()
 }
-
-
