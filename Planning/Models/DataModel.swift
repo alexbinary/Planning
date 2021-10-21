@@ -50,7 +50,7 @@ struct DataModel: Codable
         return self.planning.taskSchedulings[index]
     }
     
-    func taskSchedulings(in timeSlot: TimeSlot? = nil) -> [TaskScheduling] {
+    func taskSchedulings(intersectingWith timeSlot: TimeSlot? = nil) -> [TaskScheduling] {
         
         if let timeSlot = timeSlot {
             return self.planning.taskSchedulings.filter { $0.timeSlot.intersects(with: timeSlot) }
@@ -67,7 +67,7 @@ struct DataModel: Codable
     
     func planningFeedbackScore(on timeSlot: TimeSlot) -> Float {
         
-        let taskSchedulingsInSlot = self.taskSchedulings(in: timeSlot)
+        let taskSchedulingsInSlot = self.taskSchedulings(intersectingWith: timeSlot)
         
         return Float(taskSchedulingsInSlot.filter { $0.feedback == .taskCompletedWithoutProblem } .count) / Float(taskSchedulingsInSlot.count)
     }

@@ -128,9 +128,9 @@ class DataModelTest: XCTestCase {
         let scheduling2 = dataModel.addToPlanning(Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
         let scheduling3 = dataModel.addToPlanning(Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 6), duration: 2))
         
-        XCTAssertEqual(dataModel.taskSchedulings(in: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0.0), and: Date(timeIntervalSinceReferenceDate: 10.0))), [scheduling1, scheduling2, scheduling3])
-        XCTAssertEqual(dataModel.taskSchedulings(in: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 3.0), and: Date(timeIntervalSinceReferenceDate:  7.0))), [scheduling1, scheduling2, scheduling3])
-        XCTAssertEqual(dataModel.taskSchedulings(in: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 4.5), and: Date(timeIntervalSinceReferenceDate:  5.5))), [scheduling2])
+        XCTAssertEqual(dataModel.taskSchedulings(intersectingWith: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 0.0), and: Date(timeIntervalSinceReferenceDate: 10.0))), [scheduling1, scheduling2, scheduling3])
+        XCTAssertEqual(dataModel.taskSchedulings(intersectingWith: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 3.0), and: Date(timeIntervalSinceReferenceDate:  7.0))), [scheduling1, scheduling2, scheduling3])
+        XCTAssertEqual(dataModel.taskSchedulings(intersectingWith: TimeSlot(between: Date(timeIntervalSinceReferenceDate: 4.5), and: Date(timeIntervalSinceReferenceDate:  5.5))), [scheduling2])
         XCTAssertEqual(dataModel.taskSchedulings(), [scheduling1, scheduling2, scheduling3])
     }
     

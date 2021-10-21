@@ -23,7 +23,7 @@ struct Printer
             latestReferenceDate = timeSlot.startDate
         }
         
-        for taskScheduling in dataModel.taskSchedulings(in: timeSlot) {
+        for taskScheduling in dataModel.taskSchedulings(intersectingWith: timeSlot) {
             
             if let latestReferenceDate = latestReferenceDate,
                taskScheduling.timeSlot.startDate > latestReferenceDate {
