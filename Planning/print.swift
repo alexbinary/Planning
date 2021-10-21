@@ -24,7 +24,7 @@ func printPlanning(_ planning: Planning, for timeSlot: TimeSlot? = nil) {
     
     let printer = Printer()
     
-    for model in printer.annotatedTimeSlotPrintModels(from: planning, on: timeSlot) {
+    for model in printer.makeAnnotatedTimeSlotPrintModels(representing: planning, restrictedTo: timeSlot) {
         printAnnotatedTimeSlot(model)
     }
 }

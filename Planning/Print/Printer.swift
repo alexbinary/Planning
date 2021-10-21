@@ -13,7 +13,7 @@ struct Printer
     /// - Parameter planning The planning scheduled tasks should be read from.
     /// - Parameter timeSlot If provided, only tasks whose scheduling intersects with the time slot are used. Otherwise, all scheduled tasks are used.
     ///
-    func annotatedTimeSlotPrintModels(from planning: Planning, on timeSlot: TimeSlot? = nil) -> [AnnotatedTimeSlotPrintModel] {
+    func makeAnnotatedTimeSlotPrintModels(representing planning: Planning, restrictedTo timeSlot: TimeSlot? = nil) -> [AnnotatedTimeSlotPrintModel] {
         
         var models: [AnnotatedTimeSlotPrintModel] = []
         
