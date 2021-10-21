@@ -8,14 +8,15 @@ import Foundation
 /// You can create a time slot by specifying a start date and a duration, or a start date and an end date.
 ///
 /// ```swift
-/// let timeSlot1 = TimeSlot(withStartDate: Date(), duration: 2.hours)
-/// let timeSlot2 = TimeSlot(withStartDate: Date(), duration: Date().addingTimeInterval(2))
+/// let timeSlot1 = TimeSlot(withStartDate: .referenceDate, duration: 2.hours)
+/// let timeSlot2 = TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)
+/// timeSlot1 == timeSlot2   // true
 /// ```
 ///
 /// No matter how a time slot was created, a time slot exposes the date at which the moment ends.
 ///
 /// ```swift
-/// print(timeSlot.endDate) // Date() + 2 seconds
+/// print(timeSlot.endDate) // .referenceDate + 2.hours
 /// ```
 ///
 /// Time slots can check if they intersect with each other, and even return a time slot that corresponds the their common portion.
