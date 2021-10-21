@@ -104,13 +104,13 @@
 			isa = PBXGroup;
 			children = (
 				299C0C87271EE5A100DE927D /* Info.plist */,
-				299C0C85271EE5A100DE927D /* PlanningTest.swift */,
-				29F301B92720419C009D9CF5 /* PrinterTest.swift */,
-				29B6BB91271F22D3005F52C8 /* TaskSchedulingTest.swift */,
+				29A849252721BE6E00CA330B /* datesTest.swift */,
+				29A8491E2721AF4700CA330B /* durationsTest.swift */,
 				29B6BB95271F2858005F52C8 /* TimeSlotTest.swift */,
 				29B6BB86271F16C7005F52C8 /* DataModelTest.swift */,
-				29A8491E2721AF4700CA330B /* durationsTest.swift */,
-				29A849252721BE6E00CA330B /* datesTest.swift */,
+				299C0C85271EE5A100DE927D /* PlanningTest.swift */,
+				29B6BB91271F22D3005F52C8 /* TaskSchedulingTest.swift */,
+				29F301B92720419C009D9CF5 /* PrinterTest.swift */,
 			);
 			path = PlanningTest;
 			sourceTree = "<group>";
@@ -151,11 +151,11 @@
 		29B3D3D0271EB85400F0CB0E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				29B3D3D1271EB86400F0CB0E /* Task.swift */,
-				29B3D3D5271EB8B400F0CB0E /* TaskScheduling.swift */,
-				29B3D3D8271EB92E00F0CB0E /* Planning.swift */,
 				299C0C71271EC4B300DE927D /* DataModel.swift */,
 				299C0C74271EC54C00DE927D /* Backlog.swift */,
+				29B3D3D8271EB92E00F0CB0E /* Planning.swift */,
+				29B3D3D1271EB86400F0CB0E /* Task.swift */,
+				29B3D3D5271EB8B400F0CB0E /* TaskScheduling.swift */,
 				29B6BB7F271F1146005F52C8 /* TimeSlot.swift */,
 				29B6BB8A271F19C8005F52C8 /* TaskSchedulingFeedback.swift */,
 			);
