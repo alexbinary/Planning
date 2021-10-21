@@ -8,10 +8,10 @@ import Foundation
 struct Printer
 {
     
-    /// Returns the data that should be presented to the user to communicate planning entries on a given optional time slot.
+    /// Returns the data that should be presented to the user to communicate tasks scheduled on a planning on a given optional time slot.
     ///
-    /// - Parameter dataModel The data model planning entries should be read from
-    /// - Parameter timeSlot If provided, only planning entries that intersect with the time slot are used. Otherwise, all entries are used.
+    /// - Parameter dataModel The data model scheduled tasks should be read from
+    /// - Parameter timeSlot If provided, only tasks whose scheduling intersects with the time slot are used. Otherwise, all scheduled tasks are used.
     ///
     func annotatedTimeSlotPrintModelsForPlanning(from dataModel: DataModel, on timeSlot: TimeSlot? = nil) -> [AnnotatedTimeSlotPrintModel] {
         
@@ -23,26 +23,26 @@ struct Printer
             latestReferenceDate = timeSlot.startDate
         }
         
-        for entry in dataModel.planningEntries(in: timeSlot) {
+        for taskScheduling in dataModel.taskSchedulings(in: timeSlot) {
             
             if let latestReferenceDate = latestReferenceDate,
-               entry.timeSlot.startDate > latestReferenceDate {
+               taskScheduling.timeSlot.startDate > latestReferenceDate {
                 
-                let model = makeAnnotatedTimeSlotPrintModelForEmptyPlanningEntry(on: TimeSlot(between: latestReferenceDate, and: entry.timeSlot.startDate))
+                let model = makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: TimeSlot(between: latestReferenceDate, and: taskScheduling.timeSlot.startDate))
                 models.append(model)
             }
             
-            let model = makeAnnotatedTimeSlotPrintModel(for: entry)
+            let model = makeAnnotatedTimeSlotPrintModel(for: taskScheduling)
             models.append(model)
             
-            latestReferenceDate = entry.timeSlot.endDate
+            latestReferenceDate = taskScheduling.timeSlot.endDate
         }
         
         if let timeSlot = timeSlot,
            let latestReferenceDate = latestReferenceDate,
            latestReferenceDate < timeSlot.endDate {
         
-            let model = makeAnnotatedTimeSlotPrintModelForEmptyPlanningEntry(on: TimeSlot(between: latestReferenceDate, and: timeSlot.endDate))
+            let model = makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on: TimeSlot(between: latestReferenceDate, and: timeSlot.endDate))
             models.append(model)
         }
         
@@ -50,19 +50,19 @@ struct Printer
     }
 
 
-    func makeAnnotatedTimeSlotPrintModel(for entry: PlanningEntry) -> AnnotatedTimeSlotPrintModel {
+    func makeAnnotatedTimeSlotPrintModel(for taskScheduling: TaskScheduling) -> AnnotatedTimeSlotPrintModel {
         
         return AnnotatedTimeSlotPrintModel(
-            timeSlot: entry.timeSlot,
-            head: "\(entry.id)",
-            title: "\(entry.task.id)",
-            subtitle: "\(entry.task.name)",
-            extra: "Feedback: \(entry.feedback?.description ?? "-")"
+            timeSlot: taskScheduling.timeSlot,
+            head: "\(taskScheduling.id)",
+            title: "\(taskScheduling.task.id)",
+            subtitle: "\(taskScheduling.task.name)",
+            extra: "Feedback: \(taskScheduling.feedback?.description ?? "-")"
         )
     }
 
 
-    func makeAnnotatedTimeSlotPrintModelForEmptyPlanningEntry(on timeSlot: TimeSlot) -> AnnotatedTimeSlotPrintModel {
+    func makeAnnotatedTimeSlotPrintModelForEmptyTaskScheduling(on timeSlot: TimeSlot) -> AnnotatedTimeSlotPrintModel {
         
         return AnnotatedTimeSlotPrintModel(
             timeSlot: timeSlot,

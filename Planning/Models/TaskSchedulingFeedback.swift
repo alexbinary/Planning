@@ -3,12 +3,12 @@ import Foundation
 
 
 
-/// A type used to provide feedback on a planning entry.
+/// A type used to provide feedback on scheduled tasks.
 ///
-/// Feedback on planning entries is usefull to improve planning algorithms in the future.
-/// You give feedback on planning entries to indicate how the planning entry performed in reality.
+/// Feedback on scheduled tasks is usefull to improve planning algorithms in the future.
+/// You give feedback on scheduled tasks to indicate how the scheduling performed in reality.
 ///
-enum PlanningEntryFeedback: String, Codable, CustomStringConvertible
+enum TaskSchedulingFeedback: String, Codable, CustomStringConvertible
 {
     
     /// Indicates that the task could be performed without any issue.

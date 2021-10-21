@@ -7,43 +7,43 @@ import XCTest
 class PlanningTest: XCTestCase {
 
     
-    func test_mostRecentEntryEndDate_empty() {
+    func test_mostRecentTaskSchedulingEndDate_empty() {
         
-        let planning = Planning(entries: [ ])
+        let planning = Planning(taskSchedulings: [ ])
         
-        XCTAssertEqual(planning.mostRecentEntryEndDate, nil)
+        XCTAssertEqual(planning.mostRecentTaskSchedulingEndDate, nil)
     }
     
-    func test_mostRecentEntryEndDate_continuous() {
+    func test_mostRecentTaskSchedulingEndDate_continuous() {
         
-        let entry1 = PlanningEntry(withTask: Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
-        let entry2 = PlanningEntry(withTask: Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
-        let entry3 = PlanningEntry(withTask: Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
         
-        let planning = Planning(entries: [ entry1, entry2, entry3 ])
+        let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
         
-        XCTAssertEqual(planning.mostRecentEntryEndDate, entry3.timeSlot.endDate)
+        XCTAssertEqual(planning.mostRecentTaskSchedulingEndDate, scheduling3.timeSlot.endDate)
     }
     
-    func test_mostRecentEntryEndDate_break() {
+    func test_mostRecentTaskSchedulingEndDate_break() {
         
-        let entry1 = PlanningEntry(withTask: Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
-        let entry2 = PlanningEntry(withTask: Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
-        let entry3 = PlanningEntry(withTask: Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 10), duration: 2))
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 2))
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 10), duration: 2))
         
-        let planning = Planning(entries: [ entry1, entry2, entry3 ])
+        let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
         
-        XCTAssertEqual(planning.mostRecentEntryEndDate, entry3.timeSlot.endDate)
+        XCTAssertEqual(planning.mostRecentTaskSchedulingEndDate, scheduling3.timeSlot.endDate)
     }
     
-    func test_mostRecentEntryEndDate_crossed() {
+    func test_mostRecentTaskSchedulingEndDate_crossed() {
         
-        let entry1 = PlanningEntry(withTask: Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
-        let entry2 = PlanningEntry(withTask: Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 5))
-        let entry3 = PlanningEntry(withTask: Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 0), duration: 2))
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 2), duration: 5))
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3"), on: TimeSlot(withStartDate: Date(timeIntervalSinceReferenceDate: 4), duration: 2))
         
-        let planning = Planning(entries: [ entry1, entry2, entry3 ])
+        let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
         
-        XCTAssertEqual(planning.mostRecentEntryEndDate, entry2.timeSlot.endDate)
+        XCTAssertEqual(planning.mostRecentTaskSchedulingEndDate, scheduling2.timeSlot.endDate)
     }
 }
