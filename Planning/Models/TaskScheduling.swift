@@ -13,9 +13,10 @@ import Foundation
 /// let timeSlot = TimeSlot(withStartDate: Date(), duration: 2)
 /// let scheduling = TaskScheduling(scheduling: task, on: timeSlot)
 /// ```
-///
-/// Tasks schedulings are assigned a unique identifier. This identiier is readonly.
-/// When checking for equality, only this identifier is compared.
+/// 
+/// Task schedulings are automatically assigned a unique identifier.
+/// The task scheduling identiier is readonly and cannot be changed.
+/// The task scheduling identifier is used as reference when checking if two task schedulings are the same.
 ///
 /// ```swift
 /// let task = Task(withName: "t1")
@@ -33,9 +34,10 @@ import Foundation
 struct TaskScheduling: Codable, Equatable
 {
     
-    /// The unique identifier for this task scheduling.
+    /// The unique identifier for the task scheduling.
     ///
-    /// When checking for equality, only this identifier is compared.
+    /// The identifier is used as reference when checking if two task schedulings are the same.
+    /// Two task schedulings with the same identifier are considered the same, even if other data are different.
     ///
     let id: UUID
     
