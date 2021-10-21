@@ -5,6 +5,12 @@ import Foundation
 
 extension Date
 {
+    
+    /// Returns the current date.
+    ///
+    static var now: Date { Date() }
+    
+    
     /// Returns a date that is set at the given hours and minutes the next day from the current day.
     ///
     static func tomorrow(at hours: Int, minutes: Int) -> Date {
