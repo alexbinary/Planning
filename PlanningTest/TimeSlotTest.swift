@@ -7,7 +7,7 @@ import XCTest
 class TimeSlotTest: XCTestCase {
 
     
-    func test_init_startDateDuration() {
+    func test_init_withStartDateDuration() {
         
         let startDate: Date = .referenceDate
         let duration: TimeInterval = 2
@@ -19,7 +19,7 @@ class TimeSlotTest: XCTestCase {
     }
     
     
-    func test_init_startDateEndDate() {
+    func test_init_betweenAnd() {
         
         let startDate: Date = .referenceDate
         let duration: TimeInterval = 2
