@@ -89,7 +89,7 @@ struct Planning: Codable
             for task in backlog.tasks {
                 
                 let taskDuration = task.referenceDuration ?? 30.minutes
-                var taskTimeSlot = TimeSlot(withStartDate: referenceDate, duration: taskDuration)
+                var taskTimeSlot = TimeSlot(withStartDate: referenceDate, duration: taskDuration)!
                 
                 while true {
                     let existingSchedulings = self.taskSchedulings(intersectingWith: taskTimeSlot)
@@ -115,6 +115,6 @@ struct Planning: Codable
         let slotStartDate = self.mostRecentTaskSchedulingEndDate ?? Date()
         let slotEndDate = Calendar.current.date(byAdding: .hour, value: 24, to: slotStartDate)!
         
-        self.fill(on: TimeSlot(between: slotStartDate, and: slotEndDate), using: backlog)
+        self.fill(on: TimeSlot(between: slotStartDate, and: slotEndDate)!, using: backlog)
     }
 }

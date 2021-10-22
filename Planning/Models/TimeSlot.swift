@@ -19,6 +19,16 @@ import Foundation
 /// print(timeSlot.endDate) // .referenceDate + 2.hours
 /// ```
 ///
+/// A valid time slot has a non zero duration.
+/// If you attempt to create a time slot with an end date prior or equal to the start date, or with a zero or negative duration, you get `nil`.
+///
+/// ```swift
+/// let timeSlot = TimeSlot(withStartDate: .referenceDate, duration: 0) // nil
+/// let timeSlot = TimeSlot(withStartDate: .referenceDate, duration: -2) // nil
+/// let timeSlot = TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 1.hours) // nil
+/// let timeSlot = TimeSlot(between: .referenceDate, and: .referenceDate) // nil
+/// ```
+///
 /// Time slots can check if they intersect with each other, and even return a time slot that corresponds the their common portion.
 ///
 /// ```swift
@@ -60,8 +70,10 @@ struct TimeSlot: Codable, Equatable
     
     /// Creates a new time slot from a start date and a duration.
     ///
-    init(withStartDate startDate: Date, duration: TimeInterval)
+    init?(withStartDate startDate: Date, duration: TimeInterval)
     {
+        guard duration > 0 else { return nil }
+        
         self.startDate = startDate
         self.duration = duration
     }
@@ -69,8 +81,10 @@ struct TimeSlot: Codable, Equatable
     
     /// Creates a new time slot from a start date and an end date.
     ///
-    init(between startDate: Date, and endDate: Date)
+    init?(between startDate: Date, and endDate: Date)
     {
+        guard endDate > startDate else { return nil }
+        
         self.startDate = startDate
         self.duration = endDate.timeIntervalSince(startDate)
     }
@@ -115,7 +129,7 @@ struct TimeSlot: Codable, Equatable
         let latestStartDate = [timeSlot1.startDate, timeSlot2.startDate].max()!
         let earliestEndDate = [timeSlot1.endDate, timeSlot2.endDate].min()!
         
-        return latestStartDate < earliestEndDate ? TimeSlot(between: latestStartDate, and: earliestEndDate) : nil
+        return TimeSlot(between: latestStartDate, and: earliestEndDate)
     }
     
     

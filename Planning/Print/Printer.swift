@@ -28,7 +28,7 @@ struct Printer
             if let latestReferenceDate = latestReferenceDate,
                taskScheduling.timeSlot.startDate > latestReferenceDate {
                 
-                let model = makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: latestReferenceDate, and: taskScheduling.timeSlot.startDate))
+                let model = makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: latestReferenceDate, and: taskScheduling.timeSlot.startDate)!)
                 models.append(model)
             }
             
@@ -42,7 +42,7 @@ struct Printer
            let latestReferenceDate = latestReferenceDate,
            latestReferenceDate < timeSlot.endDate {
         
-            let model = makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: latestReferenceDate, and: timeSlot.endDate))
+            let model = makeAnnotatedTimeSlotPrintModelRepresentingEmptyTimeSlot(TimeSlot(between: latestReferenceDate, and: timeSlot.endDate)!)
             models.append(model)
         }
         

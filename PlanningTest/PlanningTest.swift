@@ -9,9 +9,9 @@ class PlanningTest: XCTestCase {
     
     func test_taskSchedulingsOrderedByStartDateOldestFirst() {
         
-        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours))
-        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
-        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 6.hours, duration: 2.hours))
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 6.hours, duration: 2.hours)!)
         
         let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
         
@@ -29,9 +29,9 @@ class PlanningTest: XCTestCase {
     
     func test_mostRecentTaskSchedulingEndDate_continuous() {
         
-        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours))
-        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
-        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours))
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
         
         let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
         
@@ -41,9 +41,9 @@ class PlanningTest: XCTestCase {
     
     func test_mostRecentTaskSchedulingEndDate_break() {
         
-        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours))
-        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
-        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 10.hours, duration: 2.hours))
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 10.hours, duration: 2.hours)!)
         
         let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
         
@@ -53,9 +53,9 @@ class PlanningTest: XCTestCase {
     
     func test_mostRecentTaskSchedulingEndDate_crossed() {
         
-        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours))
-        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 5.hours))
-        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours))
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 5.hours)!)
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
         
         let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
         
@@ -68,7 +68,7 @@ class PlanningTest: XCTestCase {
         var planning = Planning(taskSchedulings: [])
         
         let duration = 2.hours
-        let scheduling = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: duration))
+        let scheduling = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: duration)!)
         
         let newStartDate = .referenceDate + 4.hours
         let newTaskScheduling = planning.move(taskSchedulingWithId: scheduling.id, toNewStartDate: newStartDate)
@@ -82,9 +82,9 @@ class PlanningTest: XCTestCase {
  
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
-        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours))
-        let scheduling3 = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 6.hours, duration: 2.hours))
+        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
+        let scheduling3 = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 6.hours, duration: 2.hours)!)
         
         XCTAssertEqual(planning.taskSchedulings(intersectingWith: TimeSlot(between: .referenceDate, and: .referenceDate + 10.hours)), [scheduling1, scheduling2, scheduling3])
         XCTAssertEqual(planning.taskSchedulings(intersectingWith: TimeSlot(between: .referenceDate + 3.hours, and: .referenceDate + 7.hours)), [scheduling1, scheduling2, scheduling3])
@@ -97,15 +97,15 @@ class PlanningTest: XCTestCase {
  
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours))
-        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
-        let scheduling3 = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours))
+        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling3 = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
         
         planning.giveFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
         planning.giveFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling2.id)
         planning.giveFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling3.id)
         
-        XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 6.hours)), 1)
+        XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 6.hours)!), 1)
     }
     
     
@@ -113,15 +113,15 @@ class PlanningTest: XCTestCase {
  
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours))
-        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
-        let scheduling3 = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours))
+        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling3 = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
         
         planning.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling1.id)
         planning.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
         planning.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling3.id)
         
-        XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 6.hours)), 0)
+        XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 6.hours)!), 0)
     }
     
     
@@ -129,14 +129,14 @@ class PlanningTest: XCTestCase {
  
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours))
-        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
-        _ = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours))
+        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        _ = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
         
         planning.giveFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
         planning.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
         
-        XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 6.hours)), 1/3)
+        XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 6.hours)!), 1/3)
     }
     
     
@@ -144,14 +144,14 @@ class PlanningTest: XCTestCase {
  
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours))
-        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours))
+        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
         
         planning.giveFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
         planning.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
         
-        XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 1.hours)), 1)
-        XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate + 2.hours + 30.minutes, and: .referenceDate + 3.hours)), 0)
+        XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 1.hours)!), 1)
+        XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate + 2.hours + 30.minutes, and: .referenceDate + 3.hours)!), 0)
     }
     
     
@@ -163,8 +163,8 @@ class PlanningTest: XCTestCase {
         let task1 = backlog.add(Task(withName: "t1", referenceDuration: 10.minutes))
         let task2 = backlog.add(Task(withName: "t2", referenceDuration: 20.minutes))
         
-        _ = planning.schedule(task1, on: TimeSlot(withStartDate: .referenceDate + 1.hours, duration: task1.referenceDuration!))
-        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration!), using: backlog)
+        _ = planning.schedule(task1, on: TimeSlot(withStartDate: .referenceDate + 1.hours, duration: task1.referenceDuration!)!)
+        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration!)!, using: backlog)
         
         XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst.count, 3)
         
@@ -192,11 +192,11 @@ class PlanningTest: XCTestCase {
         _ = planning.schedule(preScheduledTask1, on: TimeSlot(
                                 between: .referenceDate + 25.minutes,
                                     and: .referenceDate + 35.minutes
-        ))
+        )!)
         _ = planning.schedule(preScheduledTask2, on: TimeSlot(
                                 between: .referenceDate + 35.minutes,
                                     and: .referenceDate + 45.minutes
-        ))
+        )!)
 
         // auto filling from backlog
 
@@ -211,7 +211,7 @@ class PlanningTest: XCTestCase {
         planning.fill(on: TimeSlot(
             between: .referenceDate + 0.minutes,
             and: .referenceDate + 95.minutes
-        ), using: backlog)
+        )!, using: backlog)
 
         // Expected result :
         //
@@ -262,7 +262,7 @@ class PlanningTest: XCTestCase {
         let task2 = backlog.add(Task(withName: "t2", referenceDuration: 20.minutes))
         _ = backlog.add(Task(withName: "t3", referenceDuration: 30.minutes))
 
-        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration!), using: backlog)
+        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration!)!, using: backlog)
 
         XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst.count, 2)
 
@@ -283,7 +283,7 @@ class PlanningTest: XCTestCase {
         let task2 = backlog.add(Task(withName: "t2", referenceDuration: 20.minutes))
         let task3 = backlog.add(Task(withName: "t3", referenceDuration: 30.minutes))
 
-        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration!), using: backlog)
+        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration!)!, using: backlog)
 
         XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst.count, 3)
 
@@ -307,7 +307,7 @@ class PlanningTest: XCTestCase {
         let task2 = backlog.add(Task(withName: "t2", referenceDuration: 20.minutes))
         let task3 = backlog.add(Task(withName: "t3", referenceDuration: 30.minutes))
 
-        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration! + task1.referenceDuration!), using: backlog)
+        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration! + task1.referenceDuration!)!, using: backlog)
 
         XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst.count, 4)
 
