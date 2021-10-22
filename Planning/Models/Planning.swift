@@ -91,9 +91,13 @@ struct Planning: Codable
                 let taskDuration = task.referenceDuration ?? 30.minutes
                 var taskTimeSlot = TimeSlot(withStartDate: referenceDate, duration: taskDuration)
                 
-                let existingSchedulings = self.taskSchedulings(intersectingWith: taskTimeSlot)
-                if !existingSchedulings.isEmpty {
-                    taskTimeSlot.startDate = existingSchedulings.max(by: { $0.timeSlot.endDate < $1.timeSlot.endDate })!.timeSlot.endDate
+                while true {
+                    let existingSchedulings = self.taskSchedulings(intersectingWith: taskTimeSlot)
+                    if !existingSchedulings.isEmpty {
+                        taskTimeSlot.startDate = existingSchedulings.max(by: { $0.timeSlot.endDate < $1.timeSlot.endDate })!.timeSlot.endDate
+                    } else {
+                        break
+                    }
                 }
                 
                 let taskScheduling = self.schedule(task, on: taskTimeSlot)
