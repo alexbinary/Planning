@@ -29,6 +29,16 @@ import Foundation
 /// timeSlot1.intersection(with: timeSlot2) // TimeSlot(between: .referenceDate + 1.hours, and: .referenceDate + 2.hours)
 /// ```
 ///
+/// The start and end dates of a time slot make a half open interval `[ start ; end [`, such that the end date is not included in the time slot.
+/// As a consequence, two time slots such that the second one has a start date equal to the end date of the first one do not intersect.
+///
+/// ```swift
+/// let timeSlot3 = TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)
+/// let timeSlot4 = TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)
+///
+/// timeSlot3.intersects(with: timeSlot4)  // false
+/// ```
+///
 struct TimeSlot: Codable, Equatable
 {
     
@@ -83,6 +93,16 @@ struct TimeSlot: Codable, Equatable
     /// TimeSlot.intersection(between: timeSlot3, and: timeSlot4))  // nil
     /// ```
     ///
+    /// The start and end dates of a time slot make a half open interval `[ start ; end [`, such that the end date is not included in the time slot.
+    /// As a consequence, two time slots such that the second one has a start date equal to the end date of the first one do not intersect.
+    ///
+    /// ```swift
+    /// let timeSlot5 = TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)
+    /// let timeSlot6 = TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)
+    ///
+    /// timeSlot5.intersects(with: timeSlot6)  // false
+    /// ```
+    ///
     /// Note that `intersection(between: timeSlot1, and: timeSlot2)` always produces the same result than `intersection(between: timeSlot2, and: timeSlot1)`.
     /// In other words, the order in which the time slots are given has no effect.
     ///
@@ -91,7 +111,7 @@ struct TimeSlot: Codable, Equatable
         let latestStartDate = [timeSlot1.startDate, timeSlot2.startDate].max()!
         let earliestEndDate = [timeSlot1.endDate, timeSlot2.endDate].min()!
         
-        return latestStartDate <= earliestEndDate ? TimeSlot(between: latestStartDate, and: earliestEndDate) : nil
+        return latestStartDate < earliestEndDate ? TimeSlot(between: latestStartDate, and: earliestEndDate) : nil
     }
     
     
