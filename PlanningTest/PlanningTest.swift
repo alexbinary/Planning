@@ -174,6 +174,19 @@ class PlanningTest: XCTestCase {
     }
     
     
+    func test_giveFeedbackOnTaskSchedulingWithId() {
+ 
+        var planning = Planning(taskSchedulings: [])
+        
+        let scheduling = planning.schedule(Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        
+        let feedback: TaskSchedulingFeedback = .taskCompletedWithoutProblem
+        planning.giveFeedback(feedback, onTaskSchedulingWithId: scheduling.id)
+        
+        XCTAssertEqual(planning.taskSchedulings[0].feedback, feedback)
+    }
+    
+    
     func test_planningFeedbackScoreBetweenAnd_allPositive() {
  
         var planning = Planning(taskSchedulings: [])
