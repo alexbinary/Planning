@@ -82,13 +82,14 @@ class PlanningTest: XCTestCase {
     
     func test_deleteTaskSchedulingWithId() {
  
-        let scheduling = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
         
-        var planning = Planning(taskSchedulings: [ scheduling ])
+        var planning = Planning(taskSchedulings: [ scheduling1, scheduling2 ])
         
-        planning.delete(taskSchedulingWithId: scheduling.id)
+        planning.delete(taskSchedulingWithId: scheduling1.id)
         
-        XCTAssertEqual(planning.taskSchedulings, [])
+        XCTAssertEqual(planning.taskSchedulings, [ scheduling2 ])
     }
     
     
