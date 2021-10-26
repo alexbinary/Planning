@@ -148,7 +148,7 @@ class PlanningTest: XCTestCase {
         
         let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
         let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
-        _ = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
+        planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
         
         planning.giveFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
         planning.giveFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
@@ -179,9 +179,9 @@ class PlanningTest: XCTestCase {
         let task1 = Task(withName: "t1")
         let task2 = Task(withName: "t2")
         
-        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
-        _ = planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
-        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
+        planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
+        planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
+        planning.schedule(task1, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
         
         let latestSchedulingForTask1 = planning.currentLatestSchedulingByStartDate(forTaskWithId: task1.id)
         
@@ -198,9 +198,9 @@ class PlanningTest: XCTestCase {
         let task2 = Task(withName: "t2")
         let task3 = Task(withName: "t3")
         
-        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
-        _ = planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
-        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
+        planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
+        planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
+        planning.schedule(task1, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
         
         let latestSchedulingForTask3 = planning.currentLatestSchedulingByStartDate(forTaskWithId: task3.id)
         
@@ -215,9 +215,9 @@ class PlanningTest: XCTestCase {
         let task1 = Task(withName: "t1")
         let task2 = Task(withName: "t2")
         
-        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
-        _ = planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
-        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
+        planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
+        planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
+        planning.schedule(task1, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
         
         let latestSchedulingForTask1 = planning.currentLatestSchedulingByStartDate(forTaskWithId: task1.id, in: TimeSlot(between: .referenceDate, and: .referenceDate + 3.hours)!)
         
@@ -233,9 +233,9 @@ class PlanningTest: XCTestCase {
         let task1 = Task(withName: "t1")
         let task2 = Task(withName: "t2")
         
-        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
-        _ = planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
-        _ = planning.schedule(task2, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
+        planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
+        planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
+        planning.schedule(task2, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
         
         let latestSchedulingForTask1 = planning.currentLatestSchedulingByStartDate(forTaskWithId: task1.id, in: TimeSlot(between: .referenceDate + 3.hours, and: .referenceDate + 6.hours)!)
         
@@ -251,7 +251,7 @@ class PlanningTest: XCTestCase {
         let task1 = backlog.add(Task(withName: "t1", referenceDuration: 10.minutes))
         let task2 = backlog.add(Task(withName: "t2", referenceDuration: 20.minutes))
         
-        _ = planning.schedule(task1, on: TimeSlot(withStartDate: .referenceDate + 1.hours, duration: task1.referenceDuration!)!)
+        planning.schedule(task1, on: TimeSlot(withStartDate: .referenceDate + 1.hours, duration: task1.referenceDuration!)!)
         planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration!)!, using: backlog)
         
         XCTAssertEqual(planning.taskSchedulingsSortedByStartDate.count, 3)
@@ -277,11 +277,11 @@ class PlanningTest: XCTestCase {
         let preScheduledTask1 = Task(withName: "preScheduledTask1")
         let preScheduledTask2 = Task(withName: "preScheduledTask2")
 
-        _ = planning.schedule(preScheduledTask1, on: TimeSlot(
+        planning.schedule(preScheduledTask1, on: TimeSlot(
                                 between: .referenceDate + 25.minutes,
                                     and: .referenceDate + 35.minutes
         )!)
-        _ = planning.schedule(preScheduledTask2, on: TimeSlot(
+        planning.schedule(preScheduledTask2, on: TimeSlot(
                                 between: .referenceDate + 35.minutes,
                                     and: .referenceDate + 45.minutes
         )!)

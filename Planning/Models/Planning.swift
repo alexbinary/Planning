@@ -30,6 +30,7 @@ struct Planning: Codable
     ///
     /// - Returns: a `TaskScheduling` object that represents the scheduling of the task that was added to the planning.
     ///
+    @discardableResult
     mutating func schedule(_ task: Task, on timeSlot: TimeSlot) -> TaskScheduling {
         
         let scheduling = TaskScheduling(scheduling: task, on: timeSlot)
