@@ -73,6 +73,12 @@ struct Planning: Codable
     }
     
     
+    /// Returns all task schedulings whose time slot intersect with a given time slot.
+    ///
+    /// See `TimeSlot` for details about time slots intersections.
+    ///
+    /// - Parameter timeSlot: if `nil`, all task schedulings are returned.
+    ///
     func taskSchedulings(intersectingWith timeSlot: TimeSlot? = nil) -> [TaskScheduling] {
         
         if let timeSlot = timeSlot {
