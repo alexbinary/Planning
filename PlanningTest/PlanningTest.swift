@@ -80,6 +80,18 @@ class PlanningTest: XCTestCase {
     }
     
     
+    func test_deleteTaskSchedulingWithId() {
+ 
+        let scheduling = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        
+        var planning = Planning(taskSchedulings: [ scheduling ])
+        
+        planning.delete(taskSchedulingWithId: scheduling.id)
+        
+        XCTAssertEqual(planning.taskSchedulings, [])
+    }
+    
+    
     func test_moveTaskSchedulingToNewStartDate() {
  
         var planning = Planning(taskSchedulings: [])
