@@ -63,6 +63,23 @@ class PlanningTest: XCTestCase {
     }
     
     
+    func test_scheduleTaskOn() {
+ 
+        var planning = Planning(taskSchedulings: [])
+        
+        let task = Task(withName: "t1")
+        let timeSlot = TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!
+        
+        let scheduling = planning.schedule(task, on: timeSlot)
+        
+        XCTAssertEqual(planning.taskSchedulings, [ scheduling ])
+        
+        XCTAssertEqual(scheduling.task, task)
+        XCTAssertEqual(scheduling.timeSlot, timeSlot)
+        XCTAssertEqual(scheduling.feedback, nil)
+    }
+    
+    
     func test_moveTaskSchedulingToNewStartDate() {
  
         var planning = Planning(taskSchedulings: [])
