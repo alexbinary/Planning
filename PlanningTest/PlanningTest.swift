@@ -199,7 +199,7 @@ class PlanningTest: XCTestCase {
     }
     
     
-    func test_planningFeedbackScoreBetweenAnd_allPositive() {
+    func test_feedbackScoreOn_allPositive() {
  
         var planning = Planning(taskSchedulings: [])
         
@@ -215,7 +215,7 @@ class PlanningTest: XCTestCase {
     }
     
     
-    func test_planningFeedbackScoreBetweenAnd_allNegative() {
+    func test_feedbackScoreOn_allNegative() {
  
         var planning = Planning(taskSchedulings: [])
         
@@ -231,7 +231,7 @@ class PlanningTest: XCTestCase {
     }
     
     
-    func test_planningFeedbackScoreBetweenAnd_mixed() {
+    func test_feedbackScoreOn_mixed() {
  
         var planning = Planning(taskSchedulings: [])
         
@@ -246,7 +246,7 @@ class PlanningTest: XCTestCase {
     }
     
     
-    func test_planningFeedbackScoreBetweenAnd_mixed_slotSmaller() {
+    func test_feedbackScoreOn_mixed_slotSmaller() {
  
         var planning = Planning(taskSchedulings: [])
         
