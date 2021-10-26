@@ -57,6 +57,12 @@ struct Planning: Codable
     }
     
     
+    /// Moves a task scheduling to a new date.
+    ///
+    /// The duration of the task is not changed, only its start date.
+    ///
+    /// - Returns:a `TaskScheduling` object that represents the new scheduling of the task.
+    ///
     mutating func move(taskSchedulingWithId id: UUID, toNewStartDate newStartDate: Date) -> TaskScheduling {
         
         let index = self.taskSchedulings.firstIndex(where: { $0.id == id })!
