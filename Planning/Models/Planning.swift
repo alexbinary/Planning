@@ -101,6 +101,8 @@ struct Planning: Codable
     }
     
     
+    /// Sets a feedback on a task scheduling.
+    ///
     mutating func giveFeedback(_ feedback: TaskSchedulingFeedback, onTaskSchedulingWithId id: UUID) {
         
         let index = self.taskSchedulings.firstIndex(where: { $0.id == id })!
