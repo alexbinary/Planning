@@ -39,6 +39,8 @@ struct Planning: Codable
     }
     
     
+    /// Deletes a task scheduling from its id.
+    ///
     mutating func delete(taskSchedulingWithId id: UUID) {
         
         self.taskSchedulings.removeAll(where: { $0.id == id })
