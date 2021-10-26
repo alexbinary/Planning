@@ -7,7 +7,7 @@ import Foundation
 ///
 /// This type is used to read and write the app's data to and from a file on disk.
 ///
-struct DataModel: Codable
+struct ApplicationDataContainer: Codable
 {
    
     /// Stores the planning data.

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		299C0C6E271EC37500DE927D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C6D271EC37500DE927D /* Settings.swift */; };
-		299C0C72271EC4B300DE927D /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C71271EC4B300DE927D /* DataModel.swift */; };
+		299C0C72271EC4B300DE927D /* ApplicationDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C71271EC4B300DE927D /* ApplicationDataContainer.swift */; };
 		299C0C75271EC54C00DE927D /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C74271EC54C00DE927D /* Backlog.swift */; };
 		299C0C78271ED1CA00DE927D /* print.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C77271ED1CA00DE927D /* print.swift */; };
 		299C0C7C271ED61F00DE927D /* dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C7B271ED61F00DE927D /* dates.swift */; };
@@ -36,7 +36,7 @@
 		29F4DB1A271EE738005433B8 /* TaskScheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D5271EB8B400F0CB0E /* TaskScheduling.swift */; };
 		29F4DB1D271EE741005433B8 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D1271EB86400F0CB0E /* Task.swift */; };
 		29F4DB20271EE743005433B8 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B3D3D8271EB92E00F0CB0E /* Planning.swift */; };
-		29F4DB23271EE746005433B8 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C71271EC4B300DE927D /* DataModel.swift */; };
+		29F4DB23271EE746005433B8 /* ApplicationDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C71271EC4B300DE927D /* ApplicationDataContainer.swift */; };
 		29F4DB24271EE749005433B8 /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C74271EC54C00DE927D /* Backlog.swift */; };
 		29F4DB27271EE750005433B8 /* dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C7B271ED61F00DE927D /* dates.swift */; };
 /* End PBXBuildFile section */
@@ -55,7 +55,7 @@
 
 /* Begin PBXFileReference section */
 		299C0C6D271EC37500DE927D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		299C0C71271EC4B300DE927D /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		299C0C71271EC4B300DE927D /* ApplicationDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDataContainer.swift; sourceTree = "<group>"; };
 		299C0C74271EC54C00DE927D /* Backlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backlog.swift; sourceTree = "<group>"; };
 		299C0C77271ED1CA00DE927D /* print.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = print.swift; sourceTree = "<group>"; };
 		299C0C7B271ED61F00DE927D /* dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dates.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 		29B3D3D0271EB85400F0CB0E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				299C0C71271EC4B300DE927D /* DataModel.swift */,
+				299C0C71271EC4B300DE927D /* ApplicationDataContainer.swift */,
 				299C0C74271EC54C00DE927D /* Backlog.swift */,
 				29B3D3D8271EB92E00F0CB0E /* Planning.swift */,
 				29B3D3D1271EB86400F0CB0E /* Task.swift */,
@@ -258,7 +258,7 @@
 			files = (
 				29B6BB8E271F2046005F52C8 /* TaskSchedulingFeedback.swift in Sources */,
 				29F301C02720422E009D9CF5 /* AnnotatedTimeSlotPrintModel.swift in Sources */,
-				29F4DB23271EE746005433B8 /* DataModel.swift in Sources */,
+				29F4DB23271EE746005433B8 /* ApplicationDataContainer.swift in Sources */,
 				29F4DB24271EE749005433B8 /* Backlog.swift in Sources */,
 				29A849222721AFB700CA330B /* durations.swift in Sources */,
 				29B6BB83271F11E7005F52C8 /* TimeSlot.swift in Sources */,
@@ -281,7 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29F301AE272040F0009D9CF5 /* AnnotatedTimeSlotPrintModel.swift in Sources */,
-				299C0C72271EC4B300DE927D /* DataModel.swift in Sources */,
+				299C0C72271EC4B300DE927D /* ApplicationDataContainer.swift in Sources */,
 				29B6BB80271F1146005F52C8 /* TimeSlot.swift in Sources */,
 				299C0C7C271ED61F00DE927D /* dates.swift in Sources */,
 				299C0C6E271EC37500DE927D /* Settings.swift in Sources */,
