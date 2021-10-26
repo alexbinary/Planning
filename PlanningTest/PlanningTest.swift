@@ -181,9 +181,21 @@ class PlanningTest: XCTestCase {
         let scheduling = planning.schedule(Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
         
         let feedback: TaskSchedulingFeedback = .taskCompletedWithoutProblem
-        planning.setFeedback(feedback, onTaskSchedulingWithId: scheduling.id)
+
+        XCTAssertNoThrow(try planning.setFeedback(feedback, onTaskSchedulingWithId: scheduling.id))
         
         XCTAssertEqual(planning.taskSchedulings[0].feedback, feedback)
+    }
+    
+    
+    func test_setFeedbackOnTaskSchedulingWithId_notFound() {
+ 
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        
+        var planning = Planning(taskSchedulings: [ scheduling1 ])
+        
+        XCTAssertThrowsError(try planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling2.id))
     }
     
     
@@ -195,9 +207,9 @@ class PlanningTest: XCTestCase {
         let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
         let scheduling3 = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
         
-        planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
-        planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling2.id)
-        planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling3.id)
+        try! planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
+        try! planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling2.id)
+        try! planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling3.id)
         
         XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 6.hours)!), 1)
     }
@@ -211,9 +223,9 @@ class PlanningTest: XCTestCase {
         let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
         let scheduling3 = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
         
-        planning.setFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling1.id)
-        planning.setFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
-        planning.setFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling3.id)
+        try! planning.setFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling1.id)
+        try! planning.setFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
+        try! planning.setFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling3.id)
         
         XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 6.hours)!), 0)
     }
@@ -227,8 +239,8 @@ class PlanningTest: XCTestCase {
         let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
         planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
         
-        planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
-        planning.setFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
+        try! planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
+        try! planning.setFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
         
         XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 6.hours)!), 1/3)
     }
@@ -241,8 +253,8 @@ class PlanningTest: XCTestCase {
         let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
         let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
         
-        planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
-        planning.setFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
+        try! planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
+        try! planning.setFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
         
         XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate, and: .referenceDate + 1.hours)!), 1)
         XCTAssertEqual(planning.feedbackScore(on: TimeSlot(between: .referenceDate + 2.hours + 30.minutes, and: .referenceDate + 3.hours)!), 0)

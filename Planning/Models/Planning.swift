@@ -103,9 +103,10 @@ struct Planning: Codable
     
     /// Sets a feedback on a task scheduling.
     ///
-    mutating func setFeedback(_ feedback: TaskSchedulingFeedback, onTaskSchedulingWithId taskSchedulingId: UUID) {
+    mutating func setFeedback(_ feedback: TaskSchedulingFeedback, onTaskSchedulingWithId taskSchedulingId: UUID) throws {
         
-        let index = self.taskSchedulings.firstIndex(where: { $0.id == taskSchedulingId })!
+        guard let index = self.taskSchedulings.firstIndex(where: { $0.id == taskSchedulingId }) else { throw PlanningError.objectNotFound(id: taskSchedulingId) }
+        
         self.taskSchedulings[index].feedback = feedback
     }
     
