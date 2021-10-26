@@ -93,7 +93,7 @@ struct Planning: Codable
     ///
     /// - Returns: the `TaskScheduling` object, or `nil` if no scheduling for the task was found.
     ///
-    func currentLatestSchedulingByStartDate(forTaskWithId taskId: UUID, in timeSlot: TimeSlot? = nil) -> TaskScheduling? {
+    func latestSchedulingByStartDate(forTaskWithId taskId: UUID, in timeSlot: TimeSlot? = nil) -> TaskScheduling? {
         
         return self.taskSchedulings(intersectingWith: timeSlot)
             .sortedByStartDate
