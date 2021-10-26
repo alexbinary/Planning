@@ -92,6 +92,19 @@ class PlanningTest: XCTestCase {
     }
     
     
+    func test_clear() {
+ 
+        var planning = Planning(taskSchedulings: [
+            TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!),
+            TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        ])
+        
+        planning.clear()
+        
+        XCTAssertEqual(planning.taskSchedulings, [])
+    }
+    
+    
     func test_moveTaskSchedulingToNewStartDate() {
  
         var planning = Planning(taskSchedulings: [])
