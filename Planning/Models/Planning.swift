@@ -150,15 +150,6 @@ struct Planning: Codable
             }
         }
     }
-    
-    
-    mutating func scheduleTasksForNext24HoursAfterLatestTaskScheduling(using backlog: Backlog) {
-        
-        let slotStartDate = self.mostRecentTaskSchedulingEndDate ?? Date()
-        let slotEndDate = Calendar.current.date(byAdding: .hour, value: 24, to: slotStartDate)!
-        
-        self.scheduleTasks(on: TimeSlot(between: slotStartDate, and: slotEndDate)!, using: backlog)
-    }
 }
 
 
