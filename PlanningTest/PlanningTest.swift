@@ -118,14 +118,14 @@ class PlanningTest: XCTestCase {
     }
     
     
-    func test_moveTaskSchedulingToNewStartDate() {
+    func test_moveTaskSchedulingToNewStartDate() throws {
  
         var planning = Planning(taskSchedulings: [])
         
         let scheduling = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
         
         let newStartDate = .referenceDate + 4.hours
-        let newTaskScheduling = planning.move(taskSchedulingWithId: scheduling.id, toNewStartDate: newStartDate)
+        let newTaskScheduling = try planning.move(taskSchedulingWithId: scheduling.id, toNewStartDate: newStartDate)
         
         XCTAssertEqual(planning.taskSchedulings, [ newTaskScheduling ])
         
@@ -133,6 +133,17 @@ class PlanningTest: XCTestCase {
         XCTAssertEqual(newTaskScheduling.timeSlot.startDate, newStartDate)
         XCTAssertEqual(newTaskScheduling.timeSlot.duration, scheduling.timeSlot.duration)
         XCTAssertEqual(newTaskScheduling.feedback, scheduling.feedback)
+    }
+    
+    
+    func test_moveTaskSchedulingToNewStartDate_notFound() {
+ 
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        
+        var planning = Planning(taskSchedulings: [ scheduling1 ])
+        
+        XCTAssertThrowsError(try planning.move(taskSchedulingWithId: scheduling2.id, toNewStartDate: .referenceDate))
     }
     
     

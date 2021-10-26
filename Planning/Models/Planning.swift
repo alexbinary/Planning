@@ -63,9 +63,9 @@ struct Planning: Codable
     ///
     /// - Returns:a `TaskScheduling` object that represents the new scheduling of the task.
     ///
-    mutating func move(taskSchedulingWithId id: UUID, toNewStartDate newStartDate: Date) -> TaskScheduling {
+    mutating func move(taskSchedulingWithId id: UUID, toNewStartDate newStartDate: Date) throws -> TaskScheduling {
         
-        let index = self.taskSchedulings.firstIndex(where: { $0.id == id })!
+        guard let index = self.taskSchedulings.firstIndex(where: { $0.id == id }) else { throw PlanningError.objectNotFound(id: id) }
         
         self.taskSchedulings[index].timeSlot.startDate = newStartDate
         
