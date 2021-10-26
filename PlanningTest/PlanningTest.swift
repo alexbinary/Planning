@@ -287,7 +287,7 @@ class PlanningTest: XCTestCase {
     }
     
     
-    func test_fillOnUsing_taskScheduledAfterSlot() {
+    func test_scheduleTasksOnUsing_taskScheduledAfterSlot() {
  
         var planning = Planning(taskSchedulings: [])
         var backlog = Backlog(tasks: [])
@@ -296,7 +296,7 @@ class PlanningTest: XCTestCase {
         let task2 = backlog.add(Task(withName: "t2", referenceDuration: 20.minutes))
         
         planning.schedule(task1, on: TimeSlot(withStartDate: .referenceDate + 1.hours, duration: task1.referenceDuration!)!)
-        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration!)!, using: backlog)
+        planning.scheduleTasks(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration!)!, using: backlog)
         
         XCTAssertEqual(planning.taskSchedulingsSortedByStartDate.count, 3)
         
@@ -311,7 +311,7 @@ class PlanningTest: XCTestCase {
     }
     
     
-    func test_fillOnUsing_tasksScheduledInsideSlot() {
+    func test_scheduleTasksOnUsing_tasksScheduledInsideSlot() {
 
         var planning = Planning(taskSchedulings: [])
         var backlog = Backlog(tasks: [])
@@ -340,7 +340,7 @@ class PlanningTest: XCTestCase {
         _ = backlog.add(backlogTask2)
         _ = backlog.add(backlogTask3)
 
-        planning.fill(on: TimeSlot(
+        planning.scheduleTasks(on: TimeSlot(
             between: .referenceDate + 0.minutes,
             and: .referenceDate + 95.minutes
         )!, using: backlog)
@@ -385,7 +385,7 @@ class PlanningTest: XCTestCase {
     }
     
     
-    func test_fillOnUsing_backlogBiggerThanSlot() {
+    func test_scheduleTasksOnUsing_backlogBiggerThanSlot() {
 
         var planning = Planning(taskSchedulings: [])
         var backlog = Backlog(tasks: [])
@@ -394,7 +394,7 @@ class PlanningTest: XCTestCase {
         let task2 = backlog.add(Task(withName: "t2", referenceDuration: 20.minutes))
         _ = backlog.add(Task(withName: "t3", referenceDuration: 30.minutes))
 
-        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration!)!, using: backlog)
+        planning.scheduleTasks(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration!)!, using: backlog)
 
         XCTAssertEqual(planning.taskSchedulingsSortedByStartDate.count, 2)
 
@@ -406,7 +406,7 @@ class PlanningTest: XCTestCase {
     }
     
     
-    func test_fillOnUsing_backlogSameSizeThanSlot() {
+    func test_scheduleTasksOnUsing_backlogSameSizeThanSlot() {
 
         var planning = Planning(taskSchedulings: [])
         var backlog = Backlog(tasks: [])
@@ -415,7 +415,7 @@ class PlanningTest: XCTestCase {
         let task2 = backlog.add(Task(withName: "t2", referenceDuration: 20.minutes))
         let task3 = backlog.add(Task(withName: "t3", referenceDuration: 30.minutes))
 
-        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration!)!, using: backlog)
+        planning.scheduleTasks(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration!)!, using: backlog)
 
         XCTAssertEqual(planning.taskSchedulingsSortedByStartDate.count, 3)
 
@@ -430,7 +430,7 @@ class PlanningTest: XCTestCase {
     }
     
     
-    func test_fillOnUsing_backlogSmallerThanSlot() {
+    func test_scheduleTasksOnUsing_backlogSmallerThanSlot() {
 
         var planning = Planning(taskSchedulings: [])
         var backlog = Backlog(tasks: [])
@@ -439,7 +439,7 @@ class PlanningTest: XCTestCase {
         let task2 = backlog.add(Task(withName: "t2", referenceDuration: 20.minutes))
         let task3 = backlog.add(Task(withName: "t3", referenceDuration: 30.minutes))
 
-        planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration! + task1.referenceDuration!)!, using: backlog)
+        planning.scheduleTasks(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration! + task1.referenceDuration!)!, using: backlog)
 
         XCTAssertEqual(planning.taskSchedulingsSortedByStartDate.count, 4)
 

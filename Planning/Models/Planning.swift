@@ -123,7 +123,7 @@ struct Planning: Codable
     
     /// Schedules tasks on a given time slots using a given backlog.
     ///
-    mutating func fill(on timeSlot: TimeSlot, using backlog: Backlog) {
+    mutating func scheduleTasks(on timeSlot: TimeSlot, using backlog: Backlog) {
         
         var referenceDate = timeSlot.startDate
         
@@ -152,12 +152,12 @@ struct Planning: Codable
     }
     
     
-    mutating func fillForNext24HoursAfterLatestTaskScheduling(using backlog: Backlog) {
+    mutating func scheduleTasksForNext24HoursAfterLatestTaskScheduling(using backlog: Backlog) {
         
         let slotStartDate = self.mostRecentTaskSchedulingEndDate ?? Date()
         let slotEndDate = Calendar.current.date(byAdding: .hour, value: 24, to: slotStartDate)!
         
-        self.fill(on: TimeSlot(between: slotStartDate, and: slotEndDate)!, using: backlog)
+        self.scheduleTasks(on: TimeSlot(between: slotStartDate, and: slotEndDate)!, using: backlog)
     }
 }
 
