@@ -94,3 +94,16 @@ struct TaskScheduling: Codable, Equatable
         return lhs.id == rhs.id
     }
 }
+
+
+
+extension Array where Element == TaskScheduling {
+    
+
+    /// Returns the elements of the array, sorted by start date, oldest first.
+    ///
+    var sortedByStartDate: [TaskScheduling] {
+        
+        self.sorted(by: { $0.timeSlot.startDate < $1.timeSlot.startDate })
+    }
+}
