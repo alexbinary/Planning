@@ -10,57 +10,13 @@ import Foundation
 struct Planning: Codable
 {
     
+    // MARK: - Reading task schedulings
+    
+    
     /// The tasks schedulings that the planning stores.
     ///
     var taskSchedulings: [TaskScheduling]
     
-    
-    
-    /// Schedules a task on the planning on the specified time slot.
-    ///
-    /// - Returns: a `TaskScheduling` object that represents the scheduling of the task that was added to the planning.
-    ///
-    @discardableResult
-    mutating func schedule(_ task: Task, on timeSlot: TimeSlot) -> TaskScheduling {
-        
-        let scheduling = TaskScheduling(scheduling: task, on: timeSlot)
-        self.taskSchedulings.append(scheduling)
-        return scheduling
-    }
-    
-    
-    /// Deletes a task scheduling from its id.
-    ///
-    mutating func delete(taskSchedulingWithId taskSchedulingId: UUID) throws {
-        
-        guard self.taskSchedulings.contains(where: { $0.id == taskSchedulingId }) else { throw PlanningError.objectNotFound(id: taskSchedulingId) }
-        
-        self.taskSchedulings.removeAll(where: { $0.id == taskSchedulingId })
-    }
-    
-    
-    /// Removes all task schedulings.
-    ///
-    mutating func clear() {
-        
-        self.taskSchedulings.removeAll()
-    }
-    
-    
-    /// Moves a task scheduling to a new date.
-    ///
-    /// The duration of the task is not changed, only its start date.
-    ///
-    /// - Returns:a `TaskScheduling` object that represents the new scheduling of the task.
-    ///
-    mutating func move(taskSchedulingWithId taskSchedulingId: UUID, toNewStartDate newStartDate: Date) throws -> TaskScheduling {
-        
-        guard let index = self.taskSchedulings.firstIndex(where: { $0.id == taskSchedulingId }) else { throw PlanningError.objectNotFound(id: taskSchedulingId) }
-        
-        self.taskSchedulings[index].timeSlot.startDate = newStartDate
-        
-        return self.taskSchedulings[index]
-    }
     
     
     /// Returns all task schedulings whose time slot intersect with a given time slot.
@@ -91,23 +47,19 @@ struct Planning: Codable
     }
     
     
-    /// Sets a feedback on a task scheduling.
-    ///
-    mutating func setFeedback(_ feedback: TaskSchedulingFeedback, onTaskSchedulingWithId taskSchedulingId: UUID) throws {
-        
-        guard let index = self.taskSchedulings.firstIndex(where: { $0.id == taskSchedulingId }) else { throw PlanningError.objectNotFound(id: taskSchedulingId) }
-        
-        self.taskSchedulings[index].feedback = feedback
-    }
+    // MARK: - Schedulings tasks
     
     
-    /// Returns the feedback score of the planning in a given time slot.
+    /// Schedules a task on the planning on the specified time slot.
     ///
-    func feedbackScore(on timeSlot: TimeSlot) -> Float {
+    /// - Returns: a `TaskScheduling` object that represents the scheduling of the task that was added to the planning.
+    ///
+    @discardableResult
+    mutating func schedule(_ task: Task, on timeSlot: TimeSlot) -> TaskScheduling {
         
-        let taskSchedulingsInSlot = self.taskSchedulings(intersectingWith: timeSlot)
-        
-        return Float(taskSchedulingsInSlot.filter { $0.feedback == .taskCompletedWithoutProblem } .count) / Float(taskSchedulingsInSlot.count)
+        let scheduling = TaskScheduling(scheduling: task, on: timeSlot)
+        self.taskSchedulings.append(scheduling)
+        return scheduling
     }
     
     
@@ -139,6 +91,66 @@ struct Planning: Codable
                 referenceDate = taskScheduling.timeSlot.endDate
             }
         }
+    }
+    
+    
+    /// Moves a task scheduling to a new date.
+    ///
+    /// The duration of the task is not changed, only its start date.
+    ///
+    /// - Returns:a `TaskScheduling` object that represents the new scheduling of the task.
+    ///
+    mutating func move(taskSchedulingWithId taskSchedulingId: UUID, toNewStartDate newStartDate: Date) throws -> TaskScheduling {
+        
+        guard let index = self.taskSchedulings.firstIndex(where: { $0.id == taskSchedulingId }) else { throw PlanningError.objectNotFound(id: taskSchedulingId) }
+        
+        self.taskSchedulings[index].timeSlot.startDate = newStartDate
+        
+        return self.taskSchedulings[index]
+    }
+    
+    
+    // MARK: - Feedback
+    
+    
+    /// Returns the feedback score of the planning in a given time slot.
+    ///
+    func feedbackScore(on timeSlot: TimeSlot) -> Float {
+        
+        let taskSchedulingsInSlot = self.taskSchedulings(intersectingWith: timeSlot)
+        
+        return Float(taskSchedulingsInSlot.filter { $0.feedback == .taskCompletedWithoutProblem } .count) / Float(taskSchedulingsInSlot.count)
+    }
+    
+    
+    /// Sets a feedback on a task scheduling.
+    ///
+    mutating func setFeedback(_ feedback: TaskSchedulingFeedback, onTaskSchedulingWithId taskSchedulingId: UUID) throws {
+        
+        guard let index = self.taskSchedulings.firstIndex(where: { $0.id == taskSchedulingId }) else { throw PlanningError.objectNotFound(id: taskSchedulingId) }
+        
+        self.taskSchedulings[index].feedback = feedback
+    }
+    
+    
+    // MARK: - Removing schedulings
+    
+    
+    /// Deletes a task scheduling from its id.
+    ///
+    mutating func delete(taskSchedulingWithId taskSchedulingId: UUID) throws {
+        
+        guard self.taskSchedulings.contains(where: { $0.id == taskSchedulingId }) else { throw PlanningError.objectNotFound(id: taskSchedulingId) }
+        
+        self.taskSchedulings.removeAll(where: { $0.id == taskSchedulingId })
+    }
+    
+    
+    /// Removes all task schedulings.
+    ///
+    mutating func clear() {
+        
+        self.taskSchedulings.removeAll()
     }
 }
 
