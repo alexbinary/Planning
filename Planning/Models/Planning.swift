@@ -111,6 +111,8 @@ struct Planning: Codable
     }
     
     
+    /// Returns the feedback score of the planning in a given time slot.
+    ///
     func feedbackScore(on timeSlot: TimeSlot) -> Float {
         
         let taskSchedulingsInSlot = self.taskSchedulings(intersectingWith: timeSlot)
