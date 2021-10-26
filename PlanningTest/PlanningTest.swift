@@ -203,9 +203,9 @@ class PlanningTest: XCTestCase {
  
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
-        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
-        planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
+        let scheduling1 = planning.schedule(Task(withName: "t1"), on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
+        let scheduling2 = planning.schedule(Task(withName: "t2"), on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
+        planning.schedule(Task(withName: "t3"), on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
         
         try! planning.setFeedback(.taskCompletedWithoutProblem, onTaskSchedulingWithId: scheduling1.id)
         try! planning.setFeedback(.taskCouldNotBeDoneCorrectlyOrDoneAtAll, onTaskSchedulingWithId: scheduling2.id)
