@@ -121,6 +121,8 @@ struct Planning: Codable
     }
     
     
+    /// Schedules tasks on a given time slots using a given backlog.
+    ///
     mutating func fill(on timeSlot: TimeSlot, using backlog: Backlog) {
         
         var referenceDate = timeSlot.startDate
