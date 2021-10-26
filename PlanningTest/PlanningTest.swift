@@ -155,6 +155,77 @@ class PlanningTest: XCTestCase {
     }
     
     
+    func test_currentLatestSchedulingByStartDateForTaskWithId() {
+     
+        var planning = Planning(taskSchedulings: [])
+        
+        let task1 = Task(withName: "t1")
+        let task2 = Task(withName: "t2")
+        
+        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
+        _ = planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
+        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
+        
+        let latestSchedulingForTask1 = planning.currentLatestSchedulingByStartDate(forTaskWithId: task1.id)
+        
+        XCTAssertNotNil(latestSchedulingForTask1)
+        XCTAssertEqual(latestSchedulingForTask1!.timeSlot, TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
+    }
+    
+    
+    func test_currentLatestSchedulingByStartDateForTaskWithId_noMatch() {
+     
+        var planning = Planning(taskSchedulings: [])
+        
+        let task1 = Task(withName: "t1")
+        let task2 = Task(withName: "t2")
+        let task3 = Task(withName: "t3")
+        
+        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
+        _ = planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
+        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
+        
+        let latestSchedulingForTask3 = planning.currentLatestSchedulingByStartDate(forTaskWithId: task3.id)
+        
+        XCTAssertNil(latestSchedulingForTask3)
+    }
+    
+    
+    func test_currentLatestSchedulingByStartDateForTaskWithIdIn() {
+     
+        var planning = Planning(taskSchedulings: [])
+        
+        let task1 = Task(withName: "t1")
+        let task2 = Task(withName: "t2")
+        
+        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
+        _ = planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
+        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
+        
+        let latestSchedulingForTask1 = planning.currentLatestSchedulingByStartDate(forTaskWithId: task1.id, in: TimeSlot(between: .referenceDate, and: .referenceDate + 3.hours)!)
+        
+        XCTAssertNotNil(latestSchedulingForTask1)
+        XCTAssertEqual(latestSchedulingForTask1!.timeSlot, TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
+    }
+    
+    
+    func test_currentLatestSchedulingByStartDateForTaskWithIdIn_noMatch() {
+     
+        var planning = Planning(taskSchedulings: [])
+        
+        let task1 = Task(withName: "t1")
+        let task2 = Task(withName: "t2")
+        
+        _ = planning.schedule(task1, on: TimeSlot(between: .referenceDate, and: .referenceDate + 2.hours)!)
+        _ = planning.schedule(task2, on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
+        _ = planning.schedule(task2, on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 6.hours)!)
+        
+        let latestSchedulingForTask1 = planning.currentLatestSchedulingByStartDate(forTaskWithId: task1.id, in: TimeSlot(between: .referenceDate + 3.hours, and: .referenceDate + 6.hours)!)
+        
+        XCTAssertNil(latestSchedulingForTask1)
+    }
+    
+    
     func test_fillOnUsing_taskScheduledAfterSlot() {
  
         var planning = Planning(taskSchedulings: [])

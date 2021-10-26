@@ -66,6 +66,14 @@ struct Planning: Codable
     }
     
     
+    func currentLatestSchedulingByStartDate(forTaskWithId taskId: UUID, in timeSlot: TimeSlot? = nil) -> TaskScheduling? {
+        
+        return self.taskSchedulings(intersectingWith: timeSlot)
+            .sorted(by: { $0.timeSlot.startDate < $1.timeSlot.startDate })
+            .last(where: { $0.task.id == taskId })
+    }
+    
+    
     mutating func giveFeedback(_ feedback: TaskSchedulingFeedback, onTaskSchedulingWithId id: UUID) {
         
         let index = self.taskSchedulings.firstIndex(where: { $0.id == id })!
