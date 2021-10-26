@@ -7,7 +7,7 @@ import XCTest
 class PlanningTest: XCTestCase {
 
     
-    func test_taskSchedulingsOrderedByStartDateOldestFirst() {
+    func test_taskSchedulingsSortedByStartDate() {
         
         let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
         let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
@@ -15,7 +15,7 @@ class PlanningTest: XCTestCase {
         
         let planning = Planning(taskSchedulings: [ scheduling1, scheduling2, scheduling3 ])
         
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst, [ scheduling2, scheduling1, scheduling3 ])
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate, [ scheduling2, scheduling1, scheduling3 ])
     }
     
     
@@ -237,16 +237,16 @@ class PlanningTest: XCTestCase {
         _ = planning.schedule(task1, on: TimeSlot(withStartDate: .referenceDate + 1.hours, duration: task1.referenceDuration!)!)
         planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration!)!, using: backlog)
         
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst.count, 3)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate.count, 3)
         
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].task, task1)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].timeSlot, TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[0].task, task1)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[0].timeSlot, TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration!))
         
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].task, task2)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration!, duration: task2.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[1].task, task2)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[1].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration!, duration: task2.referenceDuration!))
         
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[2].task, task1)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[2].timeSlot, TimeSlot(withStartDate: .referenceDate + 1.hours, duration: task1.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[2].task, task1)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[2].timeSlot, TimeSlot(withStartDate: .referenceDate + 1.hours, duration: task1.referenceDuration!))
     }
     
     
@@ -294,30 +294,30 @@ class PlanningTest: XCTestCase {
         // T + 65 min   - task 3
         // T + 95 min
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst.count, 5)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate.count, 5)
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].task, backlogTask1)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].timeSlot, TimeSlot(
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[0].task, backlogTask1)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[0].timeSlot, TimeSlot(
                         between: .referenceDate + 0.minutes,
                             and: .referenceDate + 10.minutes
         ))
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].task, preScheduledTask1)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].timeSlot, TimeSlot(
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[1].task, preScheduledTask1)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[1].timeSlot, TimeSlot(
                         between: .referenceDate + 25.minutes,
                             and: .referenceDate + 35.minutes
         ))
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[2].task, preScheduledTask2)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[2].timeSlot, TimeSlot(
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[2].task, preScheduledTask2)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[2].timeSlot, TimeSlot(
                         between: .referenceDate + 35.minutes,
                             and: .referenceDate + 45.minutes
         ))
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[3].task, backlogTask2)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[3].timeSlot, TimeSlot(
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[3].task, backlogTask2)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[3].timeSlot, TimeSlot(
                         between: .referenceDate + 45.minutes,
                             and: .referenceDate + 65.minutes
         ))
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[4].task, backlogTask3)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[4].timeSlot, TimeSlot(
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[4].task, backlogTask3)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[4].timeSlot, TimeSlot(
                         between: .referenceDate + 65.minutes,
                             and: .referenceDate + 95.minutes
         ))
@@ -335,13 +335,13 @@ class PlanningTest: XCTestCase {
 
         planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration!)!, using: backlog)
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst.count, 2)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate.count, 2)
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].task, task1)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].timeSlot, TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[0].task, task1)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[0].timeSlot, TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration!))
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].task, task2)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration!, duration: task2.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[1].task, task2)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[1].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration!, duration: task2.referenceDuration!))
     }
     
     
@@ -356,16 +356,16 @@ class PlanningTest: XCTestCase {
 
         planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration!)!, using: backlog)
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst.count, 3)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate.count, 3)
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].task, task1)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].timeSlot, TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[0].task, task1)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[0].timeSlot, TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration!))
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].task, task2)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration!, duration: task2.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[1].task, task2)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[1].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration!, duration: task2.referenceDuration!))
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[2].task, task3)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[2].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration! + task2.referenceDuration!, duration: task3.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[2].task, task3)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[2].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration! + task2.referenceDuration!, duration: task3.referenceDuration!))
     }
     
     
@@ -380,18 +380,18 @@ class PlanningTest: XCTestCase {
 
         planning.fill(on: TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration! + task1.referenceDuration!)!, using: backlog)
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst.count, 4)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate.count, 4)
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].task, task1)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[0].timeSlot, TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[0].task, task1)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[0].timeSlot, TimeSlot(withStartDate: .referenceDate, duration: task1.referenceDuration!))
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].task, task2)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[1].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration!, duration: task2.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[1].task, task2)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[1].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration!, duration: task2.referenceDuration!))
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[2].task, task3)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[2].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration! + task2.referenceDuration!, duration: task3.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[2].task, task3)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[2].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration! + task2.referenceDuration!, duration: task3.referenceDuration!))
 
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[3].task, task1)
-        XCTAssertEqual(planning.taskSchedulingsOrderedByStartDateOldestFirst[3].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration!, duration: task1.referenceDuration!))
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[3].task, task1)
+        XCTAssertEqual(planning.taskSchedulingsSortedByStartDate[3].timeSlot, TimeSlot(withStartDate: .referenceDate + task1.referenceDuration! + task2.referenceDuration! + task3.referenceDuration!, duration: task1.referenceDuration!))
     }
 }
