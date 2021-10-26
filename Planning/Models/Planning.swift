@@ -22,7 +22,7 @@ struct Planning: Codable
     
     /// Returns the date of the task scheduling that ends the most recently.
     ///
-    var mostRecentTaskSchedulingEndDate: Date? { self.taskSchedulings.max(by: { $0.timeSlot.endDate < $1.timeSlot.endDate })?.timeSlot.endDate }
+    var mostRecentTaskSchedulingEndDate: Date? { self.taskSchedulings.sortedByEndDate.last?.timeSlot.endDate }
     
     
     
