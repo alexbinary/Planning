@@ -17,7 +17,7 @@ struct Planning: Codable
     
     /// The tasks schedulings ordered by their start date, with the oldest start date first.
     ///
-    var taskSchedulingsSortedByStartDate: [TaskScheduling] { self.taskSchedulings.sorted(by: { $0.timeSlot.startDate < $1.timeSlot.startDate }) }
+    var taskSchedulingsSortedByStartDate: [TaskScheduling] { self.taskSchedulings.sortedByStartDate }
     
     
     /// Returns the date of the task scheduling that ends the most recently.
@@ -69,7 +69,7 @@ struct Planning: Codable
     func currentLatestSchedulingByStartDate(forTaskWithId taskId: UUID, in timeSlot: TimeSlot? = nil) -> TaskScheduling? {
         
         return self.taskSchedulings(intersectingWith: timeSlot)
-            .sorted(by: { $0.timeSlot.startDate < $1.timeSlot.startDate })
+            .sortedByStartDate
             .last(where: { $0.task.id == taskId })
     }
     
