@@ -15,11 +15,6 @@ struct Planning: Codable
     var taskSchedulings: [TaskScheduling]
     
     
-    /// The tasks schedulings ordered by their start date, with the oldest start date first.
-    ///
-    var taskSchedulingsSortedByStartDate: [TaskScheduling] { self.taskSchedulings.sortedByStartDate }
-    
-    
     
     /// Schedules a task on the planning on the specified time slot.
     ///
