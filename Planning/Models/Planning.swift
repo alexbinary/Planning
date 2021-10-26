@@ -41,7 +41,9 @@ struct Planning: Codable
     
     /// Deletes a task scheduling from its id.
     ///
-    mutating func delete(taskSchedulingWithId id: UUID) {
+    mutating func delete(taskSchedulingWithId id: UUID) throws {
+        
+        guard self.taskSchedulings.contains(where: { $0.id == id }) else { throw PlanningError.objectNotFound(id: id) }
         
         self.taskSchedulings.removeAll(where: { $0.id == id })
     }
@@ -134,4 +136,14 @@ struct Planning: Codable
         
         self.fill(on: TimeSlot(between: slotStartDate, and: slotEndDate)!, using: backlog)
     }
+}
+
+
+
+enum PlanningError: Swift.Error {
+    
+    
+    /// Indicates that an object with the given id could not be found when it was expected to.
+    ///
+    case objectNotFound(id: UUID)
 }

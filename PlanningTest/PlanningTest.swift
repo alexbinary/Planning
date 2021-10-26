@@ -87,9 +87,21 @@ class PlanningTest: XCTestCase {
         
         var planning = Planning(taskSchedulings: [ scheduling1, scheduling2 ])
         
-        planning.delete(taskSchedulingWithId: scheduling1.id)
+        XCTAssertNoThrow(try planning.delete(taskSchedulingWithId: scheduling1.id))
         
         XCTAssertEqual(planning.taskSchedulings, [ scheduling2 ])
+    }
+    
+    
+    func test_deleteTaskSchedulingWithId_notFound() {
+ 
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        
+        var planning = Planning(taskSchedulings: [ scheduling1, scheduling2 ])
+        
+        XCTAssertThrowsError(try planning.delete(taskSchedulingWithId: scheduling3.id))
     }
     
     
