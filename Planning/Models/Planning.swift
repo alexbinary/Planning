@@ -41,11 +41,11 @@ struct Planning: Codable
     
     /// Deletes a task scheduling from its id.
     ///
-    mutating func delete(taskSchedulingWithId id: UUID) throws {
+    mutating func delete(taskSchedulingWithId taskSchedulingId: UUID) throws {
         
-        guard self.taskSchedulings.contains(where: { $0.id == id }) else { throw PlanningError.objectNotFound(id: id) }
+        guard self.taskSchedulings.contains(where: { $0.id == taskSchedulingId }) else { throw PlanningError.objectNotFound(id: taskSchedulingId) }
         
-        self.taskSchedulings.removeAll(where: { $0.id == id })
+        self.taskSchedulings.removeAll(where: { $0.id == taskSchedulingId })
     }
     
     
