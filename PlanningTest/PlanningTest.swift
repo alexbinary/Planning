@@ -122,14 +122,17 @@ class PlanningTest: XCTestCase {
  
         var planning = Planning(taskSchedulings: [])
         
-        let duration = 2.hours
-        let scheduling = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: duration)!)
+        let scheduling = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
         
         let newStartDate = .referenceDate + 4.hours
         let newTaskScheduling = planning.move(taskSchedulingWithId: scheduling.id, toNewStartDate: newStartDate)
         
+        XCTAssertEqual(planning.taskSchedulings, [ newTaskScheduling ])
+        
+        XCTAssertEqual(newTaskScheduling.task, scheduling.task)
         XCTAssertEqual(newTaskScheduling.timeSlot.startDate, newStartDate)
-        XCTAssertEqual(newTaskScheduling.timeSlot.duration, duration)
+        XCTAssertEqual(newTaskScheduling.timeSlot.duration, scheduling.timeSlot.duration)
+        XCTAssertEqual(newTaskScheduling.feedback, scheduling.feedback)
     }
     
     
