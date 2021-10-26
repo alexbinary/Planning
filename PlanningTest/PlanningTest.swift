@@ -83,7 +83,7 @@ class PlanningTest: XCTestCase {
     func test_deleteTaskSchedulingWithId() {
  
         let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
-        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(withStartDate: .referenceDate, duration: 2.hours)!)
         
         var planning = Planning(taskSchedulings: [ scheduling1, scheduling2 ])
         
