@@ -47,6 +47,8 @@ struct Planning: Codable
     }
     
     
+    /// Removes all task schedulings.
+    ///
     mutating func clear() {
         
         self.taskSchedulings.removeAll()
