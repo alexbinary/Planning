@@ -147,7 +147,7 @@ class PlanningTest: XCTestCase {
     }
     
     
-    func test_taskSchedulingsIn() {
+    func test_taskSchedulingsIntersectingWith() {
  
         var planning = Planning(taskSchedulings: [])
         
