@@ -106,4 +106,12 @@ extension Array where Element == TaskScheduling {
         
         self.sorted(by: { $0.timeSlot.startDate < $1.timeSlot.startDate })
     }
+    
+    
+    /// Returns the elements of the array, sorted by end date, oldest first.
+    ///
+    var sortedByEndDate: [TaskScheduling] {
+        
+        self.sorted(by: { $0.timeSlot.endDate < $1.timeSlot.endDate })
+    }
 }

@@ -42,4 +42,14 @@ class TaskSchedulingTest: XCTestCase {
         
         XCTAssertEqual([ scheduling1, scheduling2, scheduling3 ].sortedByStartDate, [ scheduling2, scheduling1, scheduling3 ])
     }
+    
+    
+    func test_extension_array_sortedByEndDate() {
+        
+        let scheduling1 = TaskScheduling(scheduling: Task(withName: "t1"), on: TimeSlot(between: .referenceDate + 2.hours, and: .referenceDate + 4.hours)!)
+        let scheduling2 = TaskScheduling(scheduling: Task(withName: "t2"), on: TimeSlot(between: .referenceDate + 4.hours, and: .referenceDate + 10.hours)!)
+        let scheduling3 = TaskScheduling(scheduling: Task(withName: "t3"), on: TimeSlot(between: .referenceDate + 6.hours, and: .referenceDate + 8.hours)!)
+        
+        XCTAssertEqual([ scheduling1, scheduling2, scheduling3 ].sortedByEndDate, [ scheduling1, scheduling3, scheduling2 ])
+    }
 }
