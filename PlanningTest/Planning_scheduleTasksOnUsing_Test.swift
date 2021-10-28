@@ -7,6 +7,9 @@ import XCTest
 class Planning_scheduleTasksOnUsing_Test: XCTestCase {
 
     
+    /// Asserts that the method does not schedule tasks beyond the end of the slot,
+    /// even if not all tasks in the backlog have been scheduled.
+    ///
     func test_scheduleTasksOnUsing_backlogBiggerThanSlot() {
 
         var planning = Planning(taskSchedulings: [])
@@ -47,6 +50,9 @@ class Planning_scheduleTasksOnUsing_Test: XCTestCase {
     }
     
     
+    /// Asserts that the method re-schedules tasks that have already been scheduled
+    /// if the end of the slot was not reached after all tasks in the backlog have been scheduled once.
+    ///
     func test_scheduleTasksOnUsing_backlogSmallerThanSlot() {
 
         var planning = Planning(taskSchedulings: [])
@@ -101,6 +107,8 @@ class Planning_scheduleTasksOnUsing_Test: XCTestCase {
     }
     
     
+    /// Asserts that the method behaves as expected when there are tasks already scheduled after the specified slot.
+    ///
     func test_scheduleTasksOnUsing_taskScheduledAfterSlot() {
  
         var planning = Planning(taskSchedulings: [])
@@ -158,6 +166,8 @@ class Planning_scheduleTasksOnUsing_Test: XCTestCase {
     }
     
     
+    /// Asserts that the method schedules tasks at the next available slot if tasks are already scheduled inside the specified slot.
+    ///
     func test_scheduleTasksOnUsing_tasksScheduledInsideSlot() {
 
         var planning = Planning(taskSchedulings: [])
