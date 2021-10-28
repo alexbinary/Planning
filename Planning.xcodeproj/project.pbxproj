@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2971D09C272B1355007F9A06 /* Planning_scheduleTasksOnUsing_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2971D09B272B1355007F9A06 /* Planning_scheduleTasksOnUsing_Test.swift */; };
 		299C0C6E271EC37500DE927D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C6D271EC37500DE927D /* Settings.swift */; };
 		299C0C72271EC4B300DE927D /* ApplicationDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C71271EC4B300DE927D /* ApplicationDataContainer.swift */; };
 		299C0C75271EC54C00DE927D /* Backlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C0C74271EC54C00DE927D /* Backlog.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2971D09B272B1355007F9A06 /* Planning_scheduleTasksOnUsing_Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planning_scheduleTasksOnUsing_Test.swift; sourceTree = "<group>"; };
 		299C0C6D271EC37500DE927D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		299C0C71271EC4B300DE927D /* ApplicationDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDataContainer.swift; sourceTree = "<group>"; };
 		299C0C74271EC54C00DE927D /* Backlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backlog.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				29A8491E2721AF4700CA330B /* durationsTest.swift */,
 				29B6BB95271F2858005F52C8 /* TimeSlotTest.swift */,
 				299C0C85271EE5A100DE927D /* PlanningTest.swift */,
+				2971D09B272B1355007F9A06 /* Planning_scheduleTasksOnUsing_Test.swift */,
 				29B6BB91271F22D3005F52C8 /* TaskSchedulingTest.swift */,
 				29F301B92720419C009D9CF5 /* PrinterTest.swift */,
 			);
@@ -265,6 +268,7 @@
 				29B6BB92271F22D3005F52C8 /* TaskSchedulingTest.swift in Sources */,
 				29A849262721BE6E00CA330B /* datesTest.swift in Sources */,
 				29A8491F2721AF4700CA330B /* durationsTest.swift in Sources */,
+				2971D09C272B1355007F9A06 /* Planning_scheduleTasksOnUsing_Test.swift in Sources */,
 				29F301BD2720422B009D9CF5 /* Printer.swift in Sources */,
 				29F4DB27271EE750005433B8 /* dates.swift in Sources */,
 				29F4DB20271EE743005433B8 /* Planning.swift in Sources */,
