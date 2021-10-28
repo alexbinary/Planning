@@ -127,13 +127,13 @@ class PlanningTest: XCTestCase {
         var planning = Planning(taskSchedulings: [])
         var backlog = Backlog(tasks: [])
 
-        let backlogTask1 = Task(withName: "backlogTask1", referenceDuration: 10.minutes)
-        let backlogTask2 = Task(withName: "backlogTask2", referenceDuration: 20.minutes)
-        let backlogTask3 = Task(withName: "backlogTask3", referenceDuration: 30.minutes)
+        let task1 = Task(withName: "task1", referenceDuration: 10.minutes)
+        let task2 = Task(withName: "task2", referenceDuration: 20.minutes)
+        let task3 = Task(withName: "task3", referenceDuration: 30.minutes)
         
-        _ = backlog.add(backlogTask1)
-        _ = backlog.add(backlogTask2)
-        _ = backlog.add(backlogTask3)
+        _ = backlog.add(task1)
+        _ = backlog.add(task2)
+        _ = backlog.add(task3)
 
         planning.scheduleTasks(on: TimeSlot(
                                 between: .referenceDate,
@@ -148,13 +148,13 @@ class PlanningTest: XCTestCase {
         
         XCTAssertEqual(planning.taskSchedulings.sortedByStartDate.count, 2)
 
-        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[0].task, backlogTask1)
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[0].task, task1)
         XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[0].timeSlot, TimeSlot(
                         between: .referenceDate,
                             and: .referenceDate + 10.minutes
         ))
 
-        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[1].task, backlogTask2)
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[1].task, task2)
         XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[1].timeSlot, TimeSlot(
                         between: .referenceDate + 10.minutes,
                             and: .referenceDate + 30.minutes
@@ -167,13 +167,13 @@ class PlanningTest: XCTestCase {
         var planning = Planning(taskSchedulings: [])
         var backlog = Backlog(tasks: [])
 
-        let backlogTask1 = Task(withName: "backlogTask1", referenceDuration: 10.minutes)
-        let backlogTask2 = Task(withName: "backlogTask2", referenceDuration: 20.minutes)
-        let backlogTask3 = Task(withName: "backlogTask3", referenceDuration: 30.minutes)
+        let task1 = Task(withName: "task1", referenceDuration: 10.minutes)
+        let task2 = Task(withName: "task2", referenceDuration: 20.minutes)
+        let task3 = Task(withName: "task3", referenceDuration: 30.minutes)
         
-        _ = backlog.add(backlogTask1)
-        _ = backlog.add(backlogTask2)
-        _ = backlog.add(backlogTask3)
+        _ = backlog.add(task1)
+        _ = backlog.add(task2)
+        _ = backlog.add(task3)
 
         planning.scheduleTasks(on: TimeSlot(
                                 between: .referenceDate,
@@ -190,25 +190,25 @@ class PlanningTest: XCTestCase {
         
         XCTAssertEqual(planning.taskSchedulings.sortedByStartDate.count, 4)
 
-        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[0].task, backlogTask1)
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[0].task, task1)
         XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[0].timeSlot, TimeSlot(
                         between: .referenceDate,
                             and: .referenceDate + 10.minutes
         ))
 
-        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[1].task, backlogTask2)
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[1].task, task2)
         XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[1].timeSlot, TimeSlot(
                         between: .referenceDate + 10.minutes,
                             and: .referenceDate + 30.minutes
         ))
 
-        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[2].task, backlogTask3)
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[2].task, task3)
         XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[2].timeSlot, TimeSlot(
                         between: .referenceDate + 30.minutes,
                             and: .referenceDate + 60.minutes
         ))
 
-        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[3].task, backlogTask1)
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[3].task, task1)
         XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[3].timeSlot, TimeSlot(
                         between: .referenceDate + 60.minutes,
                             and: .referenceDate + 70.minutes
@@ -245,8 +245,8 @@ class PlanningTest: XCTestCase {
         
         // Expected result :
         //
-        // T + 0        - task1
-        // T + 10 min   - task2
+        // T + 0        - backlogTask1
+        // T + 10 min   - backlogTask2
         // T + 30 min
         // T + 60 min   - pre scheduled task 1
         // T + 70 min
@@ -309,12 +309,12 @@ class PlanningTest: XCTestCase {
 
         // Expected result :
         //
-        // T + 0        - task1
+        // T + 0        - backlogTask1
         // T + 10 min
         // T + 25 min   - pre scheduled task 1
         // T + 35 min   - pre scheduled task 2
-        // T + 45 min   - task 2
-        // T + 65 min   - task 3
+        // T + 45 min   - backlogTask2
+        // T + 65 min   - backlogTask3
         // T + 95 min
 
         XCTAssertEqual(planning.taskSchedulings.sortedByStartDate.count, 5)
