@@ -5,8 +5,13 @@ import Foundation
 
 /// A type that represents an activity that should be performed.
 ///
-/// A task has name and a reference duration.
-/// To create a task, you pass the name of the task and the reference duration.
+/// To create a task, you pass the name of the task.
+///
+/// ```swift
+/// let task = Task(withName: "fix bugs")
+/// ```
+///
+/// A task also has an optional reference duration that you can specify when creating the task.
 ///
 /// ```swift
 /// let task = Task(withName: "fix bugs", referenceDuration: 30.minutes)
