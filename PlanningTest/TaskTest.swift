@@ -14,17 +14,20 @@ class TaskTest: XCTestCase {
         
         XCTAssertEqual(task.name, taskName)
         XCTAssertNil(task.referenceDuration)
+        XCTAssertNil(task.minimumDuration)
     }
     
     
-    func test_init_withNameReferenceDuration() {
+    func test_init_withNameReferenceDurationMinimumDuration() {
         
         let taskName = "task"
         let referenceDuration = 3.hours
-        let task = Task(withName: taskName, referenceDuration: referenceDuration)
+        let minimumDuration = 2.hours
+        let task = Task(withName: taskName, referenceDuration: referenceDuration, minimumDuration: minimumDuration)
         
         XCTAssertEqual(task.name, taskName)
         XCTAssertEqual(task.referenceDuration, referenceDuration)
+        XCTAssertEqual(task.minimumDuration, minimumDuration)
     }
     
     

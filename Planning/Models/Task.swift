@@ -18,6 +18,15 @@ import Foundation
 ///
 /// ```swift
 /// let task = Task(withName: "fix bugs", referenceDuration: 30.minutes)
+/// // will always be scheduled for 30 minutes
+/// ```
+///
+/// To add more flexibility, you can specify a minimum duration.
+/// If a minimum duration is set, the duration allocated to the task can be reduced up to that duration so that the task can be scheduled in a smaller time slot.
+///
+/// ```swift
+/// let task = Task(withName: "write doc", referenceDuration: 40.minutes, minimumDuration: 10.minutes)
+/// // can be scheduled from 10 up to 40 minutes
 /// ```
 ///
 /// Tasks are automatically assigned a unique identifier.
@@ -59,14 +68,25 @@ struct Task: Codable, Equatable
     let referenceDuration: TimeInterval?
     
     
+    /// The minimum duration that should be allocated to the task.
+    ///
+    /// By default, tasks are scheduled for a fixed duration.
+    /// Use this property to indicate that the duration can be reduced up to a specific duration so that the task can be scheduled in a smaller time slot to accomodate planning constraints.
+    
+    /// If the minimum duration is `nil`, the duration will not be reduced below the reference duration if it is set or the planning unit time slot.
+    ///
+    let minimumDuration: TimeInterval?
+    
+    
     
     /// Creates a new task with a given name.
     ///
-    init(withName name: String, referenceDuration: TimeInterval? = nil) {
+    init(withName name: String, referenceDuration: TimeInterval? = nil, minimumDuration: TimeInterval? = nil) {
         
         self.id = UUID()
         self.name = name
         self.referenceDuration = referenceDuration
+        self.minimumDuration = minimumDuration
     }
     
     
