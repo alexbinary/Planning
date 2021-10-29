@@ -72,23 +72,74 @@ struct Planning: Codable
         while true {
             for task in backlog.tasks {
                 
+                guard referenceDate < timeSlot.endDate else {
+                    return
+                }
+                
                 let taskDuration = task.referenceDuration ?? 30.minutes
-                var taskTimeSlot = TimeSlot(withStartDate: referenceDate, duration: taskDuration)!
+                var proposedTimeSlotForTask = TimeSlot(withStartDate: referenceDate, duration: taskDuration)!
                 
                 while true {
-                    let existingSchedulings = self.taskSchedulings(intersectingWith: taskTimeSlot)
-                    if !existingSchedulings.isEmpty {
-                        taskTimeSlot.startDate = existingSchedulings.max(by: { $0.timeSlot.endDate < $1.timeSlot.endDate })!.timeSlot.endDate
-                    } else {
-                        break
+                
+                    // check if tasks are already scheduled on time slots that conflict with the proposed time slot
+                    
+                    let intersectingSchedulings = self.taskSchedulings(intersectingWith: proposedTimeSlotForTask)
+                    if intersectingSchedulings.isEmpty {
+                        
+                        break   // no conflict, task can be scheduled on proposed time slot
+                    }
+                    
+                    // from here, there is a scheduling conflict
+                    
+                    // attempt to squeeze the task before the first conflicting task
+                    
+                    if let taskMinimumDuration = task.minimumDuration {
+                        
+                        let earliestIntersectingScheduling = intersectingSchedulings.min(by: { $0.timeSlot.startDate < $1.timeSlot.startDate })!
+                        let durationToEarliestIntersectingScheduling = proposedTimeSlotForTask.startDate.distance(to: earliestIntersectingScheduling.timeSlot.startDate)
+                        if durationToEarliestIntersectingScheduling > taskMinimumDuration {
+                            
+                            proposedTimeSlotForTask.duration = durationToEarliestIntersectingScheduling
+                            break
+                        }
+                    }
+                    
+                    // attempt to schedule task after the latest conflicting slot
+                    
+                    proposedTimeSlotForTask.startDate = intersectingSchedulings.max(by: { $0.timeSlot.endDate < $1.timeSlot.endDate })!.timeSlot.endDate
+                    
+                    continue    // redo all the checking above for the new proposed slot
+                }
+                
+                if proposedTimeSlotForTask.startDate >= timeSlot.endDate {
+                    
+                    return
+                }
+                
+                // reduce the duration of the task so that it does not spill outside the allocated time slot
+                
+                if proposedTimeSlotForTask.endDate >= timeSlot.endDate {
+                
+                    if let taskMinimumDuration = task.minimumDuration {
+                        
+                        let durationToSlotEnd = proposedTimeSlotForTask.startDate.distance(to: timeSlot.endDate)
+                        if durationToSlotEnd > taskMinimumDuration {
+                            
+                            proposedTimeSlotForTask.duration = durationToSlotEnd
+                        }
                     }
                 }
                 
-                let taskScheduling = self.schedule(task, on: taskTimeSlot)
+                // schedule task
+                
+                let taskScheduling = self.schedule(task, on: proposedTimeSlotForTask)
                 if taskScheduling.timeSlot.endDate >= timeSlot.endDate {
-                    return
+                    
+                    return  // quit if end of slot is reached
                 }
+                
                 referenceDate = taskScheduling.timeSlot.endDate
+                continue    // proceed to scheduling of next task
             }
         }
     }

@@ -7,7 +7,7 @@ import XCTest
 class Planning_scheduleTasksOnUsing_Test: XCTestCase {
 
     
-    /// Asserts that the method does not schedule tasks beyond the end of the slot,
+    /// Asserts that the method does not schedule tasks to start beyond the end of the slot,
     /// even if not all tasks in the backlog have been scheduled.
     ///
     func test_scheduleTasksOnUsing_backlogBiggerThanSlot() {
@@ -25,7 +25,7 @@ class Planning_scheduleTasksOnUsing_Test: XCTestCase {
 
         planning.scheduleTasks(on: TimeSlot(
                                 between: .referenceDate,
-                                    and: .referenceDate + 30.minutes
+                                    and: .referenceDate + 20.minutes
         )!, using: backlog)
 
         // Expected result :
@@ -46,6 +46,50 @@ class Planning_scheduleTasksOnUsing_Test: XCTestCase {
         XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[1].timeSlot, TimeSlot(
                         between: .referenceDate + 10.minutes,
                             and: .referenceDate + 30.minutes
+        ))
+    }
+    
+    
+    /// Asserts that the method does not schedule tasks to start beyond the end of the slot,
+    /// even if not all tasks in the backlog have been scheduled,
+    /// and reduces the duration allocated to tasks that indicate a minimum duration.
+    ///
+    func test_scheduleTasksOnUsing_backlogBiggerThanSlot_reduceTaskDuration() {
+        
+        print("test_scheduleTasksOnUsing_backlogBiggerThanSlot_reduceTaskDuration")
+
+        var planning = Planning(taskSchedulings: [])
+        var backlog = Backlog(tasks: [])
+
+        let task1 = Task(withName: "task1", referenceDuration: 10.minutes)
+        let task2 = Task(withName: "task2", referenceDuration: 20.minutes, minimumDuration: 5.minutes)
+        
+        _ = backlog.add(task1)
+        _ = backlog.add(task2)
+
+        planning.scheduleTasks(on: TimeSlot(
+                                between: .referenceDate,
+                                    and: .referenceDate + 20.minutes
+        )!, using: backlog)
+
+        // Expected result :
+        //
+        // T + 0        - task1
+        // T + 10 min   - task2 (squeezed)
+        // T + 20 min
+        
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate.count, 2)
+
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[0].task, task1)
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[0].timeSlot, TimeSlot(
+                        between: .referenceDate,
+                            and: .referenceDate + 10.minutes
+        ))
+
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[1].task, task2)
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[1].timeSlot, TimeSlot(
+                        between: .referenceDate + 10.minutes,
+                            and: .referenceDate + 20.minutes
         ))
     }
     
@@ -238,6 +282,64 @@ class Planning_scheduleTasksOnUsing_Test: XCTestCase {
         XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[4].timeSlot, TimeSlot(
                         between: .referenceDate + 65.minutes,
                             and: .referenceDate + 95.minutes
+        ))
+    }
+    
+    
+    /// Asserts that the method squeezes tasks that allow it before already scheduled tasks.
+    ///
+    func test_scheduleTasksOnUsing_tasksScheduledInsideSlot_reduceTaskDuration() {
+
+        var planning = Planning(taskSchedulings: [])
+        var backlog = Backlog(tasks: [])
+
+        // manually scheduled tasks
+
+        let preScheduledTask1 = Task(withName: "preScheduledTask1")
+
+        planning.schedule(preScheduledTask1, on: TimeSlot(
+                                between: .referenceDate + 25.minutes,
+                                    and: .referenceDate + 35.minutes
+        )!)
+
+        // auto filling from backlog
+
+        let backlogTask1 = Task(withName: "backlogTask1", referenceDuration: 10.minutes)
+        let backlogTask2 = Task(withName: "backlogTask2", referenceDuration: 20.minutes, minimumDuration: 10.minutes)
+        let backlogTask3 = Task(withName: "backlogTask3", referenceDuration: 30.minutes)
+
+        _ = backlog.add(backlogTask1)
+        _ = backlog.add(backlogTask2)
+        _ = backlog.add(backlogTask3)
+
+        planning.scheduleTasks(on: TimeSlot(
+            between: .referenceDate + 0.minutes,
+                and: .referenceDate + 35.minutes
+        )!, using: backlog)
+
+        // Expected result :
+        //
+        // T + 0        - backlogTask1
+        // T + 10 min   - backlogTask2 (squeezed)
+        // T + 25 min   - pre scheduled task 1
+        // T + 35 min
+
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate.count, 3)
+
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[0].task, backlogTask1)
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[0].timeSlot, TimeSlot(
+                        between: .referenceDate + 0.minutes,
+                            and: .referenceDate + 10.minutes
+        ))
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[1].task, backlogTask2)
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[1].timeSlot, TimeSlot(
+                        between: .referenceDate + 10.minutes,
+                            and: .referenceDate + 25.minutes
+        ))
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[2].task, preScheduledTask1)
+        XCTAssertEqual(planning.taskSchedulings.sortedByStartDate[2].timeSlot, TimeSlot(
+                        between: .referenceDate + 25.minutes,
+                            and: .referenceDate + 35.minutes
         ))
     }
 }
