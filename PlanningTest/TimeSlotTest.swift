@@ -99,6 +99,11 @@ class TimeSlotTest: XCTestCase {
         
         XCTAssertEqual(timeSlot1, timeSlot2)
         
+        timeSlot2.startDate = .referenceDate + 1.minutes
+        
+        XCTAssertNotEqual(timeSlot1, timeSlot2)
+        
+        timeSlot2.startDate = .referenceDate
         timeSlot2.duration = 3
         
         XCTAssertNotEqual(timeSlot1, timeSlot2)
