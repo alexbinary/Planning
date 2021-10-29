@@ -29,6 +29,7 @@
 		29B6BB8E271F2046005F52C8 /* TaskSchedulingFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB8A271F19C8005F52C8 /* TaskSchedulingFeedback.swift */; };
 		29B6BB92271F22D3005F52C8 /* TaskSchedulingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB91271F22D3005F52C8 /* TaskSchedulingTest.swift */; };
 		29B6BB96271F2858005F52C8 /* TimeSlotTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6BB95271F2858005F52C8 /* TimeSlotTest.swift */; };
+		29C9978C272C7259005883C0 /* TaskTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C9978B272C7259005883C0 /* TaskTest.swift */; };
 		29F301AE272040F0009D9CF5 /* AnnotatedTimeSlotPrintModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F301AD272040F0009D9CF5 /* AnnotatedTimeSlotPrintModel.swift */; };
 		29F301B427204104009D9CF5 /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F301B327204104009D9CF5 /* Printer.swift */; };
 		29F301BA2720419C009D9CF5 /* PrinterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F301B92720419C009D9CF5 /* PrinterTest.swift */; };
@@ -77,6 +78,7 @@
 		29B6BB8A271F19C8005F52C8 /* TaskSchedulingFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSchedulingFeedback.swift; sourceTree = "<group>"; };
 		29B6BB91271F22D3005F52C8 /* TaskSchedulingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskSchedulingTest.swift; sourceTree = "<group>"; };
 		29B6BB95271F2858005F52C8 /* TimeSlotTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlotTest.swift; sourceTree = "<group>"; };
+		29C9978B272C7259005883C0 /* TaskTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTest.swift; sourceTree = "<group>"; };
 		29F301AD272040F0009D9CF5 /* AnnotatedTimeSlotPrintModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotatedTimeSlotPrintModel.swift; sourceTree = "<group>"; };
 		29F301B327204104009D9CF5 /* Printer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printer.swift; sourceTree = "<group>"; };
 		29F301B92720419C009D9CF5 /* PrinterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrinterTest.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				299C0C87271EE5A100DE927D /* Info.plist */,
 				29A849252721BE6E00CA330B /* datesTest.swift */,
 				29A8491E2721AF4700CA330B /* durationsTest.swift */,
+				29C9978B272C7259005883C0 /* TaskTest.swift */,
 				29B6BB95271F2858005F52C8 /* TimeSlotTest.swift */,
 				299C0C85271EE5A100DE927D /* PlanningTest.swift */,
 				2971D09B272B1355007F9A06 /* Planning_scheduleTasksOnUsing_Test.swift */,
@@ -261,6 +264,7 @@
 			files = (
 				29B6BB8E271F2046005F52C8 /* TaskSchedulingFeedback.swift in Sources */,
 				29F301C02720422E009D9CF5 /* AnnotatedTimeSlotPrintModel.swift in Sources */,
+				29C9978C272C7259005883C0 /* TaskTest.swift in Sources */,
 				29F4DB23271EE746005433B8 /* ApplicationDataContainer.swift in Sources */,
 				29F4DB24271EE749005433B8 /* Backlog.swift in Sources */,
 				29A849222721AFB700CA330B /* durations.swift in Sources */,
