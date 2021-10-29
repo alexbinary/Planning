@@ -19,7 +19,16 @@ import Foundation
 ///
 /// Tasks are automatically assigned a unique identifier.
 /// The task identiier is readonly and cannot be changed.
-/// The task identifier is used as reference when checking if two tasks are the same.
+/// Two tasks are considered the same as long as they have the same identifier.
+///
+///```swift
+/// let task1 = Task(withName: "fix bugs")
+/// let task2 = Task(withName: "fix bugs")
+/// task1 == task2 // false
+///
+/// let task3 = task1
+/// task1 == task3 // true
+/// ```
 ///
 struct Task: Codable, Equatable
 {
