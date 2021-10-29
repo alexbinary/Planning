@@ -11,7 +11,10 @@ import Foundation
 /// let task = Task(withName: "fix bugs")
 /// ```
 ///
-/// A task also has an optional reference duration that you can specify when creating the task.
+/// By default, tasks are scheduled for a duration that corresponds to the planning's unit time slot.
+///
+/// If you want the task to be scheduled for a specific duration, you can pass an optional reference duration when creating the task.
+/// If a reference duration is set, the task will be scheduled for this exact duration.
 ///
 /// ```swift
 /// let task = Task(withName: "fix bugs", referenceDuration: 30.minutes)
@@ -48,7 +51,10 @@ struct Task: Codable, Equatable
     let name: String
     
     
-    /// The duration that should be used as reference when scheduling the task.
+    /// The duration that should be allocated to the task.
+    ///
+    /// By default, tasks are scheduled for a duration that corresponds to the planning's unit time slot.
+    /// Use this property to indicate a specific duration the task should be schedule for.
     ///
     let referenceDuration: TimeInterval?
     
