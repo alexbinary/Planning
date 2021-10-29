@@ -126,7 +126,7 @@ class PlanningTest: XCTestCase {
  
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling = planning.schedule(Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
         
         let newStartDate = .referenceDate + 4.hours
         let newTaskScheduling = try planning.move(taskSchedulingWithId: scheduling.id, toNewStartDate: newStartDate)

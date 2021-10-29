@@ -24,7 +24,7 @@ class PrinterTest: XCTestCase {
     
     func test_makeAnnotatedTimeSlotPrintModelRepresenting() {
         
-        let task = Task(withName: "t1", referenceDuration: 30.minutes)
+        let task = Task(withName: "t1")
         let timeSlot = TimeSlot(between: .referenceDate, and: .referenceDate + 1.hours)!
         let scheduling = TaskScheduling(scheduling: task, on: timeSlot)
         
@@ -43,9 +43,9 @@ class PrinterTest: XCTestCase {
         
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
-        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
-        let scheduling3 = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 6.hours, duration: 2.hours)!)
+        let scheduling1 = planning.schedule(Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling2 = planning.schedule(Task(withName: "t2"), on: TimeSlot(withStartDate: .referenceDate + 4.hours, duration: 2.hours)!)
+        let scheduling3 = planning.schedule(Task(withName: "t3"), on: TimeSlot(withStartDate: .referenceDate + 6.hours, duration: 2.hours)!)
         
         let printer = Printer()
         let models = printer.makeAnnotatedTimeSlotPrintModels(representing: planning)
@@ -62,9 +62,9 @@ class PrinterTest: XCTestCase {
         
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate +  2.hours, duration: 2.hours)!)
-        let scheduling2 = planning.schedule(Task(withName: "t2", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate +  6.hours, duration: 2.hours)!)
-        let scheduling3 = planning.schedule(Task(withName: "t3", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 10.hours, duration: 2.hours)!)
+        let scheduling1 = planning.schedule(Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate +  2.hours, duration: 2.hours)!)
+        let scheduling2 = planning.schedule(Task(withName: "t2"), on: TimeSlot(withStartDate: .referenceDate +  6.hours, duration: 2.hours)!)
+        let scheduling3 = planning.schedule(Task(withName: "t3"), on: TimeSlot(withStartDate: .referenceDate + 10.hours, duration: 2.hours)!)
         
         let printer = Printer()
         let models = printer.makeAnnotatedTimeSlotPrintModels(representing: planning)
@@ -83,7 +83,7 @@ class PrinterTest: XCTestCase {
         
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling1 = planning.schedule(Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
         
         let printer = Printer()
         let timeSlot = TimeSlot(withStartDate: .referenceDate + 1.hours, duration: 3.hours)!
@@ -100,7 +100,7 @@ class PrinterTest: XCTestCase {
         
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling1 = planning.schedule(Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
         
         let printer = Printer()
         let timeSlot = TimeSlot(withStartDate: .referenceDate + 3.hours, duration: 2.hours)!
@@ -117,7 +117,7 @@ class PrinterTest: XCTestCase {
         
         var planning = Planning(taskSchedulings: [])
         
-        let scheduling1 = planning.schedule(Task(withName: "t1", referenceDuration: 30.minutes), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
+        let scheduling1 = planning.schedule(Task(withName: "t1"), on: TimeSlot(withStartDate: .referenceDate + 2.hours, duration: 2.hours)!)
         
         let printer = Printer()
         let timeSlot = TimeSlot(withStartDate: .referenceDate + 1.hours, duration: 5.hours)!
