@@ -50,7 +50,11 @@ struct Planning: Codable
     // MARK: - Schedulings tasks
     
     
-    /// Schedules a task on the planning on the specified time slot.
+    /// Schedules a task on the planning on the specified time slot without checking for conflicts.
+    ///
+    /// The task will always be scheduled on the provided time slot, even if tasks are already scheduled on conflicting time slots.
+    ///
+    /// If you want to allow the task to be scheduled on a different time slot to avoid conflicts, use the `trySchedule(_:on:restrictingSchedulingOptionsInside:)` method.
     ///
     /// - Returns: a `TaskScheduling` object that represents the scheduling of the task that was added to the planning.
     ///
@@ -60,6 +64,78 @@ struct Planning: Codable
         let scheduling = TaskScheduling(scheduling: task, on: timeSlot)
         self.taskSchedulings.append(scheduling)
         return scheduling
+    }
+    
+    
+    /// Attempt to schedule a task on the planning on the specified time slot.
+    ///
+    /// If tasks are already scheduled on the specified time slot, the task is either squeezed before the other tasks if it allows it, or scheduled at the earliest free slot.
+    ///
+    /// - Returns: a `TaskScheduling` object that represents the scheduling of the task that was added to the planning.
+    ///
+    @discardableResult
+    mutating func trySchedule(_ task: Task, on suggestedTimeSlotForTask: TimeSlot, restrictingSchedulingOptionsInside boundaryTimeSlot: TimeSlot? = nil) throws -> TaskScheduling {
+     
+        var candidateTimeSlotForTask = suggestedTimeSlotForTask
+        
+        while true {
+        
+            // check if tasks are already scheduled on time slots that conflict with the candidate time slot
+            
+            let intersectingSchedulings = self.taskSchedulings(intersectingWith: candidateTimeSlotForTask)
+            if intersectingSchedulings.isEmpty {
+                
+                break   // no conflict, task can be scheduled on candidate time slot
+            }
+            
+            // from here, there is a scheduling conflict
+            
+            // attempt to squeeze the task before the first conflicting task
+            
+            if let taskMinimumDuration = task.minimumDuration {
+                
+                let earliestIntersectingScheduling = intersectingSchedulings.min(by: { $0.timeSlot.startDate < $1.timeSlot.startDate })!
+                let durationToEarliestIntersectingScheduling = candidateTimeSlotForTask.startDate.distance(to: earliestIntersectingScheduling.timeSlot.startDate)
+                if durationToEarliestIntersectingScheduling > taskMinimumDuration {
+                    
+                    candidateTimeSlotForTask.duration = durationToEarliestIntersectingScheduling
+                    break
+                }
+            }
+            
+            // attempt to schedule task after the latest conflicting slot
+            
+            candidateTimeSlotForTask.startDate = intersectingSchedulings.max(by: { $0.timeSlot.endDate < $1.timeSlot.endDate })!.timeSlot.endDate
+            
+            // check if candidate slot still starts inside boundaries
+            // if it does there is nothing more to do, the task cannot be scheduled within the given constraints
+            
+            if let boundaryTimeSlot = boundaryTimeSlot, candidateTimeSlotForTask.startDate >= boundaryTimeSlot.endDate {
+                
+                throw PlanningError.couldNotSatisfyAllSchedulingConstraints
+            }
+            
+            continue    // redo all the checking above for the new candidate slot
+        }
+        
+        // reduce the duration of the task so that it does not spill outside the boundaries
+        
+        if let boundaryTimeSlot = boundaryTimeSlot,
+           candidateTimeSlotForTask.endDate >= boundaryTimeSlot.endDate,
+           let taskMinimumDuration = task.minimumDuration {
+        
+            let durationToSlotEnd = candidateTimeSlotForTask.startDate.distance(to: boundaryTimeSlot.endDate)
+            if durationToSlotEnd > taskMinimumDuration {
+                
+                candidateTimeSlotForTask.duration = durationToSlotEnd
+            }
+        }
+        
+        // all good, schedule task on candidate time slot and return
+        
+        let taskScheduling = TaskScheduling(scheduling: task, on: candidateTimeSlotForTask)
+        self.taskSchedulings.append(taskScheduling)
+        return taskScheduling
     }
     
     
@@ -213,4 +289,9 @@ enum PlanningError: Swift.Error {
     /// Indicates that an object with the given id could not be found when it was expected to.
     ///
     case objectNotFound(id: UUID)
+    
+    
+    /// Indicates that an attempt to schedule a task failed because all constraints could not be satisfied.
+    ///
+    case couldNotSatisfyAllSchedulingConstraints
 }
